@@ -14,12 +14,12 @@ EXPECT='16
 run_test
 
 NAME='mach0 thumb entrypoint info'
-BROKEN=
+BROKEN=1
 FILE=../../bins/mach0/thumb-test
 ARGS=
 CMDS='ie~vaddr
 '
-EXPECT='vaddr=0x0000bfa4 paddr=0x00007fa5 baddr=0x00003fff laddr=0x00000000
+EXPECT='vaddr=0x0000bfa4 paddr=0x00007fa5 baddr=0x00004000 laddr=0x00000000
 '
 run_test
 

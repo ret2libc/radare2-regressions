@@ -10,6 +10,7 @@ EXPECT='[17] . 0x0000059c rw- va=0x0804959c sz=0x0004 vsz=0x0004 .init_array
 run_test
 
 NAME='metadata'
+BROKEN=1
 FILE=../../bins/elf/x86-helloworld-gcc
 CMDS='CC
 '
@@ -39,12 +40,13 @@ EXPECT='0x080484b0 string[13] "Hello_world_"
 0x08049694 CCu "[22] va=0x08049694 pa=0x00000694 sz=24 vsz=24 rwx=-rw- .got.plt"
 0x080496ac CCu "[23] va=0x080496ac pa=0x000006ac sz=8 vsz=8 rwx=-rw- .data"
 0x080496b4 CCu "[24] va=0x080496b4 pa=0x000006b4 sz=4 vsz=4 rwx=-rw- .bss"
-0x08048000 CCu "[31] va=0x08048000 pa=0x00000000 sz=52 vsz=52 rwx=-rw- ehdr"
 0x00000000 CCu "[28] va=0x00000000 pa=0x000010cc sz=599 vsz=599 rwx=---- .strtab"
+0x08048000 CCu "[31] va=0x08048000 pa=0x00000000 sz=52 vsz=52 rwx=-rw- ehdr"
 '
 run_test
 
 NAME='base64 metadata commands'
+BROKEN=1
 FILE=../../bins/elf/x86-helloworld-gcc
 CMDS='C*
 '
@@ -74,8 +76,8 @@ CCu base64:WzIxXSB2YT0weDA4MDQ5NjkwIHBhPTB4MDAwMDA2OTAgc3o9NCB2c3o9NCByd3g9LXJ3L
 CCu base64:WzIyXSB2YT0weDA4MDQ5Njk0IHBhPTB4MDAwMDA2OTQgc3o9MjQgdnN6PTI0IHJ3eD0tcnctIC5nb3QucGx0 @ 0x08049694
 CCu base64:WzIzXSB2YT0weDA4MDQ5NmFjIHBhPTB4MDAwMDA2YWMgc3o9OCB2c3o9OCByd3g9LXJ3LSAuZGF0YQ== @ 0x080496ac
 CCu base64:WzI0XSB2YT0weDA4MDQ5NmI0IHBhPTB4MDAwMDA2YjQgc3o9NCB2c3o9NCByd3g9LXJ3LSAuYnNz @ 0x080496b4
-CCu base64:WzMxXSB2YT0weDA4MDQ4MDAwIHBhPTB4MDAwMDAwMDAgc3o9NTIgdnN6PTUyIHJ3eD0tcnctIGVoZHI= @ 0x08048000
 CCu base64:WzI4XSB2YT0weDAwMDAwMDAwIHBhPTB4MDAwMDEwY2Mgc3o9NTk5IHZzej01OTkgcnd4PS0tLS0gLnN0cnRhYg== @ 0x00000000
+CCu base64:WzMxXSB2YT0weDA4MDQ4MDAwIHBhPTB4MDAwMDAwMDAgc3o9NTIgdnN6PTUyIHJ3eD0tcnctIGVoZHI= @ 0x08048000
 '
 run_test
 
