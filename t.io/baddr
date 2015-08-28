@@ -74,3 +74,21 @@ EXPECT='f entry0 1 @ 0x00f00410
 31ed4989d15e4889e248
 '
 run_test
+
+NAME="e bin.baddr"
+FILE=../bins/elf/hello-linux-x86_64
+ARGS=''
+CMDS='?v `e bin.baddr`
+'
+EXPECT='0x400000
+'
+run_test
+
+NAME="e bin.baddr changed"
+FILE=../bins/elf/hello-linux-x86_64
+ARGS='-B 0xf00000'
+CMDS='?v `e bin.baddr`
+'
+EXPECT='0xf00000
+'
+run_test
