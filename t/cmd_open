@@ -116,6 +116,6 @@ CMDS='e bin.baddr = 0
 oob
 iS~.comment
 '
-EXPECT='idx=25 vaddr=0x00000000 paddr=0x00000910 sz=34 vsz=34 perm=---- name=.comment
+EXPECT='idx=25 vaddr=0x00000000 paddr=0x00000910 sz=34 vsz=34 perm=----- name=.comment
 '
 run_test

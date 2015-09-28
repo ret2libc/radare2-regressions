@@ -217,7 +217,6 @@ EXPECT='0x00000123
 run_test
 
 NAME='?p and ?P'
-BROKEN=1
 FILE=../bins/elf/simple.elf
 CMDS='?p 0xdeadbeef
 ?P 0xdeadbeef
