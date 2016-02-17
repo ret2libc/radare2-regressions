@@ -381,3 +381,16 @@ EXPECT='101
 102
 '
 run_test
+
+NAME='rename flags from bin'
+FILE='../bins/elf/main'
+CMDS='
+f~sym.__libc_csu_init
+fr sym.__libc_csu_init newname
+f~sym.__libc_csu_init
+f~newname
+'
+EXPECT='0x00400520 137 sym.__libc_csu_init
+0x00400520 137 newname
+'
+run_test
