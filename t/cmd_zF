@@ -23,6 +23,6 @@ NAME='af ; af ; zF libc.sig'
 FILE=../bins/elf/pid_stripped
 ARGS=
 CMDS="s 0x4e2420 ; af ; s 0x4e25c7 ; af ; zF ../bins/other/sigs/libc.sig ; afl ~4e2420"
-EXPECT='0x004e2420   61 664  -> 1022 flirt.__libc_start_main
+EXPECT='0x004e2420   40 664          flirt.__libc_start_main
 '
 run_test
