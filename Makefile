@@ -188,7 +188,7 @@ uninstall:
 
 unit_tests:
 	@make -C ./unit all
-	@sh ./run_unit.sh
+	@./run_unit.sh
 
 tested:
 	@grep -re FILE= t*  | cut -d : -f 2- | sed -e 's/^.*bins\///g' |sort -u | grep -v FILE
