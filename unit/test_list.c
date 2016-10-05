@@ -1,6 +1,8 @@
 #include <r_list.h>
 #include "minunit.h"
 
+#define BUF_LENGTH 100
+
 bool test_r_list_size(void) {
 	// Test that r_list adding and deleting works correctly.
 	int i;
@@ -95,6 +97,60 @@ bool test_r_list_sort(void) {
 	mu_end;
 }
 
+bool test_r_list_mergesort(void) {
+	RList* list = r_list_new ();
+	char* test1 = "AAAA";
+	char* test2 = "BBBB";
+	char* test3 = "CCCC";
+	char* test4 = "DDDD";
+	char* test5 = "EEEE";
+	char* test6_later = "FFFF";
+	char* test7 = "GGGG";
+	char* test8 = "HHHH";
+	char* test9 = "IIII";
+	char* test10 = "JJJJ";
+	char* ins_tests_odd[] = {test10, test1, test3, test7, test5, test9, test2,
+		test4, test8};
+	char* exp_tests_odd[] = {test1, test2, test3, test4, test5, test7,
+		test8, test9, test10};
+	int i;
+
+	// Put in not sorted order.
+	for (i = 0; i < R_ARRAY_SIZE (ins_tests_odd); ++i) {
+		r_list_append (list, (void*)ins_tests_odd[i]);
+	}
+	// Sort.
+	r_list_merge_sort (list, (RListComparator)strcmp);
+
+	// Check that the list (odd-length) is actually sorted.
+	RListIter *next = list->head;
+	for (i = 0; i < R_ARRAY_SIZE (exp_tests_odd); ++i) {
+		char buf[BUF_LENGTH];
+		snprintf(buf, BUF_LENGTH, "%d-th value in sorted list", i);
+		mu_assert_streq ((char*)next->data, exp_tests_odd[i], buf);
+		next = next->n;
+	}
+
+	char* exp_tests_even[] = {test1, test2, test3, test4, test5,
+		test6_later, test7, test8, test9, test10};
+	// Add test6 to make the length even
+	r_list_append (list, (void*)test6_later);
+	// Sort
+	r_list_merge_sort (list, (RListComparator)strcmp);
+
+	// Check that the list (even-length) is actually sorted.
+	next = list->head;
+	for (i = 0; i < R_ARRAY_SIZE (exp_tests_even); ++i) {
+		char buf[BUF_LENGTH];
+		snprintf(buf, BUF_LENGTH, "%d-th value in sorted list", i);
+		mu_assert_streq ((char*)next->data, exp_tests_even[i], buf);
+		next = next->n;
+	}
+
+	r_list_free (list);
+	mu_end;
+}
+
 int all_tests() {
 	mu_run_test(test_r_list_size);
 	mu_run_test(test_r_list_values);
@@ -102,6 +158,7 @@ int all_tests() {
 	mu_run_test(test_r_list_free);
 	mu_run_test(test_r_list_del_n);
 	mu_run_test(test_r_list_sort);
+	mu_run_test(test_r_list_mergesort);
 	return tests_passed != tests_run;
 }
 
