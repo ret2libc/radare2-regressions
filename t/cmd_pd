@@ -416,6 +416,37 @@ EXPECT=' 0x00400000      488d05020000.  lea rax, [rip + 2]
 '
 run_test
 
+NAME='pd asm.varsub_only'
+FILE=malloc://1024
+ARGS=
+BROKEN=
+CMDS='
+e asm.arch=x86
+e asm.bits=64
+e asm.varsub=true
+e asm.lines=false
+e asm.bytes=false
+e asm.comments=false
+e asm.fcnlines=false
+e asm.offset=false
+e scr.color=false
+wx 554889e583ec60488b44244089ec5dc3
+af
+afva
+e asm.varsub_only=true
+pd 1 @ 0~local
+pd 1 @ 7
+e asm.varsub_only=false
+pd 1 @ 0~local
+pd 1 @ 7
+'
+EXPECT='; var int local_40h @ rsp+0x40
+     mov rax, qword [local_40h]
+; var int local_40h @ rsp+0x40
+     mov rax, qword [rsp + local_40h]
+'
+run_test
+
 
 NAME='pd wide string'
 FILE='../bins/pe/c.exe'
