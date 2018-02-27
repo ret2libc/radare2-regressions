@@ -290,9 +290,9 @@ EXPECT='0x412420
 0x412420,0x4028a0,0x414fbf
 '
 RUN
-NAME='regression for #9370'
+NAME=regression for #9370
 FILE=../bins/elf/analysis/hello-arm32
-ARGS='-m 0x10000'
+ARGS=-m 0x10000
 CMDS='izz~Hello'
-EXPECT="006 0x00000200 0x00010200  11  12 (.rodata) ascii Hello World"
+EXPECT='006 0x00000200 0x00010200  11  12 (.rodata) ascii Hello World'
 RUN
