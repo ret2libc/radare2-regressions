@@ -355,7 +355,7 @@ ARGS=
 CMDS='
 e asm.bytes=false
 e asm.comments=false
-e scr.color=true
+e scr.color=1
 e anal.strings=true
 aa
 aae

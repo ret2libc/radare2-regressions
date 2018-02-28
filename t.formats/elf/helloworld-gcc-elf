@@ -106,7 +106,7 @@ CMDS='fs
 EXPECT='0    1 * strings
 1   34 * symbols
 2   78 * sections
-3    4 * relocs
+3    3 * relocs
 4    3 * imports
 '
 run_test
@@ -120,7 +120,7 @@ afl~?
 EXPECT='0    1 * strings
 1   34 * symbols
 2   78 * sections
-3    4 * relocs
+3    3 * relocs
 4    3 * imports
 5    0 * functions
 14
@@ -134,7 +134,7 @@ CMDS='s entry0+4; af;fs *;fs
 EXPECT='0    1 * strings
 1   34 * symbols
 2   78 * sections
-3    4 * relocs
+3    3 * relocs
 4    3 * imports
 5    1 * functions
 '
@@ -164,7 +164,7 @@ NAME='p-'
 FILE=../../bins/elf/analysis/x86-helloworld-gcc
 CMDS='p-
 '
-EXPECT='0x8048000 [cc_______cc_c__c_ccs.ss^sss_ss_ss__sz_c____] 0x804859c
+EXPECT='0x8048000 [sc_______ss_s__s_sss.ss^sss_ss_ss__sz_s____] 0x804859c
 '
 run_test
 
@@ -252,7 +252,7 @@ NAME='flags (total)'
 FILE=../../bins/elf/analysis/x86-helloworld-gcc
 CMDS='f~?
 '
-EXPECT='120
+EXPECT='119
 '
 run_test
 
@@ -343,10 +343,9 @@ EXPECT='0x080484b0 13 str.Hello_world
 0x00000000 0 section_end.GNU_STACK
 0x08048000 52 section.ehdr
 0x08048034 0 section_end.ehdr
-0x08049690 4 reloc.__gmon_start___144
-0x080496a0 4 reloc.puts_160
-0x080496a4 4 reloc.__gmon_start___164
-0x080496a8 4 reloc.__libc_start_main_168
+0x080496a4 4 reloc.__gmon_start
+0x080496a0 4 reloc.puts
+0x080496a8 4 reloc.__libc_start_main
 0x080495a4 0 obj.__JCR_LIST
 0x08048340 0 sym.deregister_tm_clones
 0x08048370 0 sym.register_tm_clones
