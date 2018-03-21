@@ -43,7 +43,7 @@ EXPECT='0x00002918 "alloc"
 0x00002970 bl sym.imp.objc_msgSend
 0x00002998 "Usage: FileDP [-f/-d] [Full path to file/directory] "
 0x0000299c bl sym.imp.puts
-0x00002e90 [02] m-r-x section size 149 named 2.__TEXT.__cstring
+0x00002e90 [02] -r-x section size 149 named 2.__TEXT.__cstring
 0x000029c8 bl sym.imp.strcmp
 0x00002a1c bl sym.imp.objc_msgSend
 0x00002a38 bl sym.imp.objc_msgSend

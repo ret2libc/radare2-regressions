@@ -23,6 +23,6 @@ NAME='ELF: corkami tiny.elf - sections'
 FILE=../../bins/elf/analysis/tiny.elf
 ARGS=''
 CMDS="S"
-EXPECT='[00:00] * pa=0x00000000 mrwx va=0x00010000 sz=0x002d vsz=0x002d uphdr
+EXPECT='[00:00] * pa=0x00000000 rwx va=0x00010000 sz=0x002d vsz=0x002d uphdr
 '
 run_test

@@ -43,11 +43,11 @@ FILE=../../bins/xbe/default.xbe
 ARGS='-u'
 CMDS='iS'
 EXPECT='[Sections]
-00 0x00001000  1728 0x00011000  1728 m-r-x .0
-01 0x00002000    24 0x000116c0    24 m-r-- .1
-02 0x00003000 28280 0x000116e0 1257188 m-rw- .2
-03 0x0000a000    60 0x001445e0    64 m-rwx .3
-04 0x0000b000   164 0x00144620  1188 m-r-- .4
+00 0x00001000  1728 0x00011000  1728 -r-x .0
+01 0x00002000    24 0x000116c0    24 -r-- .1
+02 0x00003000 28280 0x000116e0 1257188 -rw- .2
+03 0x0000a000    60 0x001445e0    64 -rwx .3
+04 0x0000b000   164 0x00144620  1188 -r-- .4
 '
 run_test
 
@@ -55,11 +55,11 @@ NAME='section header in r2'
 FILE=../../bins/xbe/default.xbe
 ARGS='-u'
 CMDS='S'
-EXPECT='[00:00] * pa=0x00001000 mr-x va=0x00011000 sz=0x06c0 vsz=0x06c0 .0
-[00:01] . pa=0x00002000 mr-- va=0x000116c0 sz=0x0018 vsz=0x0018 .1
-[00:02] . pa=0x00003000 mrw- va=0x000116e0 sz=0x6e78 vsz=0x132ee4 .2
-[00:03] . pa=0x0000a000 mrwx va=0x001445e0 sz=0x003c vsz=0x0040 .3
-[00:04] . pa=0x0000b000 mr-- va=0x00144620 sz=0x00a4 vsz=0x04a4 .4
+EXPECT='[00:00] * pa=0x00001000 r-x va=0x00011000 sz=0x06c0 vsz=0x06c0 .0
+[00:01] . pa=0x00002000 r-- va=0x000116c0 sz=0x0018 vsz=0x0018 .1
+[00:02] . pa=0x00003000 rw- va=0x000116e0 sz=0x6e78 vsz=0x132ee4 .2
+[00:03] . pa=0x0000a000 rwx va=0x001445e0 sz=0x003c vsz=0x0040 .3
+[00:04] . pa=0x0000b000 r-- va=0x00144620 sz=0x00a4 vsz=0x04a4 .4
 '
 run_test
 

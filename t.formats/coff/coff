@@ -6,8 +6,8 @@ NAME='tiny coff'
 FILE=../../bins/coff/coff.obj
 ARGS=''
 CMDS="S;is;ir"
-EXPECT='[00:00] * pa=0x00000064 mr-x va=0x00000064 sz=0x0027 vsz=0x0027 .text_0
-[00:01] . pa=0x0000008b mrw- va=0x0000008b sz=0x001c vsz=0x001c .data_1
+EXPECT='[00:00] * pa=0x00000064 r-x va=0x00000064 sz=0x0027 vsz=0x0027 .text_0
+[00:01] . pa=0x0000008b rw- va=0x0000008b sz=0x001c vsz=0x001c .data_1
 [Symbols]
 000 0x00000000 0x00000000 (null) EXTERNAL    4 MessageBoxA
 000 0x00000000 0x00000000 (null) EXTERNAL    4 ExitProcess
@@ -34,21 +34,21 @@ CMDS="S
 is~text
 s sym.__1FooBar__QAE_XZ
 pd 2"
-EXPECT='[00:00] . pa=0x0000017c m--- va=0x0000017c sz=0x00ef vsz=0x00ef .drectve_0
-[00:01] . pa=0x0000026b mr-- va=0x0000026b sz=0x0ab0 vsz=0x0ab0 .debug_S_1
-[00:02] . pa=0x00000d1b mr-- va=0x00000d1b sz=0x0074 vsz=0x0074 .debug_T_2
-[00:03] * pa=0x00000d8f mr-x va=0x00000d8f sz=0x002d vsz=0x002d .text_mn_3
-[00:04] . pa=0x00000dbc mr-- va=0x00000dbc sz=0x00d4 vsz=0x00d4 .debug_S_4
-[00:05] . pa=0x00000ec2 mr-x va=0x00000ec2 sz=0x002a vsz=0x002a .text_mn_5
-[00:06] . pa=0x00000eec mr-- va=0x00000eec sz=0x00d4 vsz=0x00d4 .debug_S_6
-[00:07] . pa=0x00000ff2 mr-- va=0x00000ff2 sz=0x0004 vsz=0x0004 .rtc_IMZ_7
-[00:08] . pa=0x00001000 mr-- va=0x00001000 sz=0x0004 vsz=0x0004 .rtc_TMZ_8
+EXPECT='[00:00] . pa=0x0000017c --- va=0x0000017c sz=0x00ef vsz=0x00ef .drectve_0
+[00:01] . pa=0x0000026b r-- va=0x0000026b sz=0x0ab0 vsz=0x0ab0 .debug_S_1
+[00:02] . pa=0x00000d1b r-- va=0x00000d1b sz=0x0074 vsz=0x0074 .debug_T_2
+[00:03] * pa=0x00000d8f r-x va=0x00000d8f sz=0x002d vsz=0x002d .text_mn_3
+[00:04] . pa=0x00000dbc r-- va=0x00000dbc sz=0x00d4 vsz=0x00d4 .debug_S_4
+[00:05] . pa=0x00000ec2 r-x va=0x00000ec2 sz=0x002a vsz=0x002a .text_mn_5
+[00:06] . pa=0x00000eec r-- va=0x00000eec sz=0x00d4 vsz=0x00d4 .debug_S_6
+[00:07] . pa=0x00000ff2 r-- va=0x00000ff2 sz=0x0004 vsz=0x0004 .rtc_IMZ_7
+[00:08] . pa=0x00001000 r-- va=0x00001000 sz=0x0004 vsz=0x0004 .rtc_TMZ_8
 000 0x00000d8f 0x00000d8f (null) STATIC    4 .text$mn
 000 0x00000ec2 0x00000ec2 (null) STATIC    4 .text$mn
             ;-- section..text_mn_5:
             ;-- .text$mn:
             ;-- ??1FooBar@@QAE@XZ:
-            0x00000ec2      55             push ebp                    ; [05] m-r-x section size 42 named .text_mn_5
+            0x00000ec2      55             push ebp                    ; [05] -r-x section size 42 named .text_mn_5
             0x00000ec3      8bec           mov ebp, esp
 '
 run_test

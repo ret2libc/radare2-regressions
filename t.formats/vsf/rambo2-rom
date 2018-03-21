@@ -27,8 +27,8 @@ FILE=../../bins/vsf/c64-rambo2-rom.vsf
 IGNORE_ERR=1
 ARGS=''
 CMDS="S"
-EXPECT='[00:00] . pa=0x0001209d mr-x va=0x0000a000 sz=0x2000 vsz=0x2000 BASIC
-[00:01] . pa=0x0001009d mr-x va=0x0000e000 sz=0x2000 vsz=0x2000 KERNAL
-[00:02] * pa=0x00000084 mrwx va=0x00000000 sz=0x10000 vsz=0x10000 RAM
+EXPECT='[00:00] . pa=0x0001209d r-x va=0x0000a000 sz=0x2000 vsz=0x2000 BASIC
+[00:01] . pa=0x0001009d r-x va=0x0000e000 sz=0x2000 vsz=0x2000 KERNAL
+[00:02] * pa=0x00000084 rwx va=0x00000000 sz=0x10000 vsz=0x10000 RAM
 '
 run_test

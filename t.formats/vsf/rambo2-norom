@@ -27,6 +27,6 @@ FILE=../../bins/vsf/c64-rambo2-norom.vsf
 IGNORE_ERR=1
 ARGS=''
 CMDS="S"
-EXPECT='[00:00] * pa=0x00000084 mrwx va=0x00000000 sz=0x10000 vsz=0x10000 RAM
+EXPECT='[00:00] * pa=0x00000084 rwx va=0x00000000 sz=0x10000 vsz=0x10000 RAM
 '
 run_test

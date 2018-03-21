@@ -60,7 +60,7 @@ FILE=$F0
 ARGS=
 CMDS='iS~calc
 '
-EXPECT='09 0x00000000 929792 0xfffe0000 929792 m---- C:_Windows_System32_calc.exe
+EXPECT='09 0x00000000 929792 0xfffe0000 929792 ---- C:_Windows_System32_calc.exe
 '
 run_test
 

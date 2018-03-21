@@ -12,7 +12,7 @@ NAME='PE: nosectionW7 - entrypoint'
 FILE=../../bins/pe/nosectionW7.exe
 CMDS="S"
 EXPECT_ERR=""
-EXPECT='[00:00] * pa=0x00000138 mrwx va=0x00400138 sz=0x0108 vsz=0x0108 blob
+EXPECT='[00:00] * pa=0x00000138 rwx va=0x00400138 sz=0x0108 vsz=0x0108 blob
 '
 
 run_test

@@ -407,7 +407,7 @@ block    0x100
 file     ../../bins/elf/analysis/guess-number-riscv64
 format   elf64
 iorw     false
-mode     -r-x
+mode     r-x
 size     0x9d5a8
 humansz  629.4K
 type     EXEC (Executable file)

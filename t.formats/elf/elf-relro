@@ -5,8 +5,8 @@ NAME='ELF: corkami elf-relro - sections'
 FILE=../../bins/elf/analysis/elf-relro
 ARGS=''
 CMDS="iS~rel"
-EXPECT='09 0x0000027c     8 0x0804827c     8 --r-- .rel.dyn
-10 0x00000284    16 0x08048284    16 --r-- .rel.plt
+EXPECT='09 0x0000027c     8 0x0804827c     8 -r-- .rel.dyn
+10 0x00000284    16 0x08048284    16 -r-- .rel.plt
 '
 run_test
 

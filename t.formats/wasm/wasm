@@ -38,9 +38,9 @@ IGNORE_ERR=1
 ARGS=''
 CMDS="iS"
 EXPECT='[Sections]
-00 0x0000000a    16 0x0000000a    16 ----- type
-01 0x0000001d    44 0x0000001d    44 ----- function
-02 0x0000004d   476 0x0000004d   476 ----- export
-03 0x0000022d   502 0x0000022d   502 ----- code
+00 0x0000000a    16 0x0000000a    16 ---- type
+01 0x0000001d    44 0x0000001d    44 ---- function
+02 0x0000004d   476 0x0000004d   476 ---- export
+03 0x0000022d   502 0x0000022d   502 ---- code
 '
 run_test

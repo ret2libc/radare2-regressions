@@ -31,7 +31,7 @@ run_test
 NAME='PE: corkami CoST.exe - sections list'
 FILE=../../bins/pe/CoST.exe
 CMDS="S"
-EXPECT='[00:00] * pa=0x00000000 mrwx va=0x7efd0000 sz=0x516a vsz=0x516a blob
+EXPECT='[00:00] * pa=0x00000000 rwx va=0x7efd0000 sz=0x516a vsz=0x516a blob
 '
 run_test
 

@@ -27,7 +27,7 @@ FILE=../../bins/vsf/c128-rhps-norom.vsf
 IGNORE_ERR=1
 ARGS=''
 CMDS="S"
-EXPECT='[00:00] * pa=0x0000008c mrwx va=0x00000000 sz=0x10000 vsz=0x10000 RAM_BANK_0
-[00:01] * pa=0x0001008c mrwx va=0x00000000 sz=0x10000 vsz=0x10000 RAM_BANK_1
+EXPECT='[00:00] * pa=0x0000008c rwx va=0x00000000 sz=0x10000 vsz=0x10000 RAM_BANK_0
+[00:01] * pa=0x0001008c rwx va=0x00000000 sz=0x10000 vsz=0x10000 RAM_BANK_1
 '
 run_test

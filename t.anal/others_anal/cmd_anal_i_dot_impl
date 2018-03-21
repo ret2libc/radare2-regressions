@@ -12,9 +12,9 @@ s 0x760
 iSj.
 '
 EXPECT='Current section
-00 0x00000188    36 0x08048188    36 --r-- .note.gnu.build_id
+00 0x00000188    36 0x08048188    36 -r-- .note.gnu.build_id
 Current section
-{"name":".plt","size":240,"vsize":240,"flags":"--r-x","paddr":1888,"vaddr":134514528}'
+{"name":".plt","size":240,"vsize":240,"flags":"-r-x","paddr":1888,"vaddr":134514528}'
 run_test
 
 NAME='iE and iE. implementation'

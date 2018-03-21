@@ -36,8 +36,8 @@ ARGS=''
 BROKEN=
 CMDS="iS"
 EXPECT='[Sections]
-00 0x00000073    19 0x00001000    19 m-rwx text_1
-01 0x00000095    14 0x00001013    14 m-rwx data_1
+00 0x00000073    19 0x00001000    19 -rwx text_1
+01 0x00000095    14 0x00001013    14 -rwx data_1
 '
 run_test
 
@@ -96,8 +96,8 @@ ARGS=''
 BROKEN=
 CMDS="iS"
 EXPECT='[Sections]
-00 0x00000074    29 0x00001000    29 m-rwx .text_1
-01 0x000000a3    14 0x0000101d    14 m-rwx .data_1
+00 0x00000074    29 0x00001000    29 -rwx .text_1
+01 0x000000a3    14 0x0000101d    14 -rwx .data_1
 '
 run_test
 
