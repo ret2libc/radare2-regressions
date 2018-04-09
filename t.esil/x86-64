@@ -16,7 +16,6 @@ EXPECT='imul r9
 run_test
 
 NAME='imul 2 arg'
-BROKEN=1
 FILE=-
 ARGS=
 CMDS='
@@ -109,7 +108,7 @@ wx 69c389000000
 ao~opcode,esil
 '
 EXPECT='opcode: imul eax, ebx, 0x89
-esil: 137,rbx,*,rax,=
+esil: 137,ebx,*,eax,=
 '
 run_test
 
@@ -232,7 +231,7 @@ wa mov eax, 4
 e asm.esil=true
 pd 1
 '
-EXPECT='            0x00000000      b804000000     4,rax,=
+EXPECT='            0x00000000      b804000000     4,eax,=,0xffffffff,rax,&=
 '
 run_test
 
