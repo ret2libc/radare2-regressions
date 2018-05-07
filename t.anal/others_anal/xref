@@ -312,3 +312,14 @@ pd 1 @ 0x08048432
 EXPECT='[36m|[0m [36m          [0m[32m0x08048432[0m      [37mlea[36m eax[0m,[36m [0m[33mstr.Hello_PIC[0m[36m[0m[0m
 '
 run_test
+
+NAME='axs'
+FILE=-
+ARGS=
+CMDS='
+axs 0x10
+axq
+'
+EXPECT='0x00000000 -> 0x00000010  STRING
+'
+run_test
