@@ -90,8 +90,8 @@ axq
 Ps xrefs > /dev/null
 axq
 '
-EXPECT='0x00000001 -> 0x00000000  unk
-0x00000001 -> 0x00000000  unk
+EXPECT='0x00000000 -> 0x00000001  UNKNOWN
+0x00000000 -> 0x00000001  UNKNOWN
 '
 run_test
 
@@ -381,7 +381,7 @@ Ps blah > /dev/null
 Po blah > /dev/null
 axq
 '
-EXPECT='0x00000009 -> 0x00000003  code call
+EXPECT='0x00000003 -> 0x00000009  CALL
 '
 run_test
 
