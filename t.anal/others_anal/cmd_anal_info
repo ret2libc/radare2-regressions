@@ -12,6 +12,6 @@ ai
 EXPECT='exec
 read
 flag
-reg
+flag
 '
 run_test

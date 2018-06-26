@@ -53,10 +53,6 @@ EXPECT='[Symbols]
 045 0x00000838 0x01a00838 GLOBAL    OBJ    8 obj
 047 0x00200840 0x01c00840 GLOBAL    OBJ    4 glob
 048 0x000003d8 0x004003d8 GLOBAL   FUNC    0 _init
-001 0x00000000 0x00400000 GLOBAL   FUNC    0 printf
-002 0x00000000 0x00400000 GLOBAL   FUNC    0 __libc_start_main
-003 0x00000000 0x00400000   WEAK NOTYPE    0 __gmon_start__
-004 0x00000000 0x00400000 GLOBAL   FUNC    0 atoi
 001 0x00000410 0x00400410 GLOBAL   FUNC   16 imp.printf
 002 0x00000420 0x00400420 GLOBAL   FUNC   16 imp.__libc_start_main
 003 0x00000430 0x00400430   WEAK NOTYPE   16 imp.__gmon_start__
@@ -71,9 +67,6 @@ ARGS=
 CMDS='is
 '
 EXPECT='[Symbols]
-001 0x00000000 0x00400000 GLOBAL   FUNC    0 puts
-002 0x00000000 0x00400000 GLOBAL   FUNC    0 __libc_start_main
-003 0x00000000 0x00400000   WEAK NOTYPE    0 __gmon_start__
 001 0x000003e0 0x004003e0 GLOBAL   FUNC   16 imp.puts
 002 0x000003f0 0x004003f0 GLOBAL   FUNC   16 imp.__libc_start_main
 003 0x00000400 0x00400400   WEAK NOTYPE   16 imp.__gmon_start__
@@ -86,13 +79,6 @@ ARGS=
 CMDS='is
 '
 EXPECT='[Symbols]
-001 0x00000000 0x08048000 GLOBAL   FUNC    0 mprotect
-002 0x00000000 0x08048000 GLOBAL   FUNC    0 puts
-003 0x00000000 0x08048000   WEAK NOTYPE    0 __gmon_start__
-004 0x00000000 0x08048000 GLOBAL   FUNC    0 exit
-005 0x00000000 0x08048000 GLOBAL   FUNC    0 __libc_start_main
-006 0x00000000 0x08048000 GLOBAL   FUNC    0 ptrace
-007 0x00000000 0x08048000 GLOBAL   FUNC    0 calloc
 008 0x000007dc 0x080487dc GLOBAL    OBJ    4 _IO_stdin_used
 001 0x00000370 0x08048370 GLOBAL   FUNC   16 imp.mprotect
 002 0x00000380 0x08048380 GLOBAL   FUNC   16 imp.puts
@@ -110,65 +96,35 @@ ARGS=
 CMDS='is
 '
 EXPECT='[Symbols]
-001 0x00000000 0x00000000 GLOBAL   FUNC    0 __cxa_finalize
-002 0x00000000 0x00000000 GLOBAL   FUNC    0 __cxa_atexit
 003 0x00002dd0 0x00003dd0   WEAK    OBJ   36 vtableforgralloc::IMemAlloc
-004 0x00000000 0x00000000 GLOBAL   FUNC    0 __aeabi_unwind_cpp_pr0
-005 0x00000000 0x00000000 GLOBAL   FUNC    0 _ZdlPv
 006 0x00001210 0x00001210 GLOBAL   FUNC   68 gralloc::IonAlloc::unmap_buffer(void*,unsignedint,int)
-007 0x00000000 0x00000000 GLOBAL   FUNC    0 munmap
-008 0x00000000 0x00000000 GLOBAL   FUNC    0 __errno
-009 0x00000000 0x00000000 GLOBAL   FUNC    0 strerror
-010 0x00000000 0x00000000 GLOBAL   FUNC    0 __android_log_print
 011 0x00001254 0x00001254 GLOBAL   FUNC   96 gralloc::IonAlloc::open_device()
-012 0x00000000 0x00000000 GLOBAL   FUNC    0 open
 013 0x000012b4 0x000012b4 GLOBAL   FUNC  240 gralloc::IonAlloc::clean_buffer(void*,unsignedint,int,int,int)
-014 0x00000000 0x00000000 GLOBAL   FUNC    0 ioctl
 015 0x000013a4 0x000013a4 GLOBAL   FUNC   84 gralloc::IonAlloc::map_buffer(void**,unsignedint,int,int)
-016 0x00000000 0x00000000 GLOBAL   FUNC    0 mmap
 017 0x000013f8 0x000013f8 GLOBAL   FUNC   68 gralloc::IonAlloc::free_buffer(void*,unsignedint,int,int)
-018 0x00000000 0x00000000 GLOBAL   FUNC    0 pthread_mutex_lock
-019 0x00000000 0x00000000 GLOBAL   FUNC    0 close
-020 0x00000000 0x00000000 GLOBAL   FUNC    0 pthread_mutex_unlock
 021 0x0000143c 0x0000143c GLOBAL   FUNC  304 gralloc::IonAlloc::alloc_buffer(gralloc::alloc_data&)
 022 0x0000156c 0x0000156c GLOBAL   FUNC   22 gralloc::IonAlloc::close_device()
-023 0x00000000 0x00000000 GLOBAL   FUNC    0 pthread_mutex_destroy
 024 0x00002df8 0x00003df8 GLOBAL    OBJ   36 vtableforgralloc::IonAlloc
-025 0x00000000 0x00000000 GLOBAL   FUNC    0 __cxa_pure_virtual
 026 0x00002e20 0x00003e20   WEAK    OBJ   24 vtableforgralloc::IAllocController
 027 0x00001614 0x00001614 GLOBAL   FUNC   48 gralloc::IonController::getAllocator(int)
 028 0x00001644 0x00001644 GLOBAL   FUNC  452 gralloc::IonController::allocate(gralloc::alloc_data&,int)
-029 0x00000000 0x00000000 GLOBAL   FUNC    0 _Znwj
-030 0x00000000 0x00000000 GLOBAL   FUNC    0 property_get
-031 0x00000000 0x00000000 GLOBAL   FUNC    0 strncmp
-032 0x00000000 0x00000000 GLOBAL   FUNC    0 __stack_chk_fail
-033 0x00000000 0x00000000 GLOBAL    OBJ    0 __stack_chk_guard
-034 0x00000000 0x00000000 GLOBAL    OBJ    0 _ZN7android9SingletonIN7qdutils17QCCompositionTypeEE5sLockE
-035 0x00000000 0x00000000 GLOBAL    OBJ    0 _ZN7android9SingletonIN7qdutils17QCCompositionTypeEE9sInstanceE
 036 0x00001808 0x00001808 GLOBAL   FUNC   40 AdrenoMemInfo::AdrenoMemInfo()
-037 0x00000000 0x00000000 GLOBAL   FUNC    0 dlopen
-038 0x00000000 0x00000000 GLOBAL   FUNC    0 dlsym
 039 0x00001808 0x00001808 GLOBAL   FUNC   40 AdrenoMemInfo::AdrenoMemInfo()
 040 0x00001830 0x00001830 GLOBAL   FUNC   16 AdrenoMemInfo::~AdrenoMemInfo()
-041 0x00000000 0x00000000 GLOBAL   FUNC    0 dlclose
 042 0x00001830 0x00001830 GLOBAL   FUNC   16 AdrenoMemInfo::~AdrenoMemInfo()
 043 0x00001840 0x00001840 GLOBAL   FUNC  288 AdrenoMemInfo::getStride(int,int)
-044 0x00000000 0x00000000 GLOBAL   FUNC    0 strncasecmp
 045 0x00001960 0x00001960 GLOBAL   FUNC   68 gralloc::IonController::IonController()
-046 0x00000000 0x00000000 GLOBAL   FUNC    0 pthread_mutex_init
 047 0x00001960 0x00001960 GLOBAL   FUNC   68 gralloc::IonController::IonController()
 048 0x000019a4 0x000019a4 GLOBAL   FUNC   40 gralloc::IAllocController::getInstance()
 049 0x000019cc 0x000019cc GLOBAL   FUNC   60 free_buffer(private_handle_t*)
 050 0x00001a08 0x00001a08   WEAK   FUNC   56 android::Singleton<AdrenoMemInfo>::getInstance()
 051 0x00001a40 0x00001a40 GLOBAL   FUNC  636 getBufferSizeAndDimensions(int,int,int,int&,int&)
 052 0x00001cbc 0x00001cbc GLOBAL   FUNC  244 alloc_buffer(private_handle_t**,int,int,int,int)
-053 0x00000000 0x00000000 GLOBAL    OBJ    0 __page_size
 054 0x00001db0 0x00001db0   WEAK   FUNC   44 android::Singleton<AdrenoMemInfo>::hasInstance()
 055 0x00001ddc 0x00001ddc   WEAK   FUNC    2 android::Singleton<AdrenoMemInfo>::~Singleton()
 056 0x00001ddc 0x00001ddc   WEAK   FUNC    2 android::Singleton<AdrenoMemInfo>::~Singleton()
 057 0x00001ddc 0x00001ddc   WEAK   FUNC    2 android::Singleton<AdrenoMemInfo>::Singleton()
 058 0x00001ddc 0x00001ddc   WEAK   FUNC    2 android::Singleton<AdrenoMemInfo>::Singleton()
-059 0x00000000 0x00000000 GLOBAL   FUNC    0 __aeabi_atexit
 060 0x00002e38 0x00003e38 GLOBAL    OBJ   24 vtableforgralloc::IonController
 061 0x0000300c 0x0000400c GLOBAL    OBJ    4 gralloc::IAllocController::sController
 062 0x00003004 0x00004004 GLOBAL    OBJ    4 android::Singleton<AdrenoMemInfo>::sInstance

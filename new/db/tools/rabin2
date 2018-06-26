@@ -66,7 +66,7 @@ FILE=../bins/elf/analysis/x86-helloworld-gcc
 CMDS=<<EXPECT
 !rabin2 -s ${R2_FILE}|wc -l|awk "{print \$1}"
 EXPECT=<<RUN
-69
+66
 RUN
 NAME=rabin2 -S, -SS, -rS and -rSS file elf
 FILE=../bins/elf/analysis/x86-helloworld-gcc
@@ -344,9 +344,6 @@ vaddr=0x08048400 paddr=0x00000400
 064 0x00000400 0x08048400 GLOBAL   FUNC   28 main
 066 0x000006b4 0x080496b4 GLOBAL    OBJ    0 __TMC_END__
 068 0x00000290 0x08048290 GLOBAL   FUNC    0 _init
-001 0x00000000 0x08048000 GLOBAL   FUNC    0 puts
-002 0x00000000 0x08048000   WEAK NOTYPE    0 __gmon_start__
-003 0x00000000 0x08048000 GLOBAL   FUNC    0 __libc_start_main
 001 0x000002d0 0x080482d0 GLOBAL   FUNC   16 imp.puts
 002 0x000002e0 0x080482e0   WEAK NOTYPE   16 imp.__gmon_start__
 003 0x000002f0 0x080482f0 GLOBAL   FUNC   16 imp.__libc_start_main

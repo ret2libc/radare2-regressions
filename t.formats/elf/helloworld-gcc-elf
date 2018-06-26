@@ -121,7 +121,7 @@ EXPECT='0    1 * strings
 4    3 * relocs
 5    3 * imports
 6    0 * functions
-15
+14
 '
 run_test
 

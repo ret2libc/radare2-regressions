@@ -82,12 +82,12 @@ CMDS64=CmUgc2NyLm51bGw9dHJ1ZQpvIG1hbGxvYzovLzUxMgplIHNjci5udWxsPWZhbHNlCml+ZmlsZ
 RUN
 NAME=ob select files binobj
 FILE=../bins/elf/libmagic.so
-EXPECT64=MzgKMAo=
+EXPECT64=NDAKMAo=
 CMDS64=CmlpcX4/CmUgc2NyLm51bGw9dHJ1ZQpvIG1hbGxvYzovLzEwMjQKZSBzY3IubnVsbD1mYWxzZQppaXF+PwoK
 RUN
 NAME=ob select files binobj2
 FILE=../bins/elf/libmagic.so
-EXPECT64=NDMwCjg1CjQzMAo=
+EXPECT64=NDEwCjQ2CjQxMAo=
 CMDS64=CmlzcX4/CmUgc2NyLm51bGw9dHJ1ZQpvIC4uL2JpbnMvZWxmL3RydWUzMgplIHNjci5udWxsPWZhbHNlCmlzcX4/CiMgcmFpc2UgYmFjawpvcCBgb346MFswXWAKaXNxfj8KCg==
 RUN
 NAME=o-*
