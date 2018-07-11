@@ -247,18 +247,23 @@ class NewRegressions {
           let res = '';
           let ree = '';
           test.spawnArgs = args;
+	  console.log(args);
           const child = spawn(r2bin, args);
           test.birth = new Date();
           child.stdout.on('data', data => {
+	    console.log('data');
             res += data.toString();
           });
           child.stderr.on('data', data => {
+	    console.log('data');
             ree += data.toString();
           });
           child.on('close', data => {
+	    console.log('closing');
             test.death = new Date();
             try {
               if (test.tmpScript) {
+		      console.log('closing tmpscript');
                 // TODO use yield
                 fs.unlinkSync(test.tmpScript);
                 test.tmpScript = null;
@@ -273,6 +278,7 @@ class NewRegressions {
             resolve(cb(test));
           });
         } catch (e) {
+		console.log('catch');
           console.error(e);
           reject(e);
         }

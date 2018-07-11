@@ -166,7 +166,7 @@ untested:
 
 js-tests:
 	cd new && npm install
-	cd new && node bin/r2r.js db/cmd/feat_foreach
+	cd new && node bin/r2r.js
 
 allbins:
 	find bins -type f
