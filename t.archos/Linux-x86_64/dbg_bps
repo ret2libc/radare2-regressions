@@ -11,17 +11,10 @@ ARGS=-d
 BROKEN=
 CMDS='e scr.color=0
 e dbg.swstep=true
-f times=5
-(times_stop,?e Loop `?vi times`,f times=`?vi times-1`,?= times)
-db 0x4000ce
-dbC 0x4000ce .(times_stop)
+ds 0x004000b6
 dc
-dk 9
+dr PC
 '
-EXPECT='Loop 5
-Loop 4
-Loop 3
-Loop 2
-Loop 1
+EXPECT='
 '
 run_test
