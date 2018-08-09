@@ -11,7 +11,9 @@ ARGS=-d
 BROKEN=
 CMDS='e scr.color=0
 e dbg.swstep=true
+dr PC
 dc
+dr PC
 '
 EXPECT='
 '
