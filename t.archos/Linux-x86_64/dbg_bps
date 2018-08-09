@@ -11,7 +11,13 @@ ARGS=-d
 BROKEN=
 CMDS='e scr.color=0
 e dbg.swstep=true
+db 0x4000ce
+dc
 '
-EXPECT='
+EXPECT='Loop 5
+Loop 4
+Loop 3
+Loop 2
+Loop 1
 '
 run_test
