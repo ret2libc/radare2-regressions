@@ -6,18 +6,13 @@ for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 # "!" - run commands (via system)
 
 NAME='dbg.dcC+ds.swstep1'
-FILE=../../bins/elf/analysis/tiny-crackme-vm-x86_64
+FILE=/bin/ls
 ARGS=-d
 BROKEN=
 CMDS='e scr.color=0
 e dbg.swstep=true
-db 0x4000ce
 dc
 '
-EXPECT='Loop 5
-Loop 4
-Loop 3
-Loop 2
-Loop 1
+EXPECT='
 '
 run_test
