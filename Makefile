@@ -39,7 +39,7 @@ radare2:
 	@if [ -f ../binr/radare2/radare2 ]; then $(SHELL) run_tests.sh ../t ; fi
 
 archos:
-	$(SHELL) tt.sh
+	@$(MAKE) -C t.archos
 
 dbg.linux:
 	$(SHELL) run_tests.sh t.archos/Linux
