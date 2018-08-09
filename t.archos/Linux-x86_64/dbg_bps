@@ -6,7 +6,7 @@ for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 # "!" - run commands (via system)
 
 NAME='dbg.dcC+ds.swstep1'
-FILE=../../bins/elf/analysis/elf-nx
+FILE=../../bins/elf/analysis/tiny-crackme-vm-x86_64
 ARGS=-d
 BROKEN=
 CMDS='e scr.color=0
