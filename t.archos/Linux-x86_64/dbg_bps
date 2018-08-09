@@ -27,7 +27,7 @@ EXPECT='0x080482d0
 '
 IGNORE_ERR=1
 run_test
-sleep 2
+sleep 6
 
 # Covers https://github.com/radare/radare2/issues/4560
 NAME='dbg.dc+ds.swstep2'
@@ -50,7 +50,7 @@ EXPECT='0x08048400
 '
 IGNORE_ERR=1
 run_test
-sleep 2
+sleep 6
 
 NAME='dbg.dc+ds.hwstep'
 FILE=../../bins/elf/analysis/elf-nx
@@ -74,7 +74,7 @@ EXPECT='0x080482d0
 '
 IGNORE_ERR=1
 run_test
-sleep 2
+sleep 6
 
 NAME='dbg.dc+ds.hwstep2'
 FILE=../../bins/elf/analysis/x86-helloworld-gcc
@@ -96,7 +96,7 @@ EXPECT='0x08048400
 '
 IGNORE_ERR=1
 run_test
-sleep 2
+sleep 6
 
 NAME='dbg.dcC+ds.swstep1'
 FILE=../../bins/elf/analysis/tiny-crackme-vm-x86_64
@@ -118,7 +118,7 @@ Loop 2
 Loop 1
 '
 run_test
-sleep 2
+sleep 6
 
 NAME='dbg.dcC+ds.swstep2'
 FILE=../../bins/elf/analysis/tiny-crackme-vm-x86_64
@@ -139,7 +139,7 @@ EXPECT='0x000031c0
 0x004000ce
 '
 run_test
-sleep 2
+sleep 6
 
 NAME='dbg.dcC+ds.swstep3'
 FILE=../../bins/elf/analysis/tiny-crackme-vm-x86_64
@@ -186,7 +186,7 @@ EXPECT='0x00400523
 '
 
 run_test
-sleep 2
+sleep 6
 
 NAME='dbg.dc+db'
 FILE=../../bins/elf/analysis/x86-helloworld-gcc
@@ -206,5 +206,5 @@ EXPECT='Hello world!
 '
 # IGNORE_ERR=1
 run_test
-sleep 2
+sleep 6
 
