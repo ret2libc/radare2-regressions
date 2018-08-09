@@ -33,13 +33,14 @@ all:
 	-$(MAKE) overlay-apply
 	$(MAKE) alltargets
 
-alltargets: archos unit_tests
+alltargets: archos
 
 radare2:
 	@if [ -f ../binr/radare2/radare2 ]; then $(SHELL) run_tests.sh ../t ; fi
 
 archos:
-	@$(MAKE) -C t.archos
+	$(SHELL) tt.sh
+
 dbg.linux:
 	$(SHELL) run_tests.sh t.archos/Linux
 
