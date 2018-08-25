@@ -83,11 +83,24 @@ bool test_autonames(void) {
 	mu_end;
 }
 
+bool test_initial_underscore(void) {
+	Sdb *TDB = setup_sdb ();
+	char *s;
+
+	s = r_type_func_guess (TDB, "sym._strchr");
+	mu_assert_neq (s, NULL, "sym._ should be ignored");
+	mu_assert_streq (s, "strchr", "strchr should be identified");
+
+	sdb_free (TDB);
+	mu_end;
+}
+
 int all_tests() {
 	mu_run_test (test_ignore_prefixes);
 	mu_run_test (test_remove_r2_prefixes);
 	mu_run_test (test_dll_names);
 	mu_run_test (test_autonames);
+	mu_run_test (test_initial_underscore);
 	return tests_passed != tests_run;
 }
 
