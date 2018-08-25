@@ -5,6 +5,7 @@ static Sdb *setup_sdb(void) {
 	Sdb *res = sdb_new0 ();
 	sdb_set (res, "ExitProcess", "func", 0);
 	sdb_set (res, "strchr", "func", 0);
+	sdb_set (res, "__stack_chk_fail", "func", 0);
 	return res;
 }
 
@@ -67,6 +68,12 @@ bool test_autonames(void) {
 
 	s = r_type_func_guess (TDB, "sub.strchr_123");
 	mu_assert_eq (s, NULL, "function that calls common fcns shouldn't be identified as such");
+
+	s = r_type_func_guess (TDB, "sub.__strchr_123");
+	mu_assert_eq (s, NULL, "initial _ should not confuse the api");
+
+	s = r_type_func_guess (TDB, "sub.__stack_chk_fail_740");
+	mu_assert_eq (s, NULL, "initial _ should not confuse the api");
 
 	s = r_type_func_guess (TDB, "sym.imp.strchr");
 	mu_assert_neq (s, NULL, "sym.imp. should be ignored");
