@@ -19,3 +19,4 @@ test_rbtree
 test_sparse
 test_unum
 test_vector
+test_util
