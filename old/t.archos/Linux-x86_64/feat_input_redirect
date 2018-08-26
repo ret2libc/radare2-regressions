@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -e tests.sh ] && . ./tests.sh || . ../../tests.sh
+for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 
 NAME='rarun2 Input redirection'
 SHELLCMD='rarun2 ../../../bins/rr2/input_redirection.rr2 | grep -q "^foo

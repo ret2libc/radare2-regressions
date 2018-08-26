@@ -1,5 +1,6 @@
 #!/bin/sh
-[ -e tests.sh ] && . ./tests.sh || . ../../../tests.sh
+
+for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 
 NAME='use of dmh, then any command which use grep and index'
 FILE=../../../bins/elf/simple_malloc_x86_64
