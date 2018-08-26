@@ -1,4 +1,4 @@
 TDIR=$(shell uname)-$(shell uname -m)
 
 all:
-	@[ -d "$(TDIR)" ] && ( cd .. && sh run_tests.sh t.archos/$(TDIR) ) || true
+	@[ -d "$(TDIR)" ] && ( cd ../.. && sh run_tests.sh old/t.archos/$(TDIR) ) || true

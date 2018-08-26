@@ -1,4 +1,5 @@
 #!/bin/sh
+
 for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 
 NAME="bug 6678: crash case"
