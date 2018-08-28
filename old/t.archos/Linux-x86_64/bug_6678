@@ -3,8 +3,6 @@
 for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 
 NAME="bug 6678: crash case"
-FILE=
 CMDS='-d malloc://512 -'
-EXPECT='
-'
+EXPECT=''
 run_test
