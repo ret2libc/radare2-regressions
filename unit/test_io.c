@@ -78,6 +78,7 @@ bool test_va_malloc_zero(void) {
 
 	io = r_io_new ();
 	io->va = true;
+	r_io_open_at (io, "malloc://8", R_IO_RW, 0644, 0x0);
 	buf = 0xdeadbeefcafebabe;
 	ret = r_io_read_at (io, 0, (ut8 *)&buf, 8);
 	mu_assert ("should be able to read", ret);
@@ -135,7 +136,7 @@ int all_tests() {
 	mu_run_test(test_r_io_mapsplit2);
 	mu_run_test(test_r_io_pcache);
 	mu_run_test(test_r_io_desc_exchange);
-	// mu_run_test(test_r_io_priority);
+	mu_run_test(test_r_io_priority);
 	mu_run_test(test_va_malloc_zero);
 	return tests_passed != tests_run;
 }
