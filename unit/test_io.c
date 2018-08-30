@@ -26,14 +26,14 @@ bool test_r_io_pcache (void) {
 	RIO *io = r_io_new ();
 	ut8 buf[8];
 	int fd = r_io_fd_open (io, "malloc://3", R_IO_RW, 0);
-	r_io_map_add (io, fd, R_IO_RW, 0LL, 0LL, 1, false); //8
-	r_io_map_add (io, fd, R_IO_RW, 1, 1, 1, false); //=
-	r_io_map_add (io, fd, R_IO_RW, 1, 2, 1, false); //=
-	r_io_map_add (io, fd, R_IO_RW, 1, 3, 1, false); //=
-	r_io_map_add (io, fd, R_IO_RW, 1, 4, 1, false); //=
-	r_io_map_add (io, fd, R_IO_RW, 1, 5, 1, false); //=
-	r_io_map_add (io, fd, R_IO_RW, 2, 6, 1, false); //D
-	r_io_map_calculate_skyline (io);
+	r_io_map_add_batch (io, fd, R_IO_RW, 0LL, 0LL, 1); //8
+	r_io_map_add_batch (io, fd, R_IO_RW, 1, 1, 1); //=
+	r_io_map_add_batch (io, fd, R_IO_RW, 1, 2, 1); //=
+	r_io_map_add_batch (io, fd, R_IO_RW, 1, 3, 1); //=
+	r_io_map_add_batch (io, fd, R_IO_RW, 1, 4, 1); //=
+	r_io_map_add_batch (io, fd, R_IO_RW, 1, 5, 1); //=
+	r_io_map_add_batch (io, fd, R_IO_RW, 2, 6, 1); //D
+	r_io_update (io);
 	io->p_cache = 2;
 	io->va = true;
 	r_io_fd_write_at (io, fd, 0, (const ut8*)"8=D", 3);
