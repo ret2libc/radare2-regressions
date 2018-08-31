@@ -2,6 +2,7 @@
 for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 
 NAME='rarun2 Input redirection'
+BROKEN=1
 SHELLCMD='rarun2 ../../../bins/rr2/input_redirection.rr2 | grep -q "^foo
 bar$"'
 EXITCODE=0
@@ -10,6 +11,7 @@ run_test
 NAME='radare2 Input redirection'
 FILE='../../../bins/elf/two-words'
 ARGS='-r ../../../bins/rr2/input_redirection.rr2 -d'
+BROKEN=1
 EXPECT='foo
 bar
 '

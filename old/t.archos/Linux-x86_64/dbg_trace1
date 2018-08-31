@@ -8,7 +8,7 @@ for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 NAME='dbg.trace.loop.swstep'
 FILE=../../../bins/elf/analysis/x64-loop
 ARGS=-d
-BROKEN=
+BROKEN=1
 CMDS='e scr.color=0
 e dbg.swstep=true
 db sym.called_in_loop

@@ -8,7 +8,7 @@ for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 NAME='dbg.dc+ds.swstep'
 FILE=../../../bins/elf/analysis/elf-nx
 ARGS=-d
-BROKEN=
+BROKEN=1
 CMDS='e scr.color=0
 e dbg.swstep=true
 s 0
@@ -32,7 +32,7 @@ run_test
 NAME='dbg.dc+ds.swstep2'
 FILE=../../../bins/elf/analysis/x86-helloworld-gcc
 ARGS=-d
-BROKEN=
+BROKEN=1
 CMDS='e scr.color=0
 e dbg.swstep=true
 db sym.main
@@ -53,7 +53,7 @@ run_test
 NAME='dbg.dc+ds.hwstep'
 FILE=../../../bins/elf/analysis/elf-nx
 ARGS=-d
-BROKEN=
+BROKEN=1
 CMDS='e scr.color=0
 e dbg.swstep=false
 s 0
@@ -76,7 +76,7 @@ run_test
 NAME='dbg.dc+ds.hwstep2'
 FILE=../../../bins/elf/analysis/x86-helloworld-gcc
 ARGS=-d
-BROKEN=
+BROKEN=1
 CMDS='e scr.color=0
 e dbg.swstep=false
 db sym.main
@@ -97,7 +97,7 @@ run_test
 NAME='dbg.dcC+ds.swstep1'
 FILE=../../../bins/elf/analysis/tiny-crackme-vm-x86_64
 ARGS=-d
-BROKEN=
+BROKEN=1
 CMDS='e scr.color=0
 e dbg.swstep=true
 f times=5
@@ -158,7 +158,7 @@ EXPECT='0x00000000
 NAME='dbg.dbd+dbe'
 FILE=../../../bins/elf/analysis/x64-loop
 ARGS=-d
-BROKEN=
+BROKEN=1
 CMDS='e scr.color=0
 db 0x400523
 db 0x40051a

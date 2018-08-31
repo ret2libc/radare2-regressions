@@ -4,6 +4,7 @@ for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 
 NAME='use of dmh, then any command which use grep and index'
 FILE=../../../bins/elf/simple_malloc_x86_64
+BROKEN=1
 ARGS="-d"
 CMDS='db sym.main
 dc

@@ -11,7 +11,7 @@ for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 NAME='dbg.step'
 FILE=/bin/ls
 ARGS=-d
-BROKEN=
+BROKEN=1
 CMDS='
 .dr*
 s rip
@@ -31,7 +31,7 @@ run_test
 NAME='dbg.symbols'
 FILE=/bin/ls
 ARGS=-d
-BROKEN=
+BROKEN=1
 CMDS='is~?
 ?!?e zerosyms
 '

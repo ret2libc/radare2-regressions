@@ -17,6 +17,7 @@ run_test
 NAME='dbg.maps.count'
 FILE=../../../bins/elf/analysis/elf-nx
 ARGS=-d
+BROKEN=1
 CMDS='dm~?
 dk 9'
 EXPECT='6
@@ -26,6 +27,7 @@ run_test
 
 NAME='dbg.maps.count.after.map'
 FILE=../../../bins/elf/analysis/x86-helloworld-gcc
+BROKEN=1
 ARGS=-d
 CMDS='dm~?
 db sym.imp.puts
@@ -62,6 +64,7 @@ run_test
 NAME='db.maps.symbols.after.map.complete'
 FILE=../../../bins/elf/analysis/x86-helloworld-gcc
 ARGS=-d
+BROKEN=1
 CMDS='dm~?
 db sym.imp.puts
 dc~?
@@ -78,6 +81,7 @@ run_test
 NAME='dbg.maps.sections.after.map.only_filtered'
 FILE=../../../bins/elf/analysis/x86-helloworld-gcc
 ARGS=-d
+BROKEN=1
 CMDS='dm~?
 db sym.imp.puts
 dc~?
@@ -100,6 +104,7 @@ run_test
 NAME='dbg.maps.sections.after.map.complete'
 FILE=../../../bins/elf/analysis/x86-helloworld-gcc
 ARGS=-d
+BROKEN=1
 CMDS='dm~?
 db sym.imp.puts
 dc~?
@@ -129,6 +134,7 @@ run_test
 NAME='db.maps.sections.are.singletons'
 FILE=../../../bins/elf/analysis/x86-helloworld-gcc
 ARGS=-d
+BROKEN=1
 CMDS='dmm~?
 db sym.imp.puts
 dc~?
@@ -153,6 +159,7 @@ run_test
 NAME='db.maps.current.section.after.dmS'
 FILE=../../../bins/elf/analysis/x86-helloworld-gcc
 ARGS=-d
+BROKEN=1
 CMDS='dmm~?
 db sym.imp.puts
 dc~?

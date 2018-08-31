@@ -42,7 +42,7 @@ run_test
 NAME='dso over a breakpoint'
 FILE=/bin/ls
 ARGS=-d
-BROKEN=
+BROKEN=1
 CMDS='dr rax=`dr?rip`
 ? `dr?rax` - `dr?rip`
 db rip
@@ -58,7 +58,7 @@ run_test
 NAME='ds on jmp reg'
 FILE=../../../bins/elf/analysis/x86-jmpeax
 ARGS='-b 32 -a x86 -d'
-BROKEN=
+BROKEN=1
 CMDS='dcu main
 5ds
 dr eip
@@ -70,7 +70,7 @@ run_test
 NAME='ds on calls and jumps'
 FILE=../../../bins/elf/analysis/calls_x64
 ARGS='-a x86 -d'
-BROKEN=
+BROKEN=1
 CMDS='dcu main
 2ds
 dr rip
@@ -105,7 +105,7 @@ run_test
 NAME='dso on call 1'
 FILE=../../../bins/elf/analysis/calls_x64
 ARGS='-a x86 -d'
-BROKEN=
+BROKEN=1
 CMDS='dcu main
 ds
 dr rip
@@ -121,7 +121,7 @@ run_test
 NAME='dso on call 2'
 FILE=../../../bins/elf/analysis/calls_x64
 ARGS='-a x86 -d'
-BROKEN=
+BROKEN=1
 CMDS='dcu main
 3ds
 dr rip
@@ -137,7 +137,7 @@ run_test
 NAME='dso on call 3'
 FILE=../../../bins/elf/analysis/calls_x64
 ARGS='-a x86 -d'
-BROKEN=
+BROKEN=1
 CMDS='dcu main
 5ds
 dr rip
@@ -153,7 +153,7 @@ run_test
 NAME='dso on call 4'
 FILE=../../../bins/elf/analysis/calls_x64
 ARGS='-a x86 -d'
-BROKEN=
+BROKEN=1
 CMDS='dcu main
 6ds
 dr rip
@@ -169,7 +169,7 @@ run_test
 NAME='dbg.dsu'
 FILE=../../../bins/elf/analysis/calls_x64
 ARGS='-a x86 -d'
-BROKEN=
+BROKEN=1
 CMDS='dcu main
 dsu 0x400546
 dr rip
@@ -182,7 +182,7 @@ run_test
 NAME='dbg.dsui'
 FILE=../../../bins/elf/analysis/calls_x64
 ARGS='-a x86 -d'
-BROKEN=
+BROKEN=1
 CMDS='dcu main
 dsui mov eax
 dr rip
@@ -195,7 +195,7 @@ run_test
 NAME='dbg.dsei'
 FILE=../../../bins/elf/analysis/calls_x64
 ARGS='-a x86 -d'
-BROKEN=
+BROKEN=1
 CMDS='dcu main
 aei
 dsue 0,eax,==
@@ -209,7 +209,7 @@ run_test
 NAME='dbg.dss'
 FILE=../../../bins/elf/analysis/calls_x64
 ARGS='-a x86 -d'
-BROKEN=
+BROKEN=1
 CMDS='dcu main
 4dss
 dr rip
@@ -221,7 +221,7 @@ run_test
 NAME='dbg.dcu can reach main'
 FILE=../../../bins/elf/analysis/calls_x64
 ARGS='-a x86 -d'
-BROKEN=
+BROKEN=1
 CMDS='
 dcu main
 ?v $$~[1];

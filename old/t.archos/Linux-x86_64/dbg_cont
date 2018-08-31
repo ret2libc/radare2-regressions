@@ -11,7 +11,7 @@ for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 NAME='dbg.dcu+step'
 FILE=../../../bins/elf/analysis/elf-nx
 ARGS=-d
-BROKEN=
+BROKEN=1
 CMDS='e scr.color=0
 dcu entry0
 dr PC
@@ -28,7 +28,7 @@ run_test
 NAME='dbg.dcu+step'
 FILE=../../../bins/elf/analysis/elf-nx
 ARGS=-d
-BROKEN=
+BROKEN=1
 CMDS='e scr.color=0
 dcu entry0
 dr PC

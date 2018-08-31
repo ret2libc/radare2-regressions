@@ -7,7 +7,7 @@ for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 NAME='dbg.di'
 FILE=/bin/ls
 ARGS=-d
-BROKEN=
+BROKEN=1
 IGNORE_ERR=1
 CMDS='
 di~baddr

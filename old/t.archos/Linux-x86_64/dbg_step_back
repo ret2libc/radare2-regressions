@@ -9,7 +9,7 @@ for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 NAME='dbg.stepback'
 FILE=../../../bins/elf/analysis/ls-linux-x86_64-zlul
 ARGS=-d
-BROKEN=
+BROKEN=1
 CMDS='
 db main
 db 0x004028fe
@@ -27,7 +27,7 @@ run_test
 NAME='debug stepback from callee'
 FILE=../../../bins/elf/analysis/calls_x64
 ARGS=-d
-BROKEN=
+BROKEN=1
 CMDS='
 db main
 db 0x0040052f
@@ -45,7 +45,7 @@ run_test
 NAME='debug stepback from caller'
 FILE=../../../bins/elf/analysis/calls_x64
 ARGS=-d
-BROKEN=
+BROKEN=1
 CMDS='
 db main
 db 0x0040057c

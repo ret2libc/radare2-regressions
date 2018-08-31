@@ -7,7 +7,7 @@ for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 NAME='dbg.dL'
 FILE=/bin/ls
 ARGS=
-BROKEN=
+BROKEN=1
 IGNORE_ERR=1
 CMDS='
 dL
