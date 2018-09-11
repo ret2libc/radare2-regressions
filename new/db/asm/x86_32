@@ -2281,21 +2281,21 @@ a "dec BYTE PTR [edi+0x18]" fe4f18
 a "dec BYTE PTR [esi+0x1a]" fe4e1a
 a "dec cl" fec9
 a "dec dl" feca
-a "dec DWORD PTR [eax]" 08
-a "dec DWORD PTR [eax+0x14c]" 884c010000
-a "dec DWORD PTR [ebp+0x10]" 4d10
-a "dec DWORD PTR [ebx]" 0b
-a "dec DWORD PTR [ebx+0x18]" 4b18
-a "dec DWORD PTR [ebx+0x20]" 4b20
-a "dec DWORD PTR [ecx]" 09
-a "dec DWORD PTR [ecx+0x4]" 4904
-a "dec DWORD PTR [edi]" 0f
-a "dec DWORD PTR [edi+0x28]" 4f28
-a "dec DWORD PTR [edx]" 0a
-a "dec DWORD PTR [edx+0x10]" 4a10
-a "dec DWORD PTR [esi+0x8]" 4e08
-a "dec DWORD PTR [esp]" 0c24
-a "dec DWORD PTR [esp+0x10]" 4c2410
+a "dec DWORD PTR [eax]" ff08
+a "dec DWORD PTR [eax+0x14c]" ff884c010000
+a "dec DWORD PTR [ebp+0x10]" ff4d10
+a "dec DWORD PTR [ebx]" ff0b
+a "dec DWORD PTR [ebx+0x18]" ff4b18
+a "dec DWORD PTR [ebx+0x20]" ff4b20
+a "dec DWORD PTR [ecx]" ff09
+a "dec DWORD PTR [ecx+0x4]" ff4904
+a "dec DWORD PTR [edi]" ff0f
+a "dec DWORD PTR [edi+0x28]" ff4f28
+a "dec DWORD PTR [edx]" ff0a
+a "dec DWORD PTR [edx+0x10]" ff4a10
+a "dec DWORD PTR [esi+0x8]" ff4e08
+a "dec DWORD PTR [esp]" ff0c24
+a "dec DWORD PTR [esp+0x10]" ff4c2410
 a "dec eax" 48
 a "dec ebp" 4d
 a "dec ebx" 4b
