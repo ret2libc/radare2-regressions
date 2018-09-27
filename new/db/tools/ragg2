@@ -17,7 +17,7 @@ FILE=-
 CMDS=!ragg2 -p A10 -d 50:0xcb
 EXPECT=<<EXPECT_ERR
 41414141414141414141
-EXPECT_ERR=Fuck this shit. Cannot patch outside
+EXPECT_ERR=Cannot patch outside
 RUN
 
 NAME=ragg2 -p A20 -w 10:cb
