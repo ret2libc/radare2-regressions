@@ -390,7 +390,7 @@ Num Paddr      Vaddr      Bind     Type Size Name
 022 0x00000690 0x08049690  LOCAL   SECT    0
 023 0x00000694 0x08049694  LOCAL   SECT    0
 024 0x000006ac 0x080496ac  LOCAL   SECT    0
-025 0x000006b4 0x080496b4  LOCAL   SECT    0
+025 ---------- 0x080496b4  LOCAL   SECT    0
 026 ---------- 0x00000000  LOCAL   SECT    0
 027 ---------- 0x00000000  LOCAL   FILE    0 init.c
 028 ---------- 0x00000000  LOCAL   FILE    0
@@ -399,7 +399,7 @@ Num Paddr      Vaddr      Bind     Type Size Name
 031 0x00000340 0x08048340  LOCAL   FUNC    0 deregister_tm_clones
 032 0x00000370 0x08048370  LOCAL   FUNC    0 register_tm_clones
 033 0x000003b0 0x080483b0  LOCAL   FUNC    0 __do_global_dtors_aux
-034 0x000006b4 0x080496b4  LOCAL    OBJ    1 completed.5979
+034 ---------- 0x080496b4  LOCAL    OBJ    1 completed.5979
 035 0x000005a0 0x080495a0  LOCAL    OBJ    0 __do_global_dtors_aux_fini_array_entry
 036 0x000003d0 0x080483d0  LOCAL   FUNC    0 frame_dummy
 037 0x0000059c 0x0804959c  LOCAL    OBJ    0 __frame_dummy_init_array_entry
@@ -415,7 +415,7 @@ Num Paddr      Vaddr      Bind     Type Size Name
 047 0x00000490 0x08048490 GLOBAL   FUNC    2 __libc_csu_fini
 049 0x00000330 0x08048330 GLOBAL   FUNC    4 __x86.get_pc_thunk.bx
 050 0x000006ac 0x080496ac   WEAK NOTYPE    0 data_start
-051 0x000006b4 0x080496b4 GLOBAL NOTYPE    0 _edata
+051 ---------- 0x080496b4 GLOBAL NOTYPE    0 _edata
 052 0x00000494 0x08048494 GLOBAL   FUNC    0 _fini
 053 0x000006ac 0x080496ac GLOBAL NOTYPE    0 __data_start
 056 0x000006b0 0x080496b0 GLOBAL    OBJ    0 __dso_handle
@@ -424,9 +424,9 @@ Num Paddr      Vaddr      Bind     Type Size Name
 060 ---------- 0x080496b8 GLOBAL NOTYPE    0 _end
 061 0x00000300 0x08048300 GLOBAL   FUNC    0 _start
 062 0x000004a8 0x080484a8 GLOBAL    OBJ    4 _fp_hw
-063 0x000006b4 0x080496b4 GLOBAL NOTYPE    0 __bss_start
+063 ---------- 0x080496b4 GLOBAL NOTYPE    0 __bss_start
 064 0x00000400 0x08048400 GLOBAL   FUNC   28 main
-066 0x000006b4 0x080496b4 GLOBAL    OBJ    0 __TMC_END__
+066 ---------- 0x080496b4 GLOBAL    OBJ    0 __TMC_END__
 068 0x00000290 0x08048290 GLOBAL   FUNC    0 _init
 001 0x000002d0 0x080482d0 GLOBAL   FUNC   16 imp.puts
 002 0x000002e0 0x080482e0   WEAK NOTYPE   16 imp.__gmon_start__
