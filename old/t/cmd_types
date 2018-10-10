@@ -310,10 +310,10 @@ unsigned char
 unsigned int
 unsigned short
 void *
-date
-name
 addr
+date
 dox
+name
 pf [127]z[40]zd street city zip
 '
 run_test
@@ -348,10 +348,10 @@ unsigned char
 unsigned int
 unsigned short
 void *
-date
-name
 addr
+date
 dox
+name
 pf [127]z[40]zd street city zip
 '
 run_test
