@@ -432,7 +432,7 @@ Num Paddr      Vaddr      Bind     Type Size Name
 002 0x000002e0 0x080482e0   WEAK NOTYPE   16 imp.__gmon_start__
 003 0x000002f0 0x080482f0 GLOBAL   FUNC   16 imp.__libc_start_main
 [Strings]
-Num Vaddr      Paddr      Len Size Section  Type  String
+Num Paddr      Vaddr      Len Size Section  Type  String
 000 0x000004b0 0x080484b0  12  13 (.rodata) ascii Hello world!
 arch     x86
 baddr    0x8048000
