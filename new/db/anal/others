@@ -749,3 +749,11 @@ FILE=malloc://512
 EXPECT64=dmFyIGludCBsb2NhbF80aCBAIGExKzB4NAp2YXIgaW50IGxvY2FsXzhoIEAgYTErMHg4CnZhciBpbnQgbG9jYWxfY2ggQCBhMSsweGMKCg==
 CMDS64=ZSBhc20uYXJjaD14dGVuc2EKZSBhc20uYml0cz0zMgp3eCAxMmMxZjBkOTExNDBkMzgyYzkyMTNkMGQwOTMxMDFmNWViYzAwMDAwY2QwMjhjODIwYzAzNGQwZDAxMTJlNGMwMDAwMDA4MzEyZDBjZDgxMWM4MjExMmMxMTAwZGYwCmFmCmFmdnMKCg==
 RUN
+NAME=xrefs and overlapping basic blocks
+FILE=../bins/elf/analysis/ls-linux-x86_64-zlul
+CMDS=<<EXPECT
+aaa
+axt main
+EXPECT=<<RUN
+entry0 0x40488d [DATA] mov rdi, main
+RUN
