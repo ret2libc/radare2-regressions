@@ -1,5 +1,6 @@
 NAME=mosquitoes ii
 FILE=../bins/elf/mosquito-ppc64le
+BROKEN=1
 CMDS=ii
 EXPECT=<<EOF
 [Imports]
