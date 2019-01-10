@@ -25,3 +25,14 @@ EXPECT=<<RUN
 0x00004ec3       488d3d2b4b0100  lea rdi, [rip + 0x14b2b]
 0x00004eca           e8d1f9ffff  call sym.imp.textdomain
 RUN
+
+NAME=ELF: use reloc table in dyn entry
+FILE=../bins/elf/ls-linux-wrong-rela
+BROKEN=1
+CMDS=<<EXPECT
+e asm.comments=false
+e asm.lines=false
+pd 15 @ entry0~call
+EXPECT=<<RUN
+0x000068e8      ff15b2c60100   call qword [reloc.__libc_start_main]
+RUN
