@@ -592,7 +592,7 @@ RUN
 NAME=ELF ARM: aa
 FILE=../bins/elf/analysis/arm_32_flags0
 EXPECT=<<EOF
-16
+17
 15
 EOF
 CMDS=<<EOF
