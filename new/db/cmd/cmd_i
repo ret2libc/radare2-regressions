@@ -994,16 +994,16 @@ NAME=ir (file x86_64, ifunc)
 FILE=../bins/elf/ifunc_rel64
 EXPECT=<<EOF
 [Relocations]
-vaddr=0x006b1818 paddr=0x000b1818 type=SET_64 0x004140b0 (ifunc)
-vaddr=0x006b1810 paddr=0x000b1810 type=SET_64 0x00479800 (ifunc)
-vaddr=0x006b1808 paddr=0x000b1808 type=SET_64 0x00414300 (ifunc)
-vaddr=0x006b1800 paddr=0x000b1800 type=SET_64 0x004193f0 (ifunc)
-vaddr=0x006b17f8 paddr=0x000b17f8 type=SET_64 0x00419ad0 (ifunc)
-vaddr=0x006b17f0 paddr=0x000b17f0 type=SET_64 0x00418de0 (ifunc)
-vaddr=0x006b17e8 paddr=0x000b17e8 type=SET_64 0x00418a50 (ifunc)
-vaddr=0x006b17e0 paddr=0x000b17e0 type=SET_64 0x004199b0 (ifunc)
-vaddr=0x006b17d8 paddr=0x000b17d8 type=SET_64 0x004193a0 (ifunc)
 vaddr=0x006b17d0 paddr=0x000b17d0 type=SET_64 0x00416530 (ifunc)
+vaddr=0x006b17d8 paddr=0x000b17d8 type=SET_64 0x004193a0 (ifunc)
+vaddr=0x006b17e0 paddr=0x000b17e0 type=SET_64 0x004199b0 (ifunc)
+vaddr=0x006b17e8 paddr=0x000b17e8 type=SET_64 0x00418a50 (ifunc)
+vaddr=0x006b17f0 paddr=0x000b17f0 type=SET_64 0x00418de0 (ifunc)
+vaddr=0x006b17f8 paddr=0x000b17f8 type=SET_64 0x00419ad0 (ifunc)
+vaddr=0x006b1800 paddr=0x000b1800 type=SET_64 0x004193f0 (ifunc)
+vaddr=0x006b1808 paddr=0x000b1808 type=SET_64 0x00414300 (ifunc)
+vaddr=0x006b1810 paddr=0x000b1810 type=SET_64 0x00479800 (ifunc)
+vaddr=0x006b1818 paddr=0x000b1818 type=SET_64 0x004140b0 (ifunc)
 
 10 relocations
 EOF
@@ -1580,15 +1580,15 @@ Num Paddr      Vaddr      Bind     Type Size Name
 [Relocations]
 vaddr=0x00001eec paddr=0x00000eec type=SET_32
 vaddr=0x00001ef0 paddr=0x00000ef0 type=SET_32
-vaddr=0x00001ff4 paddr=0x00000ff4 type=SET_32
-vaddr=0x00002018 paddr=0x00001018 type=SET_32
 vaddr=0x00001fe8 paddr=0x00000fe8 type=SET_32 _ITM_deregisterTMCloneTable
 vaddr=0x00001fec paddr=0x00000fec type=SET_32 __cxa_finalize
 vaddr=0x00001ff0 paddr=0x00000ff0 type=SET_32 __gmon_start__
+vaddr=0x00001ff4 paddr=0x00000ff4 type=SET_32
 vaddr=0x00001ff8 paddr=0x00000ff8 type=SET_32 _Jv_RegisterClasses
 vaddr=0x00001ffc paddr=0x00000ffc type=SET_32 _ITM_registerTMCloneTable
 vaddr=0x0000200c paddr=0x0000100c type=SET_32 puts
 vaddr=0x00002010 paddr=0x00001010 type=SET_32 __libc_start_main
+vaddr=0x00002018 paddr=0x00001018 type=SET_32
 
 11 relocations
 0x00000000 1936 segment.LOAD0
