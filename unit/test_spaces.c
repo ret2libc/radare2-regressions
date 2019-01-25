@@ -65,12 +65,12 @@ static void count_event(REvent *ev, int type, void *user, void *data) {
 	RSpaces *sps = (RSpaces *)user;
 	RSpaceEvent *spev = (RSpaceEvent *)data;
 
-	if (!strcmp (spev->space->name, "firstspace")) {
-		spev->count = 1;
-	} else if (!strcmp (spev->space->name, "secondspace")) {
-		spev->count = 2;
-	} else if (!strcmp (spev->space->name, "thirdspace")) {
-		spev->count = 3;
+	if (!strcmp (spev->data.count.space->name, "firstspace")) {
+		spev->res = 1;
+	} else if (!strcmp (spev->data.count.space->name, "secondspace")) {
+		spev->res = 2;
+	} else if (!strcmp (spev->data.count.space->name, "thirdspace")) {
+		spev->res = 3;
 	}
 }
 
@@ -98,6 +98,12 @@ bool test_space_event(void) {
 	test_event_called = false;
 	r_spaces_rename (sps, "thirdspace", "mynewname");
 	mu_assert ("rename_event has been called", test_event_called);
+
+	RSpace *s = r_spaces_get (sps, "thirdspace");
+	mu_assert_null (s, "thirdspace should not exist anymore");
+	s = r_spaces_get (sps, "mynewname");
+	mu_assert_notnull (s, "mynewname should exist now");
+	mu_assert_eq (s, third, "and it should be equal to thirdspace ptr");
 
 	test_event_called = false;
 	r_spaces_unset (sps, "mynewname");
