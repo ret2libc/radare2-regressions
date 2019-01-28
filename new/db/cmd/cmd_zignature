@@ -227,7 +227,7 @@ NAME=za o
 FILE=-
 EXPECT=<<EOF
 test:
-  offset: 0x08048123
+  addr: 0x08048123
 EOF
 CMDS=<<EOF
 za test o 0x8048123
@@ -407,7 +407,7 @@ EXPECT=<<EOF
 zigs.sym.main:
   bytes: 554889e54883ec1089....48......bf........e8........b800000000c9c3
   graph: cc=1 nbbs=1 edges=0 ebbs=1 bbsum=32
-  offset: 0x0040055b
+  addr: 0x0040055b
   refs: sym.print
   vars: b-4, b-16, r110, r114
 EOF
@@ -426,7 +426,7 @@ EXPECT=<<EOF
 zigs.sym.main:
   bytes: 554889e54883ec1089....48......bf........e8........b800000000c9c3
   graph: cc=1 nbbs=1 edges=0 ebbs=1 bbsum=32
-  offset: 0x0040055b
+  addr: 0x0040055b
   refs: sym.print
   vars: b-4, b-16, r110, r114
 EOF
@@ -445,7 +445,7 @@ EXPECT=<<EOF
 sym.main:
   bytes: 554889e54883ec1089....48......bf........e8........b800000000c9c3
   graph: cc=1 nbbs=1 edges=0 ebbs=1 bbsum=32
-  offset: 0x0040055b
+  addr: 0x0040055b
   refs: sym.print
   vars: b-4, b-16, r110, r114
   bbhash: 9890426532f35eb3a80fe773d887714fe27d13ea125ad7e90beab16a51b74496
@@ -464,7 +464,7 @@ EXPECT=<<EOF
 foobar:
   bytes: 554889e54883ec1089....48......bf........e8........b800000000c9c3
   graph: cc=1 nbbs=1 edges=0 ebbs=1 bbsum=32
-  offset: 0x0040055b
+  addr: 0x0040055b
   refs: sym.print
   vars: b-4, b-16, r110, r114
 EOF
@@ -483,7 +483,7 @@ EXPECT=<<EOF
 foobar:
   bytes: 554889e54883ec1089....48......bf........e8........b800000000c9c3
   graph: cc=1 nbbs=1 edges=0 ebbs=1 bbsum=32
-  offset: 0x0040055b
+  addr: 0x0040055b
   refs: sym.print
   vars: b-4, b-16, r110, r114
   bbhash: 9890426532f35eb3a80fe773d887714fe27d13ea125ad7e90beab16a51b74496

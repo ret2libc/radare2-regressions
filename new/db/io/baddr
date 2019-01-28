@@ -1,57 +1,135 @@
 NAME=1: io.baddr
 FILE=../bins/elf/analysis/pie
 ARGS=
-EXPECT64=MHg0NTAKCg==
-CMDS64=Cj92IGVudHJ5MAoK
+EXPECT=<<EOF
+0x450
+EOF
+CMDS=<<EOF
+?v entry0
+EOF
 RUN
+
 NAME=2: io.baddr
 FILE=../bins/elf/analysis/pie
 ARGS=-B 0xf00000
-EXPECT64=MHhmMDA0NTAKCg==
-CMDS64=Cj92IGVudHJ5MAoK
+EXPECT=<<EOF
+0xf00450
+EOF
+CMDS=<<EOF
+?v entry0
+EOF
 RUN
+
 NAME=3: io.baddr
 FILE=../bins/elf/analysis/pie
-EXPECT64=ZiBlbnRyeTAgMSBAIDB4MDBmMDA0NTAKZiBlbnRyeTBfaGFkZHIgMSBAIDB4MDAwMDAwMTgK
-CMDS64=IXJhYmluMiAtQiAweGYwMDAwMCAtcmUgJHtSMl9GSUxFfSB8IGdyZXAgMHgK
+EXPECT=<<EOF
+f entry0 1 @ 0x00f00450
+f entry0_haddr 1 @ 0x00000018
+EOF
+CMDS=<<EOF
+!rabin2 -B 0xf00000 -re ${R2_FILE} | grep 0x
+EOF
 RUN
+
 NAME=io.baddr entry0 data
 FILE=../bins/elf/analysis/pie
-EXPECT64=MHgwMDAwMDQ1MAoweDAwMDAwNDUwCjMxZWQ1ZTg5ZTE4M2U0ZjA1MDU0Cgo=
-CMDS64=CmllfnBhZGRyWzNdCmllfnZhZGRyWzFdCnA4IDEwIEAgMHgwMDAwMDQ1MAoK
+EXPECT=<<EOF
+0x00000450
+0x00000450
+31ed5e89e183e4f05054
+EOF
+CMDS=<<EOF
+ie~paddr[3]
+ie~vaddr[1]
+p8 10 @ 0x00000450
+EOF
 RUN
+
 NAME=io.baddr -B entry0 data
 FILE=../bins/elf/analysis/pie
 ARGS=-B 0x100000
-EXPECT64=MzFlZDVlODllMTgzZTRmMDUwNTQKCg==
-CMDS64=cDggMTAgQCAweDAwMTAwNDUwCgo=
+EXPECT=<<EOF
+31ed5e89e183e4f05054
+EOF
+CMDS=<<EOF
+p8 10 @ 0x00100450
+EOF
 RUN
+
 NAME=io.baddr -x86_32 entry0 data
 FILE=../bins/mach0/fatmach0-3true
 ARGS=-a x86 -b 32
-EXPECT64=MHgwMDAwNWY0NAoweDAwMDAxZjQ0CjZhMDA4OWU1ODNlNGYwODNlYzEwCjZhMDA4OWU1ODNlNGYwODNlYzEwCgo=
-CMDS64=CmllfnBhZGRyWzNdCmllfnZhZGRyWzFdCnA4IDEwIEAgMHgwMDAwMWY0NApwOCAxMCBAIDB4MDAwMDVmNDQKCg==
+EXPECT=<<EOF
+0x00005f44
+0x00001f44
+6a0089e583e4f083ec10
+6a0089e583e4f083ec10
+EOF
+CMDS=<<EOF
+ie~paddr[3]
+ie~vaddr[1]
+p8 10 @ 0x00001f44
+p8 10 @ 0x00005f44
+EOF
 RUN
+
 NAME=4: io.baddr
 FILE=../bins/elf/analysis/pie
 ARGS=-B 0xf00000
-EXPECT64=ZiBlbnRyeTAgMSBAIDB4MDBmMDA0NTAKZiBlbnRyeTBfaGFkZHIgMSBAIDB4MDAwMDAwMTgKMzFlZDVlODllMTgzZTRmMDUwNTQK
-CMDS64=IXJhYmluMiAtQiAweGYwMDAwMCAtcmUgJHtSMl9GSUxFfSB8IGdyZXAgMHgKcDggMTAgQCAweDAwZjAwNDUwCg==
+EXPECT=<<EOF
+f entry0 1 @ 0x00f00450
+f entry0_haddr 1 @ 0x00000018
+31ed5e89e183e4f05054
+EOF
+CMDS=<<EOF
+!rabin2 -B 0xf00000 -re ${R2_FILE} | grep 0x
+p8 10 @ 0x00f00450
+EOF
 RUN
+
 NAME=e bin.baddr
 FILE=../bins/elf/analysis/hello-linux-x86_64
-EXPECT64=MHg0MDAwMDAKCg==
-CMDS64=P3YgYGUgYmluLmJhZGRyYAoK
+EXPECT=<<EOF
+0x400000
+EOF
+CMDS=<<EOF
+?v `e bin.baddr`
+EOF
 RUN
+
 NAME=e bin.baddr changed
 FILE=../bins/elf/analysis/hello-linux-x86_64
 ARGS=-B 0xf00000
-EXPECT64=MHhmMDAwMDAKCg==
-CMDS64=P3YgYGUgYmluLmJhZGRyYAoK
+EXPECT=<<EOF
+0xf00000
+EOF
+CMDS=<<EOF
+?v `e bin.baddr`
+EOF
 RUN
+
 NAME=bin.baddr and anal
 FILE=../bins/elf/analysis/pie
 ARGS=-B 0xf00000
-EXPECT64=MHgwMGYwMDNlYyAgICAzIDM1ICAgICAgICAgICBzeW0uX2luaXQKMHgwMGYwMDQyMCAgICAxIDYgICAgICAgICAgICBzeW0uaW1wLl9fY3hhX2ZpbmFsaXplCjB4MDBmMDA0MzAgICAgMSA2ICAgICAgICAgICAgbG9jLmltcC5fX2dtb25fc3RhcnQKMHgwMGYwMDQ0MCAgICAxIDYgICAgICAgICAgICBzeW0uaW1wLl9fbGliY19zdGFydF9tYWluCjB4MDBmMDA0NTAgICAgMSA0OSAgICAgICAgICAgZW50cnkwCjB4MDBmMDA0ODIgICAgMSA0ICAgICAgICAgICAgZmNuLjAwZjAwNDgyCjB4MDBmMDA0OTAgICAgMSA0ICAgICAgICAgICAgc3ltLl9feDg2LmdldF9wY190aHVuay5ieAoweDAwZjAwNGEwICAgIDQgNjEgICAgICAgICAgIHN5bS5kZXJlZ2lzdGVyX3RtX2Nsb25lcwoweDAwZjAwNGUwICAgIDQgNzEgICAgICAgICAgIHN5bS5yZWdpc3Rlcl90bV9jbG9uZXMKMHgwMGYwMDUzMCAgICA1IDcxICAgICAgICAgICBzeW0uX19kb19nbG9iYWxfZHRvcnNfYXV4CjB4MDBmMDA1ODAgICAgNCA2OSAgIC0+IDYwICAgZW50cnkuaW5pdDAKMHgwMGYwMDVjNSAgICAxIDQgICAgICAgICAgICBzeW0ubWFpbgoweDAwZjAwNWQwICAgIDQgOTcgICAgICAgICAgIHN5bS5fX2xpYmNfY3N1X2luaXQKMHgwMGYwMDY0MCAgICAxIDIgICAgICAgICAgICBzeW0uX19saWJjX2NzdV9maW5pCjB4MDBmMDA2NDQgICAgMSAyMCAgICAgICAgICAgc3ltLl9maW5pCg==
-CMDS64=YWFhCmFmbAoK
+EXPECT=<<EOF
+0x00f003ec    3 35           sym._init
+0x00f00420    1 6            sym.imp.__cxa_finalize
+0x00f00430    1 6            loc.imp.__gmon_start
+0x00f00440    1 6            sym.imp.__libc_start_main
+0x00f00450    1 49           entry0
+0x00f00482    1 4            fcn.00f00482
+0x00f00490    1 4            sym.__x86.get_pc_thunk.bx
+0x00f004a0    4 61           sym.deregister_tm_clones
+0x00f004e0    4 71           sym.register_tm_clones
+0x00f00530    5 71           sym.__do_global_dtors_aux
+0x00f00580    4 69   -> 60   entry.init0
+0x00f005c5    1 4            sym.main
+0x00f005d0    4 97           sym.__libc_csu_init
+0x00f00640    1 2            sym.__libc_csu_fini
+0x00f00644    1 20           sym._fini
+EOF
+CMDS=<<EOF
+aaa
+afl
+EOF
 RUN

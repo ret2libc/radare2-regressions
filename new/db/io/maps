@@ -1,35 +1,118 @@
 NAME=io.maps alloc map
 FILE=malloc://1024
-EXPECT64=MDAwMDAwMDAKCg==
-CMDS64=CmUgaW8udmE9dHJ1ZQpzIDAKYiAxMDAKd294IDB4MTAgQCAwCm9uIG1hbGxvYzovLzB4MTAwMCAweDgwMDAwID4vZGV2L251bGwKcDggNCBAIDB4ODAwMDAKCg==
+EXPECT=<<EOF
+00000000
+EOF
+CMDS=<<EOF
+e io.va=true
+s 0
+b 100
+wox 0x10 @ 0
+on malloc://0x1000 0x80000 >/dev/null
+p8 4 @ 0x80000
+EOF
 RUN
+
 NAME=io.maps: o 100
 FILE=malloc://1024
-EXPECT64=MTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMAoxMDEwMTAxMDEwMTAxMDEwMTAxMDAwMDAwMDAwMDAwMDAwMDAwMDAwCmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmYKMjAyMDIwMjAyMDIwMjAyMDIwMjAyMDIwMjAyMDIwMjAyMDIwMjAyMAoK
-CMDS64=CnMgMApiIDEwMAp3b3ggMHgxMCBAIDAKbyBtYWxsb2M6Ly8weDEwMDAgMHg4MDAwMCA+IC9kZXYvbnVsbAplIGlvLnZhPXRydWUKYiAweDEwMDAKd293IDIwIEAgMHg4MDAwMApiIDIwCnA4IEAgMApwOCBAIDkwCnA4IEAgMHg0MDAKcDggQCAweDgwMDAwCgo=
+EXPECT=<<EOF
+1010101010101010101010101010101010101010
+1010101010101010101000000000000000000000
+ffffffffffffffffffffffffffffffffffffffff
+2020202020202020202020202020202020202020
+EOF
+CMDS=<<EOF
+s 0
+b 100
+wox 0x10 @ 0
+o malloc://0x1000 0x80000 > /dev/null
+e io.va=true
+b 0x1000
+wow 20 @ 0x80000
+b 20
+p8 @ 0
+p8 @ 90
+p8 @ 0x400
+p8 @ 0x80000
+EOF
 RUN
+
 NAME=om 0x100;x@0xff
 FILE=-
-EXPECT64=MDAwMDAwMDAKCg==
-CMDS64=CmUgaW8udmE9ZmFsc2UKZSBmaWxlLm5vd2Fybj10cnVlCmUgZmlsZS5sb2FkbWV0aG9kPWFwcGVuZApvbSBgb35bMF1gIDB4MTAwCncgcG9wIEAgMQpwOCA0IEAgMHgxMDAKCg==
+EXPECT=<<EOF
+00000000
+EOF
+CMDS=<<EOF
+e io.va=false
+e file.nowarn=true
+e file.loadmethod=append
+om `o~[0]` 0x100
+w pop @ 1
+p8 4 @ 0x100
+EOF
 RUN
+
 NAME=o - 0x9000;x@0x8f00
 FILE=-
-EXPECT64=LSBvZmZzZXQgLSAgIDAgMSAgMiAzICA0IDUgIDYgNyAgOCA5ICBBIEIgIEMgRCAgRSBGICAwMTIzNDU2Nzg5QUJDREVGCjB4MDAwMDhmZjAgIGZmZmYgZmZmZiBmZmZmIGZmZmYgZmZmZiBmZmZmIGZmZmYgZmZmZiAgLi4uLi4uLi4uLi4uLi4uLgoweDAwMDA5MDAwICAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAwMDAwIDAwMDAgIC4uLi4uLi4uLi4uLi4uLi4KCg==
-CMDS64=Cm8gbWFsbG9jOi8vMTI4IDB4OTAwMCA+IC9kZXYvbnVsbAplIGlvLnZhPXRydWUKeCAzMiBAIDB4OGZmMAoK
+EXPECT=<<EOF
+- offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+0x00008ff0  ffff ffff ffff ffff ffff ffff ffff ffff  ................
+0x00009000  0000 0000 0000 0000 0000 0000 0000 0000  ................
+EOF
+CMDS=<<EOF
+o malloc://128 0x9000 > /dev/null
+e io.va=true
+x 32 @ 0x8ff0
+EOF
 RUN
+
 NAME=omfg all rwx
 FILE=-
-EXPECT64=MgoK
-CMDS64=CmUgc2NyLm51bGw9dHJ1ZQpvIG1hbGxvYzovLzMyIDB4NDAwCmUgc2NyLm51bGw9ZmFsc2UKb21mZy1yd3gKb21+cnd4Cm9tZmcKb21+cnd4fj8KCg==
+EXPECT=<<EOF
+2
+EOF
+CMDS=<<EOF
+e scr.null=true
+o malloc://32 0x400
+e scr.null=false
+omfg-rwx
+om~rwx
+omfg
+om~rwx~?
+EOF
 RUN
+
 NAME=Opening a new map doesnt set io.a to false
 FILE=-
-EXPECT64=dHJ1ZQp0cnVlCgo=
-CMDS64=CmUgaW8udmEKZSBzY3IubnVsbD10cnVlCm8gbWFsbG9jOi8vMzIgMHg0MDAKZSBzY3IubnVsbD1mYWxzZQplIGlvLnZhCgo=
+EXPECT=<<EOF
+true
+true
+EOF
+CMDS=<<EOF
+e io.va
+e scr.null=true
+o malloc://32 0x400
+e scr.null=false
+e io.va
+EOF
 RUN
+
 NAME=omf one mapping
 FILE=-
-EXPECT64=MQoxCjEKMQoK
-CMDS64=Cm9tZiAxIHJ3eApvbX5yd3h+PwpvbWYgMSByLXgKb21+ci14fj8Kb21mIDEgLS14Cm9tfi0teH4/Cm9tZiAxIC13LQpvbX4tdy1+PwoK
+EXPECT=<<EOF
+1
+1
+1
+1
+EOF
+CMDS=<<EOF
+omf 1 rwx
+om~rwx~?
+omf 1 r-x
+om~r-x~?
+omf 1 --x
+om~--x~?
+omf 1 -w-
+om~-w-~?
+EOF
 RUN
