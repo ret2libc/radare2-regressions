@@ -105,12 +105,12 @@ RUN
 NAME=flags spaces
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 EXPECT=<<EOF
-0    1 * strings
-1   34 * symbols
-2   30 * sections
-3    9 * segments
-4    3 * relocs
-5    3 * imports
+    3 * imports
+    3 * relocs
+   30 * sections
+    9 * segments
+    1 * strings
+   34 * symbols
 EOF
 CMDS=<<EOF
 fs
@@ -120,13 +120,13 @@ RUN
 NAME=flags spaces after analysis
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 EXPECT=<<EOF
-0    1 * strings
-1   34 * symbols
-2   30 * sections
-3    9 * segments
-4    3 * relocs
-5    3 * imports
-6    0 * functions
+    0 * functions
+    3 * imports
+    3 * relocs
+   30 * sections
+    9 * segments
+    1 * strings
+   34 * symbols
 14
 EOF
 CMDS=<<EOF
@@ -138,13 +138,13 @@ RUN
 NAME=flags spaces after analysis again
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 EXPECT=<<EOF
-0    1 * strings
-1   34 * symbols
-2   30 * sections
-3    9 * segments
-4    3 * relocs
-5    3 * imports
-6    1 * functions
+    1 * functions
+    3 * imports
+    3 * relocs
+   30 * sections
+    9 * segments
+    1 * strings
+   34 * symbols
 EOF
 CMDS=<<EOF
 s entry0+4; af;fs *;fs
