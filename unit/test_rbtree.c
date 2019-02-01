@@ -87,6 +87,10 @@ bool test_r_rbtree_bound(void) {
 	RBNode *tree = NULL;
 	struct Node *x;
 	int i;
+
+	RBIter f = r_rbtree_first (tree);
+	mu_assert_eq (f.len, 0, "iter with 0 length");
+
 	for (i = 0; i < 99; i++) {
 		x = make (i);
 		r_rbtree_insert (&tree, x, &x->rb, cmp);
