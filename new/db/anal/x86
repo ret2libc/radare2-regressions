@@ -3105,6 +3105,7 @@ EXPECT=<<EOF
 0x0000118f      90             nop
 0x00001190      90             nop
 0x00001191      c3             ret
+
 EOF
 RUN
 
