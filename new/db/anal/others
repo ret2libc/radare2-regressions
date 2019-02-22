@@ -206,7 +206,7 @@ RUN
 NAME=aac on mips be
 FILE=../bins/elf/analysis/mipsbe-busybox
 EXPECT=<<EOF
-1268
+1269
 EOF
 CMDS=<<EOF
 aac
