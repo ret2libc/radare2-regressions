@@ -643,7 +643,6 @@ RUN
 NAME=ELF ARM: function arg
 FILE=../bins/elf/analysis/armcall
 EXPECT=<<EOF
-            ;-- $a:
 / (fcn) sym.call 44
 |           ; var int var_8h @ fp-0x8
 |           ; CALL XREF from sym.main (0x10468)
@@ -651,7 +650,7 @@ EXPECT=<<EOF
 |           0x00010424      04b08de2       add fp, sp, 4
 |           0x00010428      08d04de2       sub sp, sp, 8
 |           0x0001042c      08000be5       str r0, [var_8h]            ; 8
-|           0x00010430      14009fe5       ldr r0, loc._d_14           ; [loc._d_15:4]=0x104f0 loc._d_14
+|           0x00010430      14009fe5       ldr r0, [0x0001044c]        ; [0x1044c:4]=0x104f0
 |           0x00010434      08101be5       ldr r1, [var_8h]            ; 8
 |           0x00010438      a2ffffeb       bl sym.imp.printf
 |           0x0001043c      0030a0e3       mov r3, 0
@@ -671,7 +670,6 @@ NAME=ELF ARM: function args
 FILE=../bins/elf/analysis/armcall
 EXPECT=<<EOF
             ;-- main:
-            ;-- $a:
 / (fcn) sym.main 44
 |           ; var int var_ch @ fp-0xc
 |           ; var int var_8h @ fp-0x8
@@ -698,12 +696,11 @@ RUN
 NAME=ELF ARM: aav
 FILE=../bins/elf/analysis/armcall
 EXPECT=<<EOF
-            ;-- $d:
-            0x00010328      .dword 0x000104e0 ; loc._a_13 ; sym.__libc_csu_fini
-            0x0001032c      .dword 0x00010450 ; main ; loc._a_11 ; sym.main
+            0x00010328      .dword 0x000104e0 ; sym.__libc_csu_fini
+            0x0001032c      .dword 0x00010450 ; main ; sym.main
             ;-- aav.0x00010330:
-            ; UNKNOWN XREF from loc._d_19 ()
-            0x00010330      .dword 0x0001047c ; loc._a_12 ; sym.__libc_csu_init
+            ; UNKNOWN XREF from section..plt (+0x10)
+            0x00010330      .dword 0x0001047c ; sym.__libc_csu_init
 EOF
 CMDS=<<EOF
 e asm.calls=false
@@ -716,9 +713,9 @@ NAME=ELF ARM: af and aav
 FILE=../bins/elf/arm1.bin
 EXPECT=<<EOF
                  .dword 0x00084758 ; section..bss ; obj.completed.6278
-                 .dword 0x00008b00 ; loc._a_15 ; sym.__libc_csu_fini
+                 .dword 0x00008b00 ; sym.__libc_csu_fini
                  .dword 0x00008290 ; main ; sym.main
-                 .dword 0x00008b48 ; loc._a_16 ; sym.__libc_csu_init
+                 .dword 0x00008b48 ; sym.__libc_csu_init
 EOF
 CMDS=<<EOF
 e asm.arch=arm

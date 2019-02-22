@@ -38,8 +38,7 @@ RUN
 NAME=ELF: asm.flags.middle=1 + local symbols
 FILE=../bins/elf/analysis/example.elf
 EXPECT=<<EOF
-        :   ;-- $d:
-        :   0x00000356  ~   00f033f9       bl sym.app_uart_get
+        :   0x00000356      00f033f9       bl sym.app_uart_get
         :   0x0000035a      0028           cmp r0, 0
         `=< 0x0000035c      fad1           bne 0x354
 EOF
@@ -51,7 +50,7 @@ RUN
 NAME=ELF: asm.flags.middle + local symbols
 FILE=../bins/elf/analysis/example.elf
 EXPECT=<<EOF
-        :   0x00000356  ~   00f033f9       bl sym.app_uart_get
+        :   0x00000356      00f033f9       bl sym.app_uart_get
         :   0x0000035a      0028           cmp r0, 0
         `=< 0x0000035c      fad1           bne 0x354
 EOF
@@ -75,9 +74,7 @@ RUN
 
 NAME=ELF: local symbols
 FILE=../bins/elf/analysis/example.elf
-EXPECT=<<EOF
-f sym.d_41 0 0x00000ae0
-EOF
+EXPECT=''
 CMDS=<<EOF
 is*~d_41
 EOF

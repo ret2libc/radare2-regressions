@@ -27,10 +27,10 @@ e asm.cmt.right=false
 pd 1 @ 0x000102e0
 pd 1 @ 0x000102e8
 EXPECT=<<RUN
-            0x000102e0      ldr ip, sym.__libc_csu_fini                ; [loc._d_2:4]=0x10494 sym.__libc_csu_fini
+            0x000102e0      ldr ip, sym.__libc_csu_fini                ; [0x102f8:4]=0x10494 sym.__libc_csu_fini
             0x000102e8      ldr r0, sym.main                           ; [0x102fc:4]=0x10408 sym.main
 
-            ; [loc._d_2:4]=0x10494 sym.__libc_csu_fini
+            ; [0x102f8:4]=0x10494 sym.__libc_csu_fini
             0x000102e0      ldr ip, sym.__libc_csu_fini
             ; [0x102fc:4]=0x10408 sym.main
             0x000102e8      ldr r0, sym.main
@@ -238,7 +238,7 @@ EXPECT=<<RUN
 |   fcn.00008174 ();
 |           0x00008174      b80000eb       bl sym.__libc_start_main    ; lr=0x8178 -> 0xeb0002a4 ; pc=0x845c -> 0xe92d41f0
 |                                                                      ; int __libc_start_main(?, -1, ?, ?, ?, ?, -1)
-\           0x00008178      a40200eb       bl sym.abort                ; lr=0x817c -> 0xe92d4030 loc._d_2 ; pc=0x8c10 -> 0xe59f62a0
+\           0x00008178      a40200eb       bl sym.abort                ; lr=0x817c -> 0xe92d4030 ; pc=0x8c10 -> 0xe59f62a0
 \                                                                      ; void abort(void)
 
 / (fcn) fcn.00008174 8
@@ -247,7 +247,7 @@ EXPECT=<<RUN
 |              ; pc=0x845c -> 0xe92d41f0 sym.__libc_start_main
 |              ; int __libc_start_main(?, -1, ?, ?, ?, ?, -1)
 |           0x00008174      b80000eb       bl sym.__libc_start_main
-|              ; lr=0x817c -> 0xe92d4030 loc._d_2
+|              ; lr=0x817c -> 0xe92d4030
 |              ; pc=0x8c10 -> 0xe59f62a0 sym.abort
 |              ; void abort(void)
 \           0x00008178      a40200eb       bl sym.abort
@@ -261,7 +261,7 @@ EXPECT=<<RUN
 |    ; pc=0x845c -> 0xe92d41f0 sym.__libc_start_main  |
 |    ; int __libc_start_main(?, -1, ?, ?, ?, ?, -1)   |
 | bl sym.__libc_start_main;[ga]                       |
-|    ; lr=0x817c -> 0xe92d4030 loc._d_2               |
+|    ; lr=0x817c -> 0xe92d4030                        |
 |    ; pc=0x8c10 -> 0xe59f62a0 sym.abort              |
 |    ; void abort(void)                               |
 | bl sym.abort;[gb]                                   |
