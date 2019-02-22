@@ -3082,7 +3082,6 @@ RUN
 
 NAME=get function in, node before entry
 FILE=../bins/anal/fcn_in_test.elf
-BROKEN=1
 CMDS=<<EOF
 e asm.lines=false;e asm.comments=false;af @ main; pdr @ 0x1180
 EOF
