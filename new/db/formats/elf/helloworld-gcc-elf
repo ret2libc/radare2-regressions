@@ -110,7 +110,8 @@ EXPECT=<<EOF
    30 * sections
     9 * segments
     1 * strings
-   34 * symbols
+   22 * symbols
+   12 * symbols.objects
 EOF
 CMDS=<<EOF
 fs
@@ -126,7 +127,8 @@ EXPECT=<<EOF
    30 * sections
     9 * segments
     1 * strings
-   34 * symbols
+   22 * symbols
+   12 * symbols.objects
 14
 EOF
 CMDS=<<EOF
@@ -144,7 +146,8 @@ EXPECT=<<EOF
    30 * sections
     9 * segments
     1 * strings
-   34 * symbols
+   22 * symbols
+   12 * symbols.objects
 EOF
 CMDS=<<EOF
 s entry0+4; af;fs *;fs
