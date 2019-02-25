@@ -1,5 +1,6 @@
 NAME=basic integer arith
 FILE=malloc://0x200
+NEEDS_PLUGINS=asm.xtensa anal.xtensa
 EXPECT=<<EOF
 a2 = 0x00000007
 a3 = 0x00000009
@@ -20,6 +21,7 @@ RUN
 
 NAME=load/store imm
 FILE=malloc://0x200
+NEEDS_PLUGINS=asm.xtensa anal.xtensa
 EXPECT=<<EOF
 a2 = 0x00000050
 a3 = 0x000000bb
@@ -43,6 +45,7 @@ RUN
 NAME=load relative
 ARGS=-a xtensa -b 32
 FILE=malloc://0x200
+NEEDS_PLUGINS=asm.xtensa anal.xtensa
 EXPECT=<<EOF
 a2 = 0xaabbccdd
 a3 = 0xaabbccdd
@@ -62,6 +65,7 @@ RUN
 
 NAME=call0 ABI
 FILE=malloc://0x200
+NEEDS_PLUGINS=asm.xtensa anal.xtensa
 EXPECT=<<EOF
 pc = 0x00000010
 a0 = 0x00000003
@@ -93,6 +97,7 @@ RUN
 
 NAME=branch compare imm
 FILE=malloc://0x200
+NEEDS_PLUGINS=asm.xtensa anal.xtensa
 EXPECT=<<EOF
 pc = 0x0000000c
 pc = 0x00000006
@@ -114,6 +119,7 @@ RUN
 
 NAME=branch compare single
 FILE=malloc://0x200
+NEEDS_PLUGINS=asm.xtensa anal.xtensa
 EXPECT=<<EOF
 pc = 0x00000010
 EOF
@@ -129,6 +135,7 @@ RUN
 
 NAME=branch compare
 FILE=malloc://0x200
+NEEDS_PLUGINS=asm.xtensa anal.xtensa
 EXPECT=<<EOF
 pc = 0x00000010
 EOF
@@ -146,6 +153,7 @@ RUN
 
 NAME=branch check mask
 FILE=malloc://0x200
+NEEDS_PLUGINS=asm.xtensa anal.xtensa
 EXPECT=<<EOF
 pc = 0x00000020
 EOF
@@ -164,6 +172,7 @@ RUN
 
 NAME=branch check bit imm
 FILE=malloc://0x200
+NEEDS_PLUGINS=asm.xtensa anal.xtensa
 EXPECT=<<EOF
 pc = 0x00000020
 EOF
@@ -181,6 +190,7 @@ RUN
 
 NAME=branch check bit
 FILE=malloc://0x200
+NEEDS_PLUGINS=asm.xtensa anal.xtensa
 EXPECT=<<EOF
 pc = 0x00000020
 EOF
@@ -199,6 +209,7 @@ RUN
 
 NAME=extract unsigned imm
 FILE=malloc://0x200
+NEEDS_PLUGINS=asm.xtensa anal.xtensa
 EXPECT=<<EOF
 a3 = 0x0000bbcc
 EOF

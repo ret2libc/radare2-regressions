@@ -5,6 +5,7 @@ Example commands tests in `db/cmd/*`:
 
 	NAME=test_db
 	FILE=/../bins/elf/ls
+	NEEDS_PLUGINS=asm.x86 anal.x86
 	CMDS=<<EXPECT
 	pd 4
 	EXPECT=<<RUN

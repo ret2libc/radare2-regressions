@@ -26,6 +26,45 @@ function newPromise (cb) {
   return limit(_ => new Promise(cb));
 }
 
+function canRun (test) {
+  if (!test.needs_plugins) {
+    return true;
+  }
+
+  let allPresent = true;
+  for (let i = 0; i < test.needs_plugins.length; i++) {
+    let p = test.needs_plugins[i];
+    if (p.startsWith('asm.')) {
+      p = p.slice(4)
+      args = ['-c', 'e asm.arch=??', '-qcq', '-']
+    } else if (p.startsWith('anal.')) {
+      p = p.slice(5)
+      args = ['-c', 'e anal.arch=??', '-qcq', '-']
+    } else if (p.startsWith('bin.')) {
+      p = p.slice(4)
+      args = ['-c', 'iL', '-qcq', '-']
+    } else if (p.startsWith('lang.')) {
+      p = p.slice(5)
+      args = ['-c', 'Ll', '-qcq', '-']
+    } else if (p.startsWith('core.')) {
+      p = p.slice(5)
+      args = ['-c', 'Lc', '-qcq', '-']
+    } else if (p.startsWith('hash.')) {
+      p = p.slice(5)
+      args = ['-c', 'Lh', '-qcq', '-']
+    } else if (p.startsWith('io.')) {
+      p = p.slice(3)
+      args = ['-c', 'Lo', '-qcq', '-']
+    } else {
+      console.log('Wrong plugin: ' + p)
+      process.exit(1)
+    }
+    const supported = spawnSync(r2bin, args).output.toString()
+    allPresent = allPresent & (supported.indexOf(p) != -1);
+  }
+  return allPresent;
+}
+
 // support node < 8
 if (!String.prototype.padStart) {
   // XXX
@@ -232,6 +271,12 @@ class NewRegressions {
             process.env.R2_NOPLUGINS = 1;
           }
 
+          if (!canRun(test)) {
+            console.log('Skipping ' + test.name + ' because some plugins are missing')
+            test.broken = true;
+            resolve(cb(test));
+	  }
+
           const child = spawn(r2bin, args);
           test.birth = new Date();
           child.stdout.on('data', data => {
@@ -349,6 +394,9 @@ class NewRegressions {
         case 'ARGS':
           test.args = v || [];
           break;
+	case 'NEEDS_PLUGINS':
+	  test.needs_plugins = v ? v.split(' '): null;
+	  break;
         case 'CMDS':
           if (vt.startsWith('<<')) {
             const endString = vt.substring(2);
