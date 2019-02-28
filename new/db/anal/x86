@@ -173,12 +173,14 @@ e asm.functions=false
 e asm.fcncalls=false
 e asm.lines.fcn=false
 e scr.utf8=false
-e anal.afterjmp=false
+e anal.jmp.after=false
 e anal.calls=false
-e anal.cjmpref=false
-e anal.jmpabove=true
-e anal.jmpref=true
+e anal.jmp.cref=false
+e anal.jmp.above=true
+e anal.jmp.ref=true
 e anal.split=true
+# HACK to avoid ASAN taking too long on travis.. this is broken anyway
+e anal.bb.maxsize=1K
 aaa
 adf @ sym.testObf27.exe_VirtMe
 .adf @ sym.testObf27.exe_VirtMe
@@ -592,7 +594,6 @@ pop rbp
 ret
 EOF
 CMDS=<<EOF
-# e anal.afterjmp=true
 s 0x5c50
 af
 pif
@@ -921,7 +922,7 @@ EXPECT=<<EOF
 0x0040388e 0x0040389d 00:0000 15
 EOF
 CMDS=<<EOF
-e anal.jmptbl=true
+e anal.jmp.tbl=true
 s 0x402cb6
 af
 afb
@@ -934,7 +935,7 @@ EXPECT=<<EOF
 0x100001527 1 switch.0x100001527
 EOF
 CMDS=<<EOF
-e anal.jmptbl=true
+e anal.jmp.tbl=true
 af
 f~switch
 EOF
@@ -972,7 +973,7 @@ EXPECT=<<EOF
 0x004011e5 0x00401249 00:0000 100
 EOF
 CMDS=<<EOF
-e anal.jmptbl=true
+e anal.jmp.tbl=true
 s 0x401090
 af
 afb
@@ -1366,7 +1367,7 @@ EXPECT=<<EOF
 0x0040132b 0x00401335 00:0000 10
 EOF
 CMDS=<<EOF
-e anal.jmpabove=false
+e anal.jmp.above=false
 af
 afb
 EOF
@@ -1707,7 +1708,8 @@ EXPECT=<<EOF
 main 0x804831a [DATA] mov dword [var_ch], str.john
 EOF
 CMDS=<<EOF
-aaa
+af@main
+aar
 axt @ str.john
 EOF
 RUN
@@ -3078,6 +3080,35 @@ _IO_2_1_stdin_
 0x00024480
 CMDS=<<RUN
 ir~[6]
+RUN
+
+NAME=get function in, node before entry
+FILE=../bins/anal/fcn_in_test.elf
+BROKEN=1
+CMDS=<<EOF
+e asm.lines=false;e asm.comments=false;af @ main; pdr @ 0x1180
+EOF
+EXPECT=<<EOF
+;-- start2:
+0x00001180      31c0           xor eax, eax
+0x00001182      eb06           jmp loc.start
+| ----------- true: 0x0000118a
+(fcn) main 18
+  int main (int argc, char **argv, char **envp);
+0x00001184      31c0           xor eax, eax
+0x00001186      75f8           jne loc.start2
+| ----------- true: 0x00001180  false: 0x00001188
+0x00001188      ebf6           jmp loc.start2
+| ----------- true: 0x00001180
+;-- start:
+0x0000118a      89c0           mov eax, eax
+0x0000118c      50             push eax
+0x0000118d      90             nop
+0x0000118e      90             nop
+0x0000118f      90             nop
+0x00001190      90             nop
+0x00001191      c3             ret
+EOF
 RUN
 
 NAME=long basic blocks

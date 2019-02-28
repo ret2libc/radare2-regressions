@@ -50,7 +50,7 @@ NAME=pdrj and pirj ignore asm.bb.middle
 FILE=-
 CMDS=<<EXPECT
 e anal.nopskip=false
-e anal.jmpmid=true
+e anal.jmp.mid=true
 e io.cache=true
 wx 0f1f440000b8210000c1ebfdbb2c000000ebf0
 af

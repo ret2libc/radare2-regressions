@@ -1,6 +1,6 @@
 NAME=x86_64 socket syscall
 FILE=../bins/elf/socket-syscall
-CMDS=<<EXPECT
+CMDS=<<EOF
 aa
 aae
 s main
@@ -9,12 +9,78 @@ aei
 aeim
 aecu 0x00001140
 as
-EXPECT=<<RUN
+EOF
+EXPECT=<<EOF
 |           ;-- syscall.socket:
 |           ;-- syscall.socket.0:
 |           ;-- syscall.socket.1:
 |           ;-- syscall.socket.2:
 |           0x00001140      0f05           syscall
 41 = socket (0x00000001, 0x00000002, 0x00000003)
+EOF
 RUN
 
+NAME=x86_64 jmptbl -O0
+FILE=../bins/mach0/FMS.uu
+CMDS=<<EOF
+s sym._checkinput
+af
+afi*
+EOF
+EXPECT=<<EOF
+"f sym._checkinput 288 0x100000da0"
+"af+ 0x100000da0 sym._checkinput f n"
+afc amd64 @ 0x100000da0
+afb+ 0x100000da0 0x100000da0 22 0x100000db6 0xffffffffffffffff b
+afb+ 0x100000da0 0x100000db6 26 0x100000e99 0x100000dd0 n
+afb+ 0x100000da0 0x100000dd0 20 0xffffffffffffffff 0xffffffffffffffff n
+afb+ 0x100000da0 0x100000de4 16 0x100000dfb 0x100000df4 n
+afb+ 0x100000da0 0x100000df4 7 0x100000dfb 0xffffffffffffffff n
+afb+ 0x100000da0 0x100000dfb 5 0x100000e99 0xffffffffffffffff n
+afb+ 0x100000da0 0x100000e00 16 0x100000e1c 0x100000e10 n
+afb+ 0x100000da0 0x100000e10 12 0x100000e25 0xffffffffffffffff n
+afb+ 0x100000da0 0x100000e1c 9 0x100000eba 0xffffffffffffffff n
+afb+ 0x100000da0 0x100000e25 5 0x100000e99 0xffffffffffffffff n
+afb+ 0x100000da0 0x100000e2a 16 0x100000e46 0x100000e3a n
+afb+ 0x100000da0 0x100000e3a 12 0x100000e4f 0xffffffffffffffff n
+afb+ 0x100000da0 0x100000e46 9 0x100000eba 0xffffffffffffffff n
+afb+ 0x100000da0 0x100000e4f 5 0x100000e99 0xffffffffffffffff n
+afb+ 0x100000da0 0x100000e54 16 0x100000e82 0x100000e64 n
+afb+ 0x100000da0 0x100000e64 16 0x100000e82 0x100000e74 n
+afb+ 0x100000da0 0x100000e74 14 0x100000e8b 0xffffffffffffffff n
+afb+ 0x100000da0 0x100000e82 9 0x100000eba 0xffffffffffffffff n
+afb+ 0x100000da0 0x100000e8b 5 0x100000e99 0xffffffffffffffff n
+afb+ 0x100000da0 0x100000e90 9 0x100000eba 0xffffffffffffffff n
+afb+ 0x100000da0 0x100000e99 5 0x100000e9e 0xffffffffffffffff n
+afb+ 0x100000da0 0x100000e9e 24 0x100000db6 0x100000eb6 n
+afb+ 0x100000da0 0x100000eb6 4 0x100000eba 0xffffffffffffffff b
+afb+ 0x100000da0 0x100000eba 6 0xffffffffffffffff 0xffffffffffffffff n
+afvb -40 var_28h int @ 0x100000da0
+afvb -32 var_20h int @ 0x100000da0
+afvb -24 var_18h int @ 0x100000da0
+afvb -20 var_14h int @ 0x100000da0
+afvb -16 var_10h int @ 0x100000da0
+afvb -1 var_1h int @ 0x100000da0
+afvr rdi arg1 int @ 0x100000da0
+axd 0x100000ec0 0x100000dd0
+axc 0x100000de4 0x100000de2
+axc 0x100000e00 0x100000de2
+axc 0x100000e2a 0x100000de2
+axc 0x100000e54 0x100000de2
+axc 0x100000e90 0x100000de2
+axc 0x100000e99 0x100000dfb
+axc 0x100000e25 0x100000e17
+axc 0x100000eba 0x100000e20
+axc 0x100000e99 0x100000e25
+axc 0x100000e4f 0x100000e41
+axc 0x100000eba 0x100000e4a
+axc 0x100000e99 0x100000e4f
+axc 0x100000e8b 0x100000e7d
+axc 0x100000eba 0x100000e86
+axc 0x100000e99 0x100000e8b
+axc 0x100000eba 0x100000e94
+axc 0x100000e9e 0x100000e99
+afS 8 @ 0x100000da0
+
+EOF
+RUN

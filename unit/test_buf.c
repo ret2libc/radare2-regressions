@@ -19,7 +19,7 @@ bool test_r_buf_file_new() {
 	b = r_buf_new_file (filename, 0);
 	mu_assert_notnull (b, "r_buf_new_file failed");
 
-	r = r_buf_read_at (b, R_BUF_CUR, buffer, length);
+	r = r_buf_read_at (b, R_BUF_CUR, (ut8 *)buffer, length);
 	mu_assert_eq (r, length, "r_buf_read_at failed");
 
 	mu_assert_streq (buffer, content, "r_buf_read_at has corrupted content");

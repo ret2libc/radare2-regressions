@@ -2335,7 +2335,7 @@ EOF
 CMDS=<<EOF
 e asm.lines.bb=false
 e asm.lines.fcn=false
-e anal.cjmpref=true
+e anal.jmp.cref=true
 aa
 afr
 pd 1 @0x400730

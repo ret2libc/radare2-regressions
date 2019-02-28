@@ -167,7 +167,6 @@ bool test_r_sub_str_rchr(void) {
 	const char* out = r_sub_str_rchr (test, 1, 8, 'd');
 	mu_assert_streq (out, "ddddare2d", "pointer to first d in range in radddddare2d");
 	mu_end;
-	mu_end;
 }
 
 bool test_r_str_rchr(void) {
@@ -257,7 +256,25 @@ bool test_r_str_unescape(void) {
 	mu_end;
 }
 
+bool test_r_str_newf(void) {
+	char *a = r_str_newf ("hello");
+	mu_assert_streq (a, "hello", "oops");
+	free (a);
+
+	a = r_str_newf ("%s/%s", "hello", "world");
+	mu_assert_streq (a, "hello/world", "oops");
+	free (a);
+
+	a = r_str_newf ("%s/%s", "hello", "world");
+	a = r_str_appendf (a, "..%s/%s", "cow", "low");
+	a = r_str_appendf (a, "PWN");
+	mu_assert_streq (a, "hello/world..cow/lowPWN", "oops");
+	free (a);
+	mu_end;
+}
+
 bool all_tests() {
+	mu_run_test(test_r_str_newf);
 	mu_run_test(test_r_str_replace_char_once);
 	mu_run_test(test_r_str_replace_char);
 	mu_run_test(test_r_str_bits64);
