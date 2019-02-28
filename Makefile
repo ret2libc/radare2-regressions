@@ -27,7 +27,7 @@ alltargets: js-tests unit_tests
 
 js-tests:
 	cd new && npm install
-	cd new && node bin/r2r.js
+	cd new && node bin/r2r.js fuzz
 
 keystone:
 	cd new && npm install
