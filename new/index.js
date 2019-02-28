@@ -1,5 +1,5 @@
 const promiseConcurrency = 8;
-const timeoutFuzzed = 60 * 1000;
+const timeoutFuzzed = 75 * 1000;
 
 const co = require('co');
 const colors = require('colors/safe');
