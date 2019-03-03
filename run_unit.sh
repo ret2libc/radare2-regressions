@@ -4,6 +4,7 @@
 # export KCOV="kcov /path/to/output"
 # kcov output will be placed in the /path/to/output/index.html
 
+LSAN_OPTIONS=detect_leaks=1
 EXIT_STATUS=0
 for i in $(find ./unit -name 'test_*' -type f -perm -111); do
 	filename=$(basename "$i")

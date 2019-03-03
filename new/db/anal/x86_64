@@ -1,4 +1,15 @@
 NAME=x86_64 socket syscall
+FILE=../bins/mach0/ls-osx-x86_64
+CMDS=<<EOF
+af
+aCe 0x10000143e
+EOF
+EXPECT=<<EOF
+char *getenv("COLUMNS")
+EOF
+RUN
+
+NAME=x86_64 socket syscall
 FILE=../bins/elf/socket-syscall
 CMDS=<<EOF
 aa
