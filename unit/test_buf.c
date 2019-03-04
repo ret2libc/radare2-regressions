@@ -26,7 +26,7 @@ bool test_r_buf_file_new() {
 
 	// Cleanup
 	unlink (filename);
-
+	r_buf_free (b);
 	mu_end;
 }
 

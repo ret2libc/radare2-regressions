@@ -2,88 +2,153 @@
 #include "minunit.h"
 
 bool test_r_hex_from_code() {
-	char *s;
+	const char *s;
+	char *r;
 	s = "char *s = \"ABCD\";";
-	mu_assert_streq (r_hex_from_code (s), "41424344", s);
+	r = r_hex_from_code (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "char *s = \"AB\" \"CD\";";
-	mu_assert_streq (r_hex_from_code (s), "41424344", s);
+	r = r_hex_from_code (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "char *s = \"\x41\x42\x43\x44\"";
-	mu_assert_streq (r_hex_from_code (s), "41424344", s);
+	r = r_hex_from_code (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "char *s = \"\x41\x42\" /* test */ \"\x43\x44\";";
-	mu_assert_streq (r_hex_from_code (s), "41424344", s);
+	r = r_hex_from_code (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "char *s = \"\n\r\e\"";
-	mu_assert_streq (r_hex_from_code (s), "0a0d1b", s);
+	r = r_hex_from_code (s);
+	mu_assert_streq (r, "0a0d1b", s);
+	free (r);
 	s = "uint8_t buffer[3] = {0x41, 0x42, 0x43, 0x44};";
-	mu_assert_streq (r_hex_from_code (s), "41424344", s);
+	r = r_hex_from_code (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "uint8_t buffer[3] = {0x41,\n0x42,\n0x43,\n0x44};";
-	mu_assert_streq (r_hex_from_code (s), "41424344", s);
+	r = r_hex_from_code (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "uint8_t buffer[3] = { 0x41 , \n 0x42, \n 0x43 , \n 0x44 } ;";
-	mu_assert_streq (r_hex_from_code (s), "41424344", s);
+	r = r_hex_from_code (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "uint8_t buffer[3] = {0x41, /* test */0x42, 0x43,/*test*/ 0x44};";
-	mu_assert_streq (r_hex_from_code (s), "41424344", s);
-
+	r = r_hex_from_code (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "buf = \"\x41\x42\x43\x44\"";
-	mu_assert_streq (r_hex_from_code (s), "41424344", s);
+	r = r_hex_from_code (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "buf = [0x41, 0x42, 0x43, 0x44]";
-	mu_assert_streq (r_hex_from_code (s), "41424344", s);
+	r = r_hex_from_code (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 
 	mu_end;
 }
 
 bool test_r_hex_from_c() {
-	char *s;
+	const char *s;
+	char *r;
 	s = "char *s = \"ABCD\";";
-	mu_assert_streq (r_hex_from_c (s), "41424344", s);
+	r = r_hex_from_c (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "char *s = \"AB\" \"CD\";";
-	mu_assert_streq (r_hex_from_c (s), "41424344", s);
+	r = r_hex_from_c (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "char *s = \"\x41\x42\x43\x44\"";
-	mu_assert_streq (r_hex_from_c (s), "41424344", s);
+	r = r_hex_from_c (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "char *s = \"\x41\x42\" /* test */ \"\x43\x44\";";
-	mu_assert_streq (r_hex_from_c (s), "41424344", s);
+	r = r_hex_from_c (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "char *s = \"\n\r\e\"";
-	mu_assert_streq (r_hex_from_c (s), "0a0d1b", s);
+	r = r_hex_from_c (s);
+	mu_assert_streq (r, "0a0d1b", s);
+	free (r);
 	s = "uint8_t buffer[3] = {0x41, 0x42, 0x43, 0x44};";
-	mu_assert_streq (r_hex_from_c (s), "41424344", s);
+	r = r_hex_from_c (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "uint8_t buffer[3] = {0x41,\n0x42,\n0x43,\n0x44};";
-	mu_assert_streq (r_hex_from_c (s), "41424344", s);
+	r = r_hex_from_c (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "uint8_t buffer[3] = { 0x41 , \n 0x42, \n 0x43 , \n 0x44 } ;";
-	mu_assert_streq (r_hex_from_c (s), "41424344", s);
+	r = r_hex_from_c (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "uint8_t buffer[3] = {0x41, /* test */0x42, 0x43,/*test*/ 0x44};";
-	mu_assert_streq (r_hex_from_c (s), "41424344", s);
+	r = r_hex_from_c (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 
 	mu_end;
 }
 
 bool test_r_hex_from_py() {
-	char *s;
+	const char *s;
+	char *r;
 	s = "s = \"ABCD\";";
-	mu_assert_streq (r_hex_from_py (s), "41424344", s);
+	r = r_hex_from_py (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "s = \"\x41\x42\x43\x44\"";
-	mu_assert_streq (r_hex_from_py (s), "41424344", s);
+	r = r_hex_from_py (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "s = \"\n\r\"";
-	mu_assert_streq (r_hex_from_py (s), "0a0d", s);
+	r = r_hex_from_py (s);
+	mu_assert_streq (r, "0a0d", s);
+	free (r);
 	s = "buffer = [0x41, 0x42, 0x43, 0x44]";
-	mu_assert_streq (r_hex_from_py (s), "41424344", s);
+	r = r_hex_from_py (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "buffer = [0x41,\n0x42,\n0x43,\n0x44]";
-	mu_assert_streq (r_hex_from_py (s), "41424344", s);
+	r = r_hex_from_py (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "buffer = [ 0x41 , \n 0x42, \n 0x43 , \n 0x44 ]";
-	mu_assert_streq (r_hex_from_py (s), "41424344", s);
+	r = r_hex_from_py (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 
 	mu_end;
 }
 
 bool test_r_hex_no_code() {
 	const char *s;
+	char *r;
 	s = "\"ABCD\"";
-	mu_assert_streq (r_hex_no_code (s), "41424344", s);
+	r = r_hex_no_code (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "\"AB\" \"CD\"";
-	mu_assert_streq (r_hex_no_code (s), "41424344", s);
+	r = r_hex_no_code (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "\"AB\"\n\"CD\"\n";
-	mu_assert_streq (r_hex_no_code (s), "41424344", s);
+	r = r_hex_no_code (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "\"\x41\x42\x43\x44\"";
-	mu_assert_streq (r_hex_no_code (s), "41424344", s);
+	r = r_hex_no_code (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 	s = "\"\x41\x42\"  \"\x43\x44\";";
-	mu_assert_streq (r_hex_no_code (s), "41424344", s);
+	r = r_hex_no_code (s);
+	mu_assert_streq (r, "41424344", s);
+	free (r);
 
 	mu_end;
 }

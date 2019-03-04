@@ -4,7 +4,7 @@
 bool test_r_flag_get_set(void) {
 	RFlag *flags;
 	RFlagItem *fi;
-	
+
 	flags = r_flag_new ();
 	mu_assert_notnull (flags, "r_flag_new () failed");
 
@@ -21,6 +21,7 @@ bool test_r_flag_get_set(void) {
 	fi = r_flag_get (flags, "foo");
 	mu_assert_notnull (fi, "cannot find 'foo' flag");
 
+	r_flag_free (flags);
 	mu_end;
 }
 
