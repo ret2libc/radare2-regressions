@@ -625,6 +625,7 @@ pd 1 @ 0x080495a8
 EXPECT=<<RUN
             ;-- section..dynamic:
             ;-- segment.DYNAMIC:
+            ;-- .dynamic:
             ;-- _DYNAMIC:
             0x080495a8      add dword [eax], eax                       ; [21] -rw- section size 232 named .dynamic
 RUN
@@ -635,6 +636,7 @@ CMDS=<<EXPECT
 pd 3 @ section..bss
 EXPECT=<<RUN
             ;-- section..bss:
+            ;-- .bss:
             ;-- completed.5979:
             ;-- _edata:
             ;-- __bss_start:
@@ -680,32 +682,32 @@ EXPECT=<<EOF
 [Symbols]
 Num Paddr      Vaddr      Bind     Type Size Name
 004 0x000004ac 0x080484ac GLOBAL    OBJ    4 _IO_stdin_used
-001 0x00000134 0x08048134  LOCAL   SECT    0
-002 0x00000148 0x08048148  LOCAL   SECT    0
-003 0x00000168 0x08048168  LOCAL   SECT    0
-004 0x0000018c 0x0804818c  LOCAL   SECT    0
-005 0x000001ac 0x080481ac  LOCAL   SECT    0
-006 0x000001fc 0x080481fc  LOCAL   SECT    0
-007 0x00000246 0x08048246  LOCAL   SECT    0
-008 0x00000250 0x08048250  LOCAL   SECT    0
-009 0x00000270 0x08048270  LOCAL   SECT    0
-010 0x00000278 0x08048278  LOCAL   SECT    0
-011 0x00000290 0x08048290  LOCAL   SECT    0
-012 0x000002c0 0x080482c0  LOCAL   SECT    0
-013 0x00000300 0x08048300  LOCAL   SECT    0
-014 0x00000494 0x08048494  LOCAL   SECT    0
-015 0x000004a8 0x080484a8  LOCAL   SECT    0
-016 0x000004c0 0x080484c0  LOCAL   SECT    0
-017 0x000004ec 0x080484ec  LOCAL   SECT    0
-018 0x0000059c 0x0804959c  LOCAL   SECT    0
-019 0x000005a0 0x080495a0  LOCAL   SECT    0
-020 0x000005a4 0x080495a4  LOCAL   SECT    0
-021 0x000005a8 0x080495a8  LOCAL   SECT    0
-022 0x00000690 0x08049690  LOCAL   SECT    0
-023 0x00000694 0x08049694  LOCAL   SECT    0
-024 0x000006ac 0x080496ac  LOCAL   SECT    0
-025 ---------- 0x080496b4  LOCAL   SECT    0
-026 ---------- 0x00000000  LOCAL   SECT    0
+001 0x00000134 0x08048134  LOCAL   SECT    0 .interp
+002 0x00000148 0x08048148  LOCAL   SECT    0 .note.ABI-tag
+003 0x00000168 0x08048168  LOCAL   SECT    0 .note.gnu.build-id
+004 0x0000018c 0x0804818c  LOCAL   SECT    0 .gnu.hash
+005 0x000001ac 0x080481ac  LOCAL   SECT    0 .dynsym
+006 0x000001fc 0x080481fc  LOCAL   SECT    0 .dynstr
+007 0x00000246 0x08048246  LOCAL   SECT    0 .gnu.version
+008 0x00000250 0x08048250  LOCAL   SECT    0 .gnu.version_r
+009 0x00000270 0x08048270  LOCAL   SECT    0 .rel.dyn
+010 0x00000278 0x08048278  LOCAL   SECT    0 .rel.plt
+011 0x00000290 0x08048290  LOCAL   SECT    0 .init
+012 0x000002c0 0x080482c0  LOCAL   SECT    0 .plt
+013 0x00000300 0x08048300  LOCAL   SECT    0 .text
+014 0x00000494 0x08048494  LOCAL   SECT    0 .fini
+015 0x000004a8 0x080484a8  LOCAL   SECT    0 .rodata
+016 0x000004c0 0x080484c0  LOCAL   SECT    0 .eh_frame_hdr
+017 0x000004ec 0x080484ec  LOCAL   SECT    0 .eh_frame
+018 0x0000059c 0x0804959c  LOCAL   SECT    0 .init_array
+019 0x000005a0 0x080495a0  LOCAL   SECT    0 .fini_array
+020 0x000005a4 0x080495a4  LOCAL   SECT    0 .jcr
+021 0x000005a8 0x080495a8  LOCAL   SECT    0 .dynamic
+022 0x00000690 0x08049690  LOCAL   SECT    0 .got
+023 0x00000694 0x08049694  LOCAL   SECT    0 .got.plt
+024 0x000006ac 0x080496ac  LOCAL   SECT    0 .data
+025 ---------- 0x080496b4  LOCAL   SECT    0 .bss
+026 ---------- 0x00000000  LOCAL   SECT    0 .comment
 027 ---------- 0x00000000  LOCAL   FILE    0 init.c
 028 ---------- 0x00000000  LOCAL   FILE    0
 029 ---------- 0x00000000  LOCAL   FILE    0 crtstuff.c
@@ -1017,32 +1019,32 @@ FILE=../bins/elf/analysis/hello-linux-x86_64
 EXPECT=<<EOF
 [Symbols]
 Num Paddr      Vaddr      Bind     Type Size Name
-001 0x00000200 0x00400200  LOCAL   SECT    0
-002 0x0000021c 0x0040021c  LOCAL   SECT    0
-003 0x0000023c 0x0040023c  LOCAL   SECT    0
-004 0x00000260 0x00400260  LOCAL   SECT    0
-005 0x00000280 0x00400280  LOCAL   SECT    0
-006 0x000002e0 0x004002e0  LOCAL   SECT    0
-007 0x0000031e 0x0040031e  LOCAL   SECT    0
-008 0x00000328 0x00400328  LOCAL   SECT    0
-009 0x00000348 0x00400348  LOCAL   SECT    0
-010 0x00000360 0x00400360  LOCAL   SECT    0
-011 0x000003a8 0x004003a8  LOCAL   SECT    0
-012 0x000003d0 0x004003d0  LOCAL   SECT    0
-013 0x00000410 0x00400410  LOCAL   SECT    0
-014 0x000005b4 0x004005b4  LOCAL   SECT    0
-015 0x000005c0 0x004005c0  LOCAL   SECT    0
-016 0x000005d0 0x004005d0  LOCAL   SECT    0
-017 0x00000608 0x00400608  LOCAL   SECT    0
-018 0x000006e0 0x006006e0  LOCAL   SECT    0
-019 0x000006e8 0x006006e8  LOCAL   SECT    0
-020 0x000006f0 0x006006f0  LOCAL   SECT    0
-021 0x000006f8 0x006006f8  LOCAL   SECT    0
-022 0x000008c8 0x006008c8  LOCAL   SECT    0
-023 0x000008d0 0x006008d0  LOCAL   SECT    0
-024 0x00000900 0x00600900  LOCAL   SECT    0
-025 ---------- 0x00600910  LOCAL   SECT    0
-026 ---------- 0x00000000  LOCAL   SECT    0
+001 0x00000200 0x00400200  LOCAL   SECT    0 .interp
+002 0x0000021c 0x0040021c  LOCAL   SECT    0 .note.ABI-tag
+003 0x0000023c 0x0040023c  LOCAL   SECT    0 .note.gnu.build-id
+004 0x00000260 0x00400260  LOCAL   SECT    0 .gnu.hash
+005 0x00000280 0x00400280  LOCAL   SECT    0 .dynsym
+006 0x000002e0 0x004002e0  LOCAL   SECT    0 .dynstr
+007 0x0000031e 0x0040031e  LOCAL   SECT    0 .gnu.version
+008 0x00000328 0x00400328  LOCAL   SECT    0 .gnu.version_r
+009 0x00000348 0x00400348  LOCAL   SECT    0 .rela.dyn
+010 0x00000360 0x00400360  LOCAL   SECT    0 .rela.plt
+011 0x000003a8 0x004003a8  LOCAL   SECT    0 .init
+012 0x000003d0 0x004003d0  LOCAL   SECT    0 .plt
+013 0x00000410 0x00400410  LOCAL   SECT    0 .text
+014 0x000005b4 0x004005b4  LOCAL   SECT    0 .fini
+015 0x000005c0 0x004005c0  LOCAL   SECT    0 .rodata
+016 0x000005d0 0x004005d0  LOCAL   SECT    0 .eh_frame_hdr
+017 0x00000608 0x00400608  LOCAL   SECT    0 .eh_frame
+018 0x000006e0 0x006006e0  LOCAL   SECT    0 .init_array
+019 0x000006e8 0x006006e8  LOCAL   SECT    0 .fini_array
+020 0x000006f0 0x006006f0  LOCAL   SECT    0 .jcr
+021 0x000006f8 0x006006f8  LOCAL   SECT    0 .dynamic
+022 0x000008c8 0x006008c8  LOCAL   SECT    0 .got
+023 0x000008d0 0x006008d0  LOCAL   SECT    0 .got.plt
+024 0x00000900 0x00600900  LOCAL   SECT    0 .data
+025 ---------- 0x00600910  LOCAL   SECT    0 .bss
+026 ---------- 0x00000000  LOCAL   SECT    0 .comment
 027 ---------- 0x00000000  LOCAL   FILE    0 init.c
 028 ---------- 0x00000000  LOCAL   FILE    0
 029 ---------- 0x00000000  LOCAL   FILE    0 crtstuff.c
@@ -1683,12 +1685,14 @@ EXPECT=<<RUN
             ;-- section..preinit_array:
             ;-- segment.LOAD1:
             ;-- segment.GNU_RELRO:
+            ;-- .preinit_array:
             ;-- __preinit:
             0x08049ed4      .dword 0x08048486 ; entry.preinit0 ; sym.preinit ; [18] -rw- section size 8 named .preinit_array
             ;-- __preinit2:
             0x08049ed8      .dword 0x0804849f ; entry.preinit1 ; sym.preinit2
 
             ;-- section..init_array:
+            ;-- .init_array:
             ;-- __frame_dummy_init_array_entry:
             ;-- __init_array_start:
             0x08049edc      .dword 0x08048480 ; entry.init0 ; sym.frame_dummy ; [19] -rw- section size 20 named .init_array
@@ -1700,6 +1704,7 @@ EXPECT=<<RUN
             0x08049eec      .dword 0x08048503 ; entry.init4 ; sym.constructor2
 
             ;-- section..fini_array:
+            ;-- .fini_array:
             ;-- __do_global_dtors_aux_fini_array_entry:
             ;-- __init_array_end:
             0x08049ef0      .dword 0x08048450 ; entry.fini0 ; sym.__do_global_dtors_aux ; [20] -rw- section size 20 named .fini_array

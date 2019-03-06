@@ -1,11 +1,10 @@
 NAME= fnj shows demangled symbols
 FILE=../bins/elf/demangle-test-cpp
 EXPECT=<<CMDS
-{"name":"reloc._ZdlPv","size":8,"offset":16432}
-{"name":"reloc.operatordelete(void*)","size":8,"offset":16432}
+{"name":"loc.__init_array_start","size":0,"offset":15800}
+{"name":"__init_array_start","size":0,"offset":15800}
 CMDS=<<RUN
 aaa
 fj~{245}
 fnj~{245}
 RUN
-

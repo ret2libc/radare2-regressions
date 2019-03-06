@@ -313,25 +313,25 @@ NAME=super mario block (#8788)
 FILE=../bins/elf/analysis/hello-android-mips
 EXPECT=<<EOF
 [0x0008049c]> VV @ super_mario_fix (nodes 1 edges 0 zoom 100%) BB-NORM mouse:canvas-y mov-speed:5
-.-------------------------------------------------.
-|  0x8049c                                        |
-| (fcn) super_mario_fix 8                         |
-|   super_mario_fix ();                           |
-|    ; segment.ehdr                               |
-| lui v0, 8                                       |
-|    ; "\u00a2\u00a2\u00a2World" section..rodata  |
-| addiu a0, v0, 0x510                             |
-`-------------------------------------------------'
+.---------------------------------------------.
+|  0x8049c                                    |
+| (fcn) super_mario_fix 8                     |
+|   super_mario_fix ();                       |
+|    ; segment.ehdr                           |
+| lui v0, 8                                   |
+|    ; "\u00a2\u00a2\u00a2World" sym..rodata  |
+| addiu a0, v0, 0x510                         |
+`---------------------------------------------'
 [0x0008049c]> VV @ super_mario_fix (nodes 1 edges 0 zoom 100%) BB-NORM mouse:canvas-y mov-speed:5
-.----------------------------------.
-|  0x8049c                         |
-| (fcn) super_mario_fix 8          |
-|   super_mario_fix ();            |
-|    ; segment.ehdr                |
-| lui v0, 8                        |
-|    ; "...World" section..rodata  |
-| addiu a0, v0, 0x510              |
-`----------------------------------'
+.------------------------------.
+|  0x8049c                     |
+| (fcn) super_mario_fix 8      |
+|   super_mario_fix ();        |
+|    ; segment.ehdr            |
+| lui v0, 8                    |
+|    ; "...World" sym..rodata  |
+| addiu a0, v0, 0x510          |
+`------------------------------'
 EOF
 CMDS=<<EOF
 e emu.str=true

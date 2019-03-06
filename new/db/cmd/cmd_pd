@@ -1424,13 +1424,13 @@ NAME=pd, esil, emu.stroff and bin.strpurge
 FILE=../bins/elf/analysis/hello-android-mips
 EXPECT=<<EOF
             0x0008049c      0800023c       lui v0, 8                   ; segment.ehdr
-            0x000804a0      10054424       addiu a0, v0, 0x510         ; "Hello World" section..rodata
+            0x000804a0      10054424       addiu a0, v0, 0x510         ; "Hello World" sym..rodata
 ----
             0x0008049c      0800023c       lui v0, 8                   ; segment.ehdr
-            0x000804a0      10054424       addiu a0, v0, 0x510         ; 0x80510 "Hello World" section..rodata
+            0x000804a0      10054424       addiu a0, v0, 0x510         ; 0x80510 "Hello World" sym..rodata
 ----
             0x0008049c      0800023c       lui v0, 8                   ; segment.ehdr
-            0x000804a0      10054424       addiu a0, v0, 0x510         ; section..rodata
+            0x000804a0      10054424       addiu a0, v0, 0x510         ; sym..rodata
 EOF
 CMDS=<<EOF
 e emu.str=true
@@ -1450,8 +1450,8 @@ RUN
 NAME=emu.pre and double pd
 FILE=../bins/elf/analysis/hello-android-mips
 EXPECT=<<EOF
-            0x000804a0      10054424       addiu a0, v0, 0x510         ; "Hello World" section..rodata
-            0x000804a0      10054424       addiu a0, v0, 0x510         ; "Hello World" section..rodata
+            0x000804a0      10054424       addiu a0, v0, 0x510         ; "Hello World" sym..rodata
+            0x000804a0      10054424       addiu a0, v0, 0x510         ; "Hello World" sym..rodata
 EOF
 CMDS=<<EOF
 e emu.pre=true
