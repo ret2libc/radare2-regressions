@@ -69,7 +69,7 @@ RUN
 NAME=2: fs *
 FILE=../bins/elf/analysis/main
 EXPECT=<<EOF
-7
+6
 EOF
 CMDS=<<EOF
 fs *
