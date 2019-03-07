@@ -51,3 +51,14 @@ pd 15 @ entry0~call
 EXPECT=<<RUN
 0x000068e8      ff15b2c60100   call qword [reloc.__libc_start_main]
 RUN
+
+NAME=ELF: R_X86_64_PLT32 patch reloc
+FILE=../bins/elf/radare2.c.o
+ARGS=-e io.cache=true
+CMDS=<<EXPECT
+e asm.comments=false
+e asm.lines=false
+pd 1 @ 0x0800005e
+EXPECT=<<RUN
+0x0800005e      e878840300     call reloc.r_spaces_set
+RUN
