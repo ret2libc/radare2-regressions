@@ -2975,8 +2975,8 @@ RUN
 NAME=af afF graph
 FILE=malloc://1024
 EXPECT=<<EOF
-[0x00000000]> VV @ test (nodes 1 edges 0 zoom 100%) BB-NORM mouse:canvas-y mov-speed:5
-.---------------------------.
+[0x00000000]>  # test ();
+ ---------------------------.
 |  0x0                      |
 | / (fcn) test              |
 | (6 byte folded function)  |

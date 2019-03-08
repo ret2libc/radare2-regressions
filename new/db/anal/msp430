@@ -32,7 +32,6 @@ size: 62
 is-pure: true
 realsz: 62
 stackframe: 0
-call-convention: (null)
 cyclomatic-cost : 0
 cyclomatic-complexity: 1
 bits: 32
@@ -105,5 +104,3 @@ locals: 0
 args: 0
 diff: type: new
 RUN
-
-
