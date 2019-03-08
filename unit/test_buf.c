@@ -3,22 +3,11 @@
 #include <stdlib.h>
 #include "minunit.h"
 
-bool test_r_buf_file() {
-	RBuffer *b;
+bool test_buf(RBuffer *b) {
 	ut8 buffer[1024] = { 0 };
-	int r;
-	char filename[] = "r2-XXXXXX";
 	const char *content = "Something To\nSay Here..";
 	const int length = 23;
-
-	// Prepare file
-	int fd = mkstemp (filename);
-	mu_assert_neq (fd, -1, "mkstemp failed...");
-	write (fd, content, length);
-	close (fd);
-
-	b = r_buf_new_file (filename, O_RDWR, 0);
-	mu_assert_notnull (b, "r_buf_new_file failed");
+	int r;
 
 	ut64 buf_sz = r_buf_size (b);
 	mu_assert_eq (buf_sz, length, "file size should be computed");
@@ -75,14 +64,80 @@ bool test_r_buf_file() {
 	mu_assert_eq (gtlen, 7, "there are only 7 bytes left after idx 5");
 	mu_assert_eq (*gt, (ut8)',', "comma should be there");
 
+	r = r_buf_seek (b, 0x100, R_BUF_SET);
+	mu_assert_eq (r, 0x100, "moving seek out of current length");
+	r = r_buf_write (b, "mydata", 6);
+	mu_assert_eq (r, 6, "writes 6 bytes");
+	r = r_buf_read_at (b, 0xf0, buffer, sizeof (buffer));
+	mu_assert_eq (r, 0x16, "read 16 bytes at the end of gap and new data");
+	mu_assert_memeq (buffer, "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00", 16, "first bytes should be 0");
+	mu_assert_memeq (buffer + 0x10, "mydata", 6, "then there is mydata");
+
+	return MU_PASSED;
+}
+
+bool test_r_buf_file() {
+	RBuffer *b;
+	char filename[] = "r2-XXXXXX";
+	const char *content = "Something To\nSay Here..";
+	const int length = 23;
+
+	// Prepare file
+	int fd = mkstemp (filename);
+	mu_assert_neq (fd, -1, "mkstemp failed...");
+	write (fd, content, length);
+	close (fd);
+
+	b = r_buf_new_file (filename, O_RDWR, 0);
+	mu_assert_notnull (b, "r_buf_new_file failed");
+
+	if (test_buf (b) != MU_PASSED) {
+		mu_fail ("test failed");
+	}
+
 	// Cleanup
 	r_buf_free (b);
 	unlink (filename);
 	mu_end;
 }
 
+bool test_r_buf_bytes() {
+	RBuffer *b;
+	const char *content = "Something To\nSay Here..";
+	const int length = 23;
+
+	b = r_buf_new_with_bytes ((const ut8 *)content, length);
+	mu_assert_notnull (b, "r_buf_new_file failed");
+
+	if (test_buf (b) != MU_PASSED) {
+		mu_fail ("test failed");
+	}
+
+	// Cleanup
+	r_buf_free (b);
+	mu_end;
+}
+
+bool test_r_buf_bytes_steal() {
+	RBuffer *b;
+	const char *content = "Something To\nSay Here..";
+	const int length = 23;
+
+	b = r_buf_new_with_bytes ((const ut8 *)content, length);
+	mu_assert_notnull (b, "r_buf_new_file failed");
+	char *s = r_buf_to_string (b);
+	mu_assert_streq (s, content, "content is right");
+	free (s);
+
+	// Cleanup
+	r_buf_free (b);
+	mu_end;
+}
+
 int all_tests() {
 	mu_run_test (test_r_buf_file);
+	mu_run_test (test_r_buf_bytes);
+	mu_run_test (test_r_buf_bytes_steal);
 	return tests_passed != tests_run;
 }
 
