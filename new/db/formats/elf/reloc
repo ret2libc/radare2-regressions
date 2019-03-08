@@ -53,7 +53,7 @@ EXPECT=<<RUN
 RUN
 
 NAME=ELF: R_X86_64_PLT32 patch reloc
-FILE=../bins/elf/radare2.c.o
+FILE=../bins/elf/radare2.c.obj
 ARGS=-e io.cache=true
 CMDS=<<EXPECT
 e asm.comments=false
