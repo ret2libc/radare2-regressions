@@ -22,7 +22,7 @@
 #define MU_TEST_UNBROKEN 0
 #define MU_TEST_BROKEN 1
 
-void sprint_mem(char *out, ut8 *buf, size_t len) {
+void sprint_mem(char *out, const ut8 *buf, size_t len) {
 	size_t i;
 	*out = '\0';
 	for (i = 0; i < len; i++) {
