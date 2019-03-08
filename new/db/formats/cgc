@@ -1,0 +1,8 @@
+NAME=CGC: Open
+FILE=../bins/cgc/CADET_00001
+EXPECT=<<EOF
+EOF
+CMDS=<<EOF
+q!
+EOF
+RUN

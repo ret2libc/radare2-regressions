@@ -38,6 +38,20 @@ EXPECT=<<RUN
 f hit0_0 0x0000058f ; ../bins/elf/ioli/crackme0x00
 RUN
 
+NAME=rafind2 -r -X -x with nibbles masked
+FILE=-
+CMDS=!rafind2 -r -X -x caf.bab. ../bins/java/Hello.class
+EXPECT=<<RUN
+f hit0_0 0x00000000 ; ../bins/java/Hello.class
+RUN
+
+NAME=rafind2 -r -X -x with bin mask
+FILE=-
+CMDS=!rafind2 -r -X -x caf3bab3 -M fff0fff0 ../bins/java/Hello.class
+EXPECT=<<RUN
+f hit0_0 0x00000000 ; ../bins/java/Hello.class
+RUN
+
 NAME=rafind2 -h
 FILE=-
 CMDS=!rafind2 -h | grep -c Usage

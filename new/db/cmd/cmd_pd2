@@ -257,19 +257,19 @@ EXPECT=<<RUN
 |              ; void abort(void)
 \           0x00008178      a40200eb       bl sym.abort
 
-[0x00008174]> VV @ fcn.00008174 (nodes 1 edges 0 zoom 100%) BB-NORM mouse:canvas-y mov-speed:5
-.-----------------------------------------------------.
+[0x00008174]>  # fcn.00008174 ();
+ -----------------------------------------------------.
 |  0x8174                                             |
 | (fcn) fcn.00008174 8                                |
 |   fcn.00008174 ();                                  |
 |    ; lr=0x8178 -> 0xeb0002a4                        |
 |    ; pc=0x845c -> 0xe92d41f0 sym.__libc_start_main  |
 |    ; int __libc_start_main(?, -1, ?, ?, ?, ?, -1)   |
-| bl sym.__libc_start_main;[ga]                       |
+| bl sym.__libc_start_main;[oa]                       |
 |    ; lr=0x817c -> 0xe92d4030                        |
 |    ; pc=0x8c10 -> 0xe59f62a0 sym.abort              |
 |    ; void abort(void)                               |
-| bl sym.abort;[gb]                                   |
+| bl sym.abort;[ob]                                   |
 `-----------------------------------------------------'
 RUN
 

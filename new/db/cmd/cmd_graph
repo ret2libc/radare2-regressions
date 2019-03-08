@@ -159,8 +159,8 @@ RUN
 NAME=agf one
 FILE=-
 EXPECT=<<EOF
-[0x00000000]> VV @ fcn.00000000 (nodes 1 edges 0 zoom 100%) BB-NORM mouse:canvas-y mov-speed:5
-.----------------------.
+[0x00000000]>  # fcn.00000000 ();
+ ----------------------.
 |  0x0                 |
 | (fcn) fcn.00000000 5 |
 | push ebp             |
@@ -312,8 +312,8 @@ RUN
 NAME=super mario block (#8788)
 FILE=../bins/elf/analysis/hello-android-mips
 EXPECT=<<EOF
-[0x0008049c]> VV @ super_mario_fix (nodes 1 edges 0 zoom 100%) BB-NORM mouse:canvas-y mov-speed:5
-.---------------------------------------------.
+[0x0008049c]>  # super_mario_fix ();
+ ---------------------------------------------.
 |  0x8049c                                    |
 | (fcn) super_mario_fix 8                     |
 |   super_mario_fix ();                       |
@@ -322,8 +322,8 @@ EXPECT=<<EOF
 |    ; "\u00a2\u00a2\u00a2World" sym..rodata  |
 | addiu a0, v0, 0x510                         |
 `---------------------------------------------'
-[0x0008049c]> VV @ super_mario_fix (nodes 1 edges 0 zoom 100%) BB-NORM mouse:canvas-y mov-speed:5
-.------------------------------.
+[0x0008049c]>  # super_mario_fix ();
+ ------------------------------.
 |  0x8049c                     |
 | (fcn) super_mario_fix 8      |
 |   super_mario_fix ();        |

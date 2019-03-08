@@ -8,7 +8,7 @@ Originally based on work by and now in collaboration with pancake.
 Directory Hierarchy
 -------------------
 
- * new/:         New testsuite written in NodeJS (make js-tests, check new/README.md).
+ * new/:         New testsuite written in NodeJS.
  * unit/:        Unit tests (written in C, using minunit).
  * bins/:        Sample binaries.
 
@@ -22,8 +22,10 @@ Requirements
 Usage
 -----
 
- * To run *all* tests, use 'make -k all'.
-
+ * To run *all* tests, use `make -k all`.
+ * To execute only the unit tests use `make -k unit_tests`
+ * To execute only the regressions tests use `make -k js-tests`
+ * To execute and autofix a specific set of test use `node bin/r2r.js -i db/XXXX/YYYY`, this will provide a dialog in which you can ask the program to replace the expected output with the current output of radare2
 
 Failure Levels
 --------------
@@ -42,48 +44,79 @@ use the official r2 tracker:
 
 https://github.com/radare/radare2/issues?state=open
 
-Writing test cases
-------------------
+Writing Assembly tests
+----------------------
+
+Example tests for `db/asm/*`:
+
+	General format:
+	type "assembly" opcode [offset]
+
+		type:
+			* a stands for assemble
+			* d stands for disassemble
+			* B stands for broken
+			* E stands for cfg.bigendian=true
+
+		offset:
+			Some architectures are going to assemble an instruction differently depending
+			on the offset it's written to. Optional.
+
+	Examples:
+	a "ret" c3
+	d "ret" c3
+	a "nop" 90 # Assembly is correct
+	dB "nopppp" 90 # Disassembly test is broken
+
+	You can merge lines:
+
+	adB "nop" 90
+
+	acts the same as
+
+	aB "nop" 90
+	dB "nop" 90
+
+        The filename is very important. It is used to tell radare which architecture to use.
+
+        Format:
+        arch[[_cpu]_bits]
+
+	Example:
+	x86_32 means -a x86 -b 32
+        arm_v7_64 means what it means
 
 
-The following variables are available:
+Writing JSON tests
+----------
 
- * NAME (string, recommend):       radare2 command being tested (e.g. px).
- * FILE (path, optional):          File argument for radare2 (defaults to '-')
- * ARGS (string, optional):        Additional arguments for radare2. If not
-                                   present no additional arguments are used.
- * CMDS (string, required):        Commands to run,  one per line. Just like
-                                   in interactive mode.
- * EXPECT (string, required):      Expected stdout output.
- * EXPECT_ERR (string, optional):  Expected stderr output.
- * IGNORE_ERR (boolean, optional): Ignore stderr output.
- * FILTER (string, optional):      Filter program (like grep or sed) to filter
-                                   radare2's output before comparing it with
-                                   EXPECT. Useful to fix random output to
-                                   generate stable tests.
- * BROKEN (boolean, optional):     This tests documents a bug which is not yet
-                                   fixed.
- * ESSENTIAL (boolean, optional):  A failure of this test is treated as fatal.
- * EXITCODE (number, optional):    Check the exit code of radare2 matches.
-                                   Can be used to check handling of invalid
-                                   arguments.
+The JSON tests `db/new/json` are executed on 3 standard files (1 ELF, 1 MachO, 1 PE). The tests need to be working on the 3 files to pass.
 
-In this case, "boolean" means 1 for "true" or nothing for "false". Not setting
-the variable has the same effect as setting it to an empty value.
+# Commands tests
+----------------
 
-All uppercase variable names are reserved for the test system.
+Example commands tests for the other `new/` folders:
 
-The following functions are available:
+	NAME=test_db
+	FILE=/../bins/elf/ls
+	CMDS=<<EXPECT
+	pd 4
+	EXPECT=<<RUN
+            ;-- main:
+            ;-- entry0:
+            ;-- func.100001174:
+            0x100001174      55             Push rbp
+            0x100001175      4889e5         Mov  rbp, rsp
+            0x100001178      4157           Push r15
+	RUN
 
- * RUN(): Run the test with the variables. Can be called multiple times
-               in one test file.
+* **NAME** is the name of the test, it must be unique
+* **FILE** is the path of the file used for the test
+* **ARGS** (optional) are the command line argument passed to r2 (e.g -b 16)
+* **CMDS** are the commands to be executed by the test
+* **EXPECT** is the expected output of the test
 
-The test files should be named according to the following convention:
-
- * cmd_*: For each command (see libr/core/cmd.c).
- * feat_*: For features not tied to a single command, like grep or
-           redirection.
- * file_*: For each supported file format.
+You must end the test by adding RUN keyword
 
 Advices
 ------------------
