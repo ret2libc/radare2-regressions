@@ -425,3 +425,13 @@ CMDS=<<EOF
 il
 EOF
 RUN
+
+NAME=pe32 header
+FILE=../bins/pe/single_import.exe
+EXPECT=<<EOF
+1
+EOF
+CMDS=<<EOF
+ih~?Signature : 0x4550
+EOF
+RUN
