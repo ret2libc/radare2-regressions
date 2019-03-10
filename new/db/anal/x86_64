@@ -1018,6 +1018,18 @@ pd 1~?ExitProcess(UINT
 EOF
 RUN
 
+NAME=Function definition indirect calls
+FILE=.../bins/pe/msvcfindmain.exe
+BROKEN=1
+EXPECT=<<EOF
+1
+EOF
+CMDS=<<EOF
+aaa
+pd 1 @ 0x004012c0 ~?DWORD
+EOF
+RUN
+
 NAME=Function definition
 FILE=../bins/elf/ioli/crackme0x00
 EXPECT=<<EOF
