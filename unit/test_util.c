@@ -4,6 +4,8 @@
 static Sdb *setup_sdb(void) {
 	Sdb *res = sdb_new0 ();
 	sdb_set (res, "ExitProcess", "func", 0);
+	sdb_set (res, "ReadFile", "func", 0);
+	sdb_set (res, "memcpy", "func", 0);
 	sdb_set (res, "strchr", "func", 0);
 	sdb_set (res, "__stack_chk_fail", "func", 0);
 	return res;
@@ -23,9 +25,19 @@ bool test_dll_names(void) {
 	mu_assert_streq (s, "ExitProcess", "number should be ignored");
 	free (s);
 
+	s = r_type_func_guess (TDB, "sym.imp.KERNEL32.dll_ReadFile");
+	mu_assert_notnull (s, "dll_ and number should be ignored case 1");
+	mu_assert_streq (s, "ReadFile", "dll_ and number should be ignored case 1");
+	free (s);
+
+	s = r_type_func_guess (TDB, "sub.VCRUNTIME14.dll_memcpy");
+	mu_assert_notnull (s, "dll_ and number should be ignored case 2");
+	mu_assert_streq (s, "memcpy", "dll_ and number should be ignored case 2");
+	free (s);
+
 	s = r_type_func_guess (TDB, "sub.KERNEL32.dll_ExitProcess_32");
-	mu_assert_notnull (s, "dll_ and number should be ignored");
-	mu_assert_streq (s, "ExitProcess", "dll_ and number should be ignored");
+	mu_assert_notnull (s, "dll_ and number should be ignored case 3");
+	mu_assert_streq (s, "ExitProcess", "dll_ and number should be ignored case 3");
 	free (s);
 
 	sdb_free (TDB);
