@@ -134,10 +134,30 @@ bool test_r_buf_bytes_steal() {
 	mu_end;
 }
 
+bool test_r_buf_format() {
+	RBuffer *b = r_buf_new ();
+	uint16_t a[] = {0xdead, 0xbeef, 0xcafe, 0xbabe};
+	char buf[4 * sizeof (uint16_t)];
+
+	r_buf_fwrite (b, (ut8 *)a, "4s", 1);
+	r_buf_read_at (b, 0, buf, sizeof (buf));
+	mu_assert_memeq (buf, "\xad\xde\xef\xbe\xfe\xca\xbe\xba", sizeof(buf), "fwrite");
+
+	r_buf_fread_at (b, 0, (ut8 *)a, "S", 4);
+	mu_assert_eq (a[0], 0xadde, "first");
+	mu_assert_eq (a[1], 0xefbe, "second");
+	mu_assert_eq (a[2], 0xfeca, "third");
+	mu_assert_eq (a[3], 0xbeba, "fourth");
+
+	r_buf_free (b);
+	mu_end;
+}
+
 int all_tests() {
 	mu_run_test (test_r_buf_file);
 	mu_run_test (test_r_buf_bytes);
 	mu_run_test (test_r_buf_bytes_steal);
+	mu_run_test (test_r_buf_format);
 	return tests_passed != tests_run;
 }
 
