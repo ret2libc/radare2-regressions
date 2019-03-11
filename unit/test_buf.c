@@ -107,6 +107,58 @@ bool test_r_buf_bytes() {
 	const int length = 23;
 
 	b = r_buf_new_with_bytes ((const ut8 *)content, length);
+	mu_assert_notnull (b, "r_buf_new_with_bytes failed");
+
+	if (test_buf (b) != MU_PASSED) {
+		mu_fail ("test failed");
+	}
+
+	// Cleanup
+	r_buf_free (b);
+	mu_end;
+}
+
+bool test_r_buf_mmap() {
+	RBuffer *b;
+	char filename[] = "r2-XXXXXX";
+	const char *content = "Something To\nSay Here..";
+	const int length = 23;
+
+	// Prepare file
+	int fd = mkstemp (filename);
+	mu_assert_neq (fd, -1, "mkstemp failed...");
+	write (fd, content, length);
+	close (fd);
+
+	b = r_buf_new_mmap (filename, R_PERM_RW);
+	mu_assert_notnull (b, "r_buf_new_mmap failed");
+
+	if (test_buf (b) != MU_PASSED) {
+		mu_fail ("test failed");
+	}
+
+	// Cleanup
+	r_buf_free (b);
+	mu_end;
+}
+
+bool test_r_buf_io() {
+	mu_ignore;
+	RBuffer *b;
+	const char *content = "Something To\nSay Here..";
+	const int length = 23;
+
+	RIO *io = r_io_new ();
+	RIODesc *desc = r_io_open_at (io, "file:///tmp/r-buf-io.test", R_PERM_RW | R_PERM_CREAT, 0644, 0);
+	mu_assert_notnull (desc, "file should be opened for writing");
+
+	bool res = r_io_write_at (io, 0, content, length);
+	mu_assert ("initial content should be written", res);
+
+	RIOBind bnd;
+	r_io_bind (io, &bnd);
+
+	b = r_buf_new_with_io(&bnd, desc->fd);
 	mu_assert_notnull (b, "r_buf_new_file failed");
 
 	if (test_buf (b) != MU_PASSED) {
@@ -115,6 +167,8 @@ bool test_r_buf_bytes() {
 
 	// Cleanup
 	r_buf_free (b);
+	r_io_close (io);
+	r_io_free (io);
 	mu_end;
 }
 
@@ -156,6 +210,8 @@ bool test_r_buf_format() {
 int all_tests() {
 	mu_run_test (test_r_buf_file);
 	mu_run_test (test_r_buf_bytes);
+	mu_run_test (test_r_buf_mmap);
+	mu_run_test (test_r_buf_io);
 	mu_run_test (test_r_buf_bytes_steal);
 	mu_run_test (test_r_buf_format);
 	return tests_passed != tests_run;
