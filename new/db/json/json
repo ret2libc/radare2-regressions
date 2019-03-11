@@ -3,7 +3,7 @@
 /j l
 /Oj
 /oj
-/Rj BROKEN
+/Rj
 /wj BROKEN
 ?j 0x10
 ?Vj
@@ -54,7 +54,8 @@ ej
 fj
 fsj
 iaj
-iCj
+iAj
+iCj BROKEN
 icj
 iEj
 iej
@@ -62,8 +63,10 @@ ihj
 iIj
 iij
 ij
+ilj
 iLj
 iMj
+imj
 iRj
 irj
 iSj
@@ -71,15 +74,15 @@ isj
 iSj entropy
 iSj sha1
 iSSj
+itj
 iVj
 izj
 izzj
-izzj BROKEN
 Lsj
 oj
 oLj
 omj
-p-j BROKEN
+p-j
 p8j
 pcj
 pdbj
@@ -87,7 +90,7 @@ pdfj
 pDj
 pdj
 pDJ BROKEN
-pdJ BROKEN
+pdJ
 pdrj
 pij 1 @@@ functions BROKEN
 pIj

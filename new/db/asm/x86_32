@@ -527,6 +527,9 @@ d "xor eax, dword [eax]" 3300
 d "xrstor [eax]" 0fae28
 d "xsave [eax]" 0fae20
 d "xsetbv" 0f01d1
+d "xsaves [ecx]" 0fc729
+d "xsaveopt [ecx]" 0fae31
+d "xrstors [ecx]" 0fc719
 dB "adx" d4
 dB "amx" d5
 d "cwde" 98

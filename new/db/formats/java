@@ -40,7 +40,7 @@ RUN
 NAME=java classes
 FILE=../bins/java/DemoTest.class
 EXPECT=<<EOF
-0x00000000 [0x00000190 - 0x00000211] (sz 129) class 0 DemoTest super: java/lang/Object
+0x00000000 [0x00000190 - 0x00000211]    129 class 0 DemoTest super: java/lang/Object
 0x00000190 method 0      fun
 0x000001b9 method 1      <init>
 0x000001e8 method 2      res

@@ -807,7 +807,7 @@ EXPECT=<<EOF
 │       ╎   ; CALL XREF from main (0x400406)
 └       ╎   0x004003f0      jmp qword reloc.puts                       ; [0x601018:8]=0x4003f6
         ╎   0x004003f6      push 0
-        └─< 0x004003fb      jmp 0x4003e0
+        └─< 0x004003fb      jmp sym..plt
 EOF
 CMDS=<<EOF
 e scr.utf8=true
@@ -1015,6 +1015,18 @@ CMDS=<<EOF
 aaa
 s 0x00401255
 pd 1~?ExitProcess(UINT
+EOF
+RUN
+
+NAME=Function definition indirect calls
+FILE=.../bins/pe/msvcfindmain.exe
+BROKEN=1
+EXPECT=<<EOF
+1
+EOF
+CMDS=<<EOF
+aaa
+pd 1 @ 0x004012c0 ~?DWORD
 EOF
 RUN
 

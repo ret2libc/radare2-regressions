@@ -17,3 +17,40 @@ CMDS=<<EOF
 iE
 EOF
 RUN
+
+NAME=PE: export function names RAD
+FILE=../bins/pe/Lab05-01.dll
+EXPECT=<<EOF
+fs exports
+f sym.xdll.dll_InstallRT 0 0x1000d847
+f sym.xdll.dll_InstallSA 0 0x1000dec1
+f sym.xdll.dll_InstallSB 0 0x1000e892
+f sym.xdll.dll_PSLIST 0 0x10007025
+f sym.xdll.dll_ServiceMain 0 0x1000cf30
+f sym.xdll.dll_StartEXS 0 0x10007ecb
+f sym.xdll.dll_UninstallRT 0 0x1000f405
+f sym.xdll.dll_UninstallSA 0 0x1000ea05
+f sym.xdll.dll_UninstallSB 0 0x1000f138
+EOF
+CMDS=<<EOF
+iE*
+EOF
+RUN
+
+NAME=PE: export function names SIMPLE
+FILE=../bins/pe/Lab05-01.dll
+EXPECT=<<EOF
+0x1000d847 0 xdll.dll_InstallRT
+0x1000dec1 0 xdll.dll_InstallSA
+0x1000e892 0 xdll.dll_InstallSB
+0x10007025 0 xdll.dll_PSLIST
+0x1000cf30 0 xdll.dll_ServiceMain
+0x10007ecb 0 xdll.dll_StartEXS
+0x1000f405 0 xdll.dll_UninstallRT
+0x1000ea05 0 xdll.dll_UninstallSA
+0x1000f138 0 xdll.dll_UninstallSB
+EOF
+CMDS=<<EOF
+iEq
+EOF
+RUN

@@ -819,7 +819,7 @@ function createTemporaryFile () {
 }
 
 function parseTestJson (source, line) {
-  const bins = ['../bins/elf/crackme0x00b', '../bins/pe/version_std.exe', '../bins/elf/bomb'];
+  const bins = ['../bins/elf/crackme0x00b', '../bins/pe/version_std.exe', '../bins/elf/bomb', '../bins/mach0/hello-objc'];
   let t = {from: source, broken: false};
   let tmp = line.split(' ');
 
@@ -844,9 +844,11 @@ function parseTestJson (source, line) {
       test.passes = false;
       if (t.broken) {
         console.error(colors.blue('[BR] ') + t.cmd);
+        console.error(test.stdout);
         console.error(err);
       } else {
         console.error(colors.red.bold('[XX] ') + t.cmd);
+        console.error(test.stdout);
         console.error(err);
       }
       

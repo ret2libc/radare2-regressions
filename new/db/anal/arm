@@ -592,7 +592,7 @@ RUN
 NAME=ELF ARM: aa
 FILE=../bins/elf/analysis/arm_32_flags0
 EXPECT=<<EOF
-17
+42
 15
 EOF
 CMDS=<<EOF
@@ -624,19 +624,6 @@ EOF
 CMDS=<<EOF
 aa
 afl
-EOF
-RUN
-
-NAME=ELF ARM: af @@ sym.*
-FILE=../bins/elf/analysis/arm_32_flags0
-EXPECT=<<EOF
-17
-15
-EOF
-CMDS=<<EOF
-af @@ sym.*
-f~sym?
-afl~?
 EOF
 RUN
 
@@ -711,7 +698,7 @@ RUN
 NAME=ELF ARM: af and aav
 FILE=../bins/elf/arm1.bin
 EXPECT=<<EOF
-                 .dword 0x00084758 ; section..bss ; obj.completed.6278
+                 .dword 0x00084758 ; section..bss ; sym..bss ; obj.completed.6278
                  .dword 0x00008b00 ; sym.__libc_csu_fini
                  .dword 0x00008290 ; main ; sym.main
                  .dword 0x00008b48 ; sym.__libc_csu_init

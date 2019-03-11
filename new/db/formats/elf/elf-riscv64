@@ -13,24 +13,24 @@ FILE=../bins/elf/analysis/guess-number-riscv64
 EXPECT=<<EOF
 [Symbols]
 Num Paddr      Vaddr      Bind     Type Size Name
-001 0x00001000 0x00010000  LOCAL   SECT    0
-002 0x000124f8 0x000214f8  LOCAL   SECT    0
-003 0x00013620 0x00022620  LOCAL   SECT    0
-004 0x00013628 0x00022628  LOCAL   SECT    0
-005 0x00013630 0x00022630  LOCAL   SECT    0
-006 0x00015060 0x00024060  LOCAL   SECT    0
-007 0x00015070 0x00024070  LOCAL   SECT    0
-008 0x00016070 0x00025070  LOCAL   SECT    0
-009 ---------- 0x00025168  LOCAL   SECT    0
-010 ---------- 0x00025198  LOCAL   SECT    0
-011 ---------- 0x00000000  LOCAL   SECT    0
-012 ---------- 0x00000000  LOCAL   SECT    0
-013 ---------- 0x00000000  LOCAL   SECT    0
-014 ---------- 0x00000000  LOCAL   SECT    0
-015 ---------- 0x00000000  LOCAL   SECT    0
-016 ---------- 0x00000000  LOCAL   SECT    0
-017 ---------- 0x00000000  LOCAL   SECT    0
-018 ---------- 0x00000000  LOCAL   SECT    0
+001 0x00001000 0x00010000  LOCAL   SECT    0 .text
+002 0x000124f8 0x000214f8  LOCAL   SECT    0 .rodata
+003 0x00013620 0x00022620  LOCAL   SECT    0 .init_array
+004 0x00013628 0x00022628  LOCAL   SECT    0 .fini_array
+005 0x00013630 0x00022630  LOCAL   SECT    0 .eh_frame
+006 0x00015060 0x00024060  LOCAL   SECT    0 .jcr
+007 0x00015070 0x00024070  LOCAL   SECT    0 .data
+008 0x00016070 0x00025070  LOCAL   SECT    0 .sdata
+009 ---------- 0x00025168  LOCAL   SECT    0 .sbss
+010 ---------- 0x00025198  LOCAL   SECT    0 .bss
+011 ---------- 0x00000000  LOCAL   SECT    0 .comment
+012 ---------- 0x00000000  LOCAL   SECT    0 .debug_info
+013 ---------- 0x00000000  LOCAL   SECT    0 .debug_abbrev
+014 ---------- 0x00000000  LOCAL   SECT    0 .debug_loc
+015 ---------- 0x00000000  LOCAL   SECT    0 .debug_aranges
+016 ---------- 0x00000000  LOCAL   SECT    0 .debug_line
+017 ---------- 0x00000000  LOCAL   SECT    0 .debug_str
+018 ---------- 0x00000000  LOCAL   SECT    0 .debug_ranges
 019 ---------- 0x00000000  LOCAL   FILE    0 crtstuff.c
 020 0x00013630 0x00022630  LOCAL    OBJ    0 __EH_FRAME_BEGIN__
 021 0x00015060 0x00024060  LOCAL    OBJ    0 __JCR_LIST__

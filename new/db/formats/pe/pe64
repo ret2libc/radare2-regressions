@@ -7,3 +7,14 @@ CMDS=<<EOF
 iM~addr
 EOF
 RUN
+
+NAME=pe64 header
+FILE=../bins/pe/tls64.exe
+EXPECT=<<EOF
+1
+EOF
+CMDS=<<EOF
+ih~?Signature : 0x4550
+EOF
+RUN
+
