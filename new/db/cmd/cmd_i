@@ -4119,7 +4119,21 @@ NAME=izzz*
 FILE=../bins/mach0/fatmach0-3true
 CMDS=izzz*~str.http:__www.apple.com_appleca_codesigning.crl0
 EXPECT=<<RUN
-f str.http:__www.apple.com_appleca_codesigning.crl0 48 @ 0x00002f3c
+f str.http:__www.apple.com_appleca_codesigning.crl0 48 @ 0x100001f3c
+RUN
+
+NAME=it
+FILE=../bins/mach0/fatmach0-3true
+ARGS=-w
+CMDS=it ; wx 0x90 ; it
+EXPECT_ERR=File has been modified.
+EXPECT=<<RUN
+md5 84144530144b53a704c84d9c65ab5f92
+sha1 9016e215a321184c42c28ab03847554851932713
+- md5 84144530144b53a704c84d9c65ab5f92
+- sha1 9016e215a321184c42c28ab03847554851932713
++ md5 9a99cca7bf3e27ee1c8964141cfad053
++ sha1 17c5b6331a420fc3b48defe782090295294fee2e
 RUN
 
 NAME=it

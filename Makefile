@@ -1,4 +1,4 @@
-VERSION=2.5.0
+VERSION=3.4.0
 DESTDIR?=/
 PREFIX?=/usr/local
 BINDIR=$(DESTDIR)/$(PREFIX)/bin
@@ -13,8 +13,6 @@ LIBDIR=$(DESTDIR)/$(PREFIX)/lib
 
 -include config.mk
 
-
-PULLADDR=https://github.com/radare/radare2-regressions.git
 
 all:
 	-$(MAKE) overlay-apply
