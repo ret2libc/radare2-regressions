@@ -145,17 +145,17 @@ bool test_r_io_priority2(void) {
 	mu_assert_memeq (buf, (ut8 *)"\x00\x00", 2, "0 should be there initially");
 	r_io_write_at (io, 0, (const ut8 *)"\x90\x90", 2);
 	r_io_read_at (io, 0, buf, 2);
-	mu_assert_memeq (buf, (ut8 *)"\x90\x90", 2, "0x00 from map1 should overlap");
+	mu_assert_memeq (buf, (ut8 *)"\x90\x90", 2, "0x90 was written");
 
 	RIODesc *desc1 = r_io_open_at (io, "malloc://1024", R_PERM_R, 0644, 0x0);
 	mu_assert_notnull (desc1, "second malloc should be opened");
 	map1 = r_io_map_get (io, 0)->id;
 	r_io_read_at (io, 0, buf, 2);
-	mu_assert_memeq (buf, (ut8 *)"\x00\x00", 2, "0x00 from map1 should overlap");
+	mu_assert_memeq (buf, (ut8 *)"\x00\x00", 2, "0x00 from map1 should be on top");
 
 	r_io_map_priorize (io, map0);
 	r_io_read_at (io, 0, buf, 2);
-	mu_assert_memeq (buf, (ut8 *)"\x90\x90", 2, "0x00 from map1 should overlap");
+	mu_assert_memeq (buf, (ut8 *)"\x90\x90", 2, "0x90 from map0 should be on top after prioritize");
 
 	r_io_free (io);
 	mu_end;
