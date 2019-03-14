@@ -1218,7 +1218,7 @@ EXPECT=<<RUN
 var int var_0h @ sp+0x0
 var int var_48h @ fp-0x48
 var char * s1 @ fp-0x44
-var void * var_40h @ fp-0x40
+var int var_40h @ fp-0x40
 var int var_3ch @ fp-0x3c
 var int var_38h @ fp-0x38
 var pid_t pid @ fp-0x34

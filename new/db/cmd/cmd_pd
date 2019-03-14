@@ -1067,9 +1067,10 @@ RUN
 NAME=call asm.filter=false flag cmt
 FILE=../bins/pe/ConsoleApplication1.exe
 EXPECT=<<EOF
-            0x004010c6      ff1508204000   call dword [0x402008]       ; sym.imp.KERNEL32.dll_GetProcAddress ; " *"
+            0x004010c6      ff1508204000   call dword [0x402008]       ; sym.imp.KERNEL32.dll_GetProcAddress ; " *" ; FARPROC GetProcAddress(HMODULE hModule, LPCSTR lpProcName)
             ; sym.imp.KERNEL32.dll_GetProcAddress
             ; " *"
+            ; FARPROC GetProcAddress(HMODULE hModule, LPCSTR lpProcName)
             0x004010c6      ff1508204000   call dword [0x402008]
 EOF
 CMDS=<<EOF
@@ -1123,6 +1124,7 @@ FILE=../bins/pe/ConsoleApplication1.exe
 EXPECT=<<EOF
 [0m[36m|[0m [36m          [0m[32m0x004010e8[0m      [35mpush[36m esi[0m[0m
 [36m|[0m [36m          [0m[31m; 0x402004
+[0m[36m|[0m [36m          [0m[31m; DWORD GetCurrentProcessorNumber(void)
 [0m[36m|[0m [36m          [0m[32m0x004010e9[0m      [32mcall dword [sym.imp.KERNEL32.dll_GetCurrentProcessorNumber][0m
 EOF
 CMDS=<<EOF
