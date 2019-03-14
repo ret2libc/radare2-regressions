@@ -130,12 +130,44 @@ bool test_r_io_priority(void) {
 	mu_end;
 }
 
+bool test_r_io_priority2(void) {
+	RIO *io = r_io_new();
+	ut32 map0, map1;
+	ut8 buf[2];
+	bool ret;
+
+	io->va = true;
+	RIODesc *desc0 = r_io_open_at (io, "malloc://1024", R_PERM_RW, 0644, 0x0);
+	mu_assert_notnull (desc0, "first malloc should be opened");
+	map0 = r_io_map_get (io, 0)->id;
+	ret = r_io_read_at (io, 0, (ut8 *)&buf, 2);
+	mu_assert ("should be able to read", ret);
+	mu_assert_memeq (buf, (ut8 *)"\x00\x00", 2, "0 should be there initially");
+	r_io_write_at (io, 0, (const ut8 *)"\x90\x90", 2);
+	r_io_read_at (io, 0, buf, 2);
+	mu_assert_memeq (buf, (ut8 *)"\x90\x90", 2, "0x00 from map1 should overlap");
+
+	RIODesc *desc1 = r_io_open_at (io, "malloc://1024", R_PERM_R, 0644, 0x0);
+	mu_assert_notnull (desc1, "second malloc should be opened");
+	map1 = r_io_map_get (io, 0)->id;
+	r_io_read_at (io, 0, buf, 2);
+	mu_assert_memeq (buf, (ut8 *)"\x00\x00", 2, "0x00 from map1 should overlap");
+
+	r_io_map_priorize (io, map0);
+	r_io_read_at (io, 0, buf, 2);
+	mu_assert_memeq (buf, (ut8 *)"\x90\x90", 2, "0x00 from map1 should overlap");
+
+	r_io_free (io);
+	mu_end;
+}
+
 int all_tests() {
 	mu_run_test(test_r_io_mapsplit);
 	mu_run_test(test_r_io_mapsplit2);
 	mu_run_test(test_r_io_pcache);
 	mu_run_test(test_r_io_desc_exchange);
 	mu_run_test(test_r_io_priority);
+	mu_run_test(test_r_io_priority2);
 	mu_run_test(test_va_malloc_zero);
 	return tests_passed != tests_run;
 }
