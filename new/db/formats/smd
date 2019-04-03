@@ -1,14 +1,14 @@
 NAME=sega megadrive rom info
 FILE=../bins/smd/LiquidSpaceDodgerV3.bin
 EXPECT=<<EOF
-blksz    0x0
-block    0x100
 file     ../bins/smd/LiquidSpaceDodgerV3.bin
-format   smd
-iorw     false
-mode     r-x
 size     0x272f8
 humansz  156.7K
+mode     r-x
+format   smd
+iorw     false
+blksz    0x0
+block    0x100
 type     ROM
 arch     m68k
 baddr    0x0
@@ -16,7 +16,6 @@ binsz    160504
 bits     16
 canary   false
 retguard false
-sanitiz  false
 class    SEGA MEGASIS    (C)2015 James L.
 crypto   false
 endian   big
@@ -29,6 +28,7 @@ nx       false
 os       smd
 pic      false
 relocs   false
+sanitiz  false
 static   true
 stripped false
 va       true

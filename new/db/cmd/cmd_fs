@@ -116,7 +116,7 @@ EOF
 ARGS=-n
 CMDS=<<EOF
 m /root ext2
-mg /root/README.md
+mc /root/README.md
 EOF
 RUN
 
@@ -143,7 +143,7 @@ EOF
 ARGS=-n
 CMDS=<<EOF
 m /root fat
-mg /root/README.md
+mc /root/README.md
 EOF
 RUN
 
@@ -170,6 +170,6 @@ EOF
 ARGS=-n
 CMDS=<<EOF
 m /root hfs
-mg /root/README.md
+mc /root/README.md
 EOF
 RUN

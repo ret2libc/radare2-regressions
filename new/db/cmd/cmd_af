@@ -133,7 +133,7 @@ afb
 pdf
 ?e
 pdr
-EXPECT=<<EXPECT_ERR
+EXPECT=<<EOF
 size: 9
 0x004017c0 0x004017c9 00:0000 9 j 0x004017dd f 0x004017cd
 
@@ -172,9 +172,7 @@ size: 12
 | 0x004017c6      3d00100000     cmp eax, 0x1000
 | 0x004017cb      72             invalid
 | ----------- true: 0x004017dd  false: 0x004017cd
-EXPECT_ERR=<<RUN
-Truncated instruction of 3 bytes at 0x4017c6
-Truncated instruction of 1 bytes at 0x4017cb
+EOF
 RUN
 
 NAME=afcf
@@ -199,8 +197,8 @@ afcf
 afcfj
 '
 EXPECT=<<EOF
-fcn.00013c70 (int arg1, int arg2, int arg3);
-[{"name":"fcn.00013c70","args":[{"name":"arg1","type":"int"},{"name":"arg2","type":"int"},{"name":"arg3","type":"int"}],"count":3}]
+fcn.00013c70 (int32_t arg1, int32_t arg2, int32_t arg3);
+[{"name":"fcn.00013c70","args":[{"name":"arg1","type":"int32_t"},{"name":"arg2","type":"int32_t"},{"name":"arg3","type":"int32_t"}],"count":3}]
 EOF
 RUN
 

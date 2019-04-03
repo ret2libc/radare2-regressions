@@ -53,6 +53,7 @@ class NewRegressions {
   constructor (argv, cb) {
     this.argv = argv;
     this.queue = [];
+    this.fixed = [];
     this.report = {
       total: 0,
       success: 0,
@@ -667,6 +668,7 @@ class NewRegressions {
     if (test.passes) {
       if (test.broken) {
         this.report.fixed++;
+        this.fixed.push(test);
       } else {
         this.report.success++;
       }
@@ -823,7 +825,7 @@ function parseTestJson (source, line) {
   let t = {from: source, broken: false};
   let tmp = line.split(' ');
 
-  t.name = tmp[0];
+  t.name = line.split('BROKEN')[0].trim();
   if (tmp[tmp.length - 1] === 'BROKEN') {
     tmp = tmp.slice(0, tmp.length - 1);
     t.cmd = tmp.join(' ');

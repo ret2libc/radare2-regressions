@@ -397,15 +397,15 @@ RUN
 NAME=ELF: riscv64: file format
 FILE=../bins/elf/analysis/guess-number-riscv64
 EXPECT=<<EOF
-blksz    0x0
-block    0x100
 fd       3
 file     ../bins/elf/analysis/guess-number-riscv64
-format   elf64
-iorw     false
-mode     r-x
 size     0x9d5a8
 humansz  629.4K
+mode     r-x
+format   elf64
+iorw     false
+blksz    0x0
+block    0x100
 type     EXEC (Executable file)
 arch     riscv
 baddr    0x10000
@@ -413,8 +413,8 @@ binsz    643108
 bintype  elf
 bits     64
 canary   false
-sanitiz  false
 class    ELF64
+compiler GCC: (GNU) 5.2.0
 crypto   false
 endian   little
 havecode true
@@ -428,6 +428,7 @@ os       linux
 pic      false
 relocs   true
 rpath    NONE
+sanitiz  false
 static   true
 stripped false
 subsys   linux

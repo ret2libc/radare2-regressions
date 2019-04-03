@@ -217,15 +217,15 @@ pdf
 # pd 3 @ entry2
 EOF
 EXPECT=<<EOF
-blksz    0x0
-block    0x100
 fd       42
 file     malloc://1024
-format   java
-iorw     true
-mode     -rwx
 size     0x400
 humansz  1K
+mode     -rwx
+format   java
+iorw     true
+blksz    0x0
+block    0x100
 type     JAVA CLASS
 arch     java
 binsz    1024

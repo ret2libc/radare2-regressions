@@ -256,28 +256,28 @@ RUN
 NAME=$e (malloc) 3
 FILE=malloc://1024
 EXPECT=<<EOF
+int32   8
 hex     0x8
 octal   010
 unit    8
 segment 0000:0008
-int32   8
 string  "\b"
-binary  0b00001000
 fvalue: 8.0
 float:  0.000000f
 double: 0.000000
+binary  0b00001000
 trits   0t22
 0x8
+int32   0
 hex     0x0
 octal   00
 unit    0
 segment 0000:0000
-int32   0
 string  "\0"
-binary  0b00000000
 fvalue: 0.0
 float:  0.000000f
 double: 0.000000
+binary  0b00000000
 trits   0t0
 0x0
 EOF
@@ -325,16 +325,16 @@ NAME=$b (x86-simple)
 FILE=../bins/elf/analysis/x86-simple
 EXPECT=<<EOF
 0x7b
+int32   123
 hex     0x7b
 octal   0173
 unit    123
 segment 0000:007b
-int32   123
 string  "{"
-binary  0b01111011
 fvalue: 123.0
 float:  0.000000f
 double: 0.000000
+binary  0b01111011
 trits   0t11120
 EOF
 CMDS=<<EOF

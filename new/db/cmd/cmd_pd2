@@ -51,9 +51,9 @@ pdf
 EXPECT=<<RUN
 / (fcn) fcn.00560e67 318
 |   fcn.00560e67 ();
-|       :   ; var int var_4h @ esp+0x4
-|       :   ; var int var_8h @ esp+0x8
-|       :   ; var int var_10h @ esp+0x10
+|       :   ; var int32_t var_4h @ esp+0x4
+|       :   ; var int32_t var_8h @ esp+0x8
+|       :   ; var int32_t var_10h @ esp+0x10
 |       :   0x00560e67      push esi
 |      ,==< 0x00560e68      jmp 0x560e7d
 ..
@@ -258,19 +258,19 @@ EXPECT=<<RUN
 \           0x00008178      a40200eb       bl sym.abort
 
 [0x00008174]>  # fcn.00008174 ();
- -----------------------------------------------------.
-|  0x8174                                             |
-| (fcn) fcn.00008174 8                                |
-|   fcn.00008174 ();                                  |
-|    ; lr=0x8178 -> 0xeb0002a4                        |
-|    ; pc=0x845c -> 0xe92d41f0 sym.__libc_start_main  |
-|    ; int __libc_start_main(?, -1, ?, ?, ?, ?, -1)   |
-| bl sym.__libc_start_main;[oa]                       |
-|    ; lr=0x817c -> 0xe92d4030                        |
-|    ; pc=0x8c10 -> 0xe59f62a0 sym.abort              |
-|    ; void abort(void)                               |
-| bl sym.abort;[ob]                                   |
-`-----------------------------------------------------'
+ ----------------------------------------------------.
+|  0x8174                                            |
+| (fcn) fcn.00008174 8                               |
+|   fcn.00008174 ();                                 |
+|    ; lr=0x8178 -> 0xeb0002a4                       |
+|    ; pc=0x845c -> 0xe92d41f0 sym.__libc_start_main |
+|    ; int __libc_start_main(?, -1, ?, ?, ?, ?, -1)  |
+| bl sym.__libc_start_main;[oa]                      |
+|    ; lr=0x817c -> 0xe92d4030                       |
+|    ; pc=0x8c10 -> 0xe59f62a0 sym.abort             |
+|    ; void abort(void)                              |
+| bl sym.abort;[ob]                                  |
+`----------------------------------------------------'
 RUN
 
 NAME=esil func cmt refline
@@ -308,10 +308,10 @@ EXPECT=<<RUN
             0x00000000      488b4608       mov rax, qword [rsi + ms.member1]
 RUN
 
-NAME=asm.bbline no-anal glitch fix (#12516)
+NAME=asm.bb.line no-anal glitch fix (#12516)
 FILE=../bins/elf/lab2
 CMDS=<<EXPECT
-e asm.bbline=true
+e asm.bb.line=true
 e asm.bytes=false
 e asm.comments=false
 e io.cache=true
@@ -402,10 +402,10 @@ EXPECT=<<RUN
 ]
 RUN
 
-NAME=asm.bbline anal
+NAME=asm.bb.line anal
 FILE=../bins/elf/ls
 CMDS=<<EXPECT
-e asm.bbline=true
+e asm.bb.line=true
 e asm.bytes=false
 e asm.comments=false
 e io.cache=true

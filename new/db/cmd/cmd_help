@@ -131,16 +131,16 @@ FILE=--
 CMDS=<<EXPECT
 ? 1;?v
 EXPECT=<<RUN
+int32   1
 hex     0x1
 octal   01
 unit    1
 segment 0000:0001
-int32   1
 string  "\x01"
-binary  0b00000001
 fvalue: 1.0
 float:  0.000000f
 double: 0.000000
+binary  0b00000001
 trits   0t1
 1
 RUN
@@ -150,16 +150,16 @@ FILE=--
 CMDS=<<EXPECT
 ? 0;?v
 EXPECT=<<RUN
+int32   0
 hex     0x0
 octal   00
 unit    0
 segment 0000:0000
-int32   0
 string  "\0"
-binary  0b00000000
 fvalue: 0.0
 float:  0.000000f
 double: 0.000000
+binary  0b00000000
 trits   0t0
 0
 RUN
@@ -169,16 +169,16 @@ FILE=--
 CMDS=<<EXPECT
 ? -1
 EXPECT=<<RUN
+int64   -1
 hex     0xffffffffffffffff
 octal   01777777777777777777777
 unit    16.0E
 segment fffff000:0fff
-int64   -1
 string  "\xff\xff\xff\xff\xff\xff\xff\xff"
-binary  0b1111111111111111111111111111111111111111111111111111111111111111
 fvalue: -1.0
 float:  nanf
 double: nan
+binary  0b1111111111111111111111111111111111111111111111111111111111111111
 trits   0t11112220022122120101211020120210210211220
 RUN
 
@@ -187,16 +187,16 @@ FILE=--
 CMDS=<<EXPECT
 ? 2*1.5
 EXPECT=<<RUN
+int32   2
 hex     0x2
 octal   02
 unit    2
 segment 0000:0002
-int32   2
 string  "\x02"
-binary  0b00000010
 fvalue: 3.0
 float:  0.000000f
 double: 0.000000
+binary  0b00000010
 trits   0t2
 RUN
 

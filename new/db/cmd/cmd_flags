@@ -555,3 +555,35 @@ f blah = 0x200
 f
 EOF
 RUN
+
+NAME=base64 armored flags
+FILE=malloc://1024
+EXPECT=<<EOF
+fs *
+f direct1 1 0x00000000 base64:dmVyYmF0aW0=
+fs *
+f direct2 1 0x00000010 base64:ImJhc2U2NCBhcm1vcmVkIg==
+fs *
+f indirect 1 0x00000020 base64:d29ya3MgdG9v
+[{"name":"direct1","size":1,"offset":0,"comment":"verbatim"},{"name":"direct2","size":1,"offset":16,"comment":"\"base64 armored\""},{"name":"indirect","size":1,"offset":32,"comment":"works too"}]
+EOF
+CMDS=<<EOF
+f direct1 1 0 verbatim
+f direct2 1 16 base64:ImJhc2U2NCBhcm1vcmVkIg==
+f indirect=32
+fC indirect base64:d29ya3MgdG9v
+f*
+fj
+EOF
+RUN
+
+NAME=f base64:NotB64=100
+FILE=malloc://1024
+EXPECT=<<EOF
+0x00000064 1 base64:NotB64
+EOF
+CMDS=<<EOF
+f base64:NotB64=100
+f
+EOF
+RUN

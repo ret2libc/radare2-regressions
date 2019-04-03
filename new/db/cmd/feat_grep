@@ -1,4 +1,3 @@
-
 NAME='?e ~'
 FILE=malloc://1024
 CMDS=<<EXPECT
@@ -142,15 +141,15 @@ i~:1..2
 i~:-2
 i~:-1
 EXPECT=<<RUN
-blksz    0x0
-block    0x100
 fd       3
-blksz    0x0
-block    0x100
-fd       3
-block    0x100
+file     malloc://1024
 size     0x400
-humansz  1K
+fd       3
+file     malloc://1024
+size     0x400
+file     malloc://1024
+blksz    0x0
+block    0x100
 RUN
 
 NAME='multigrep'

@@ -64,24 +64,31 @@ EXPECT=<<EOF
 fs header
 f header.ELF @ 0x00000000
 CC 0x464c457f @ 0x0
+Cf 4 x @ 0x0
 pf.ELF x
 f header.Type @ 0x00000010
 CC 0x00000002 @ 0x10
+Cf 2 x @ 0x10
 pf.Type x
 f header.Machine @ 0x00000012
 CC 0x00000003 @ 0x12
+Cf 2 x @ 0x12
 pf.Machine x
 f header.Version @ 0x00000014
 CC 0x00000001 @ 0x14
+Cf 4 x @ 0x14
 pf.Version x
 f header.Entry_point @ 0x00000018
 CC 0x08048300 @ 0x18
+Cf 4 x @ 0x18
 pf.Entry_point x
 f header.PhOff @ 0x0000001c
 CC 0x00000034 @ 0x1c
+Cf 4 x @ 0x1c
 pf.PhOff x
 f header.ShOff @ 0x00000020
 CC 0x000007cc @ 0x20
+Cf 4 x @ 0x20
 pf.ShOff x
 EOF
 CMDS=<<EOF
@@ -112,20 +119,19 @@ RUN
 NAME=i (all) (malloc)
 FILE=malloc://1025
 EXPECT=<<EOF
-blksz    0x0
-block    0x100
 fd       3
 file     malloc://1025
-format   any
-iorw     true
-mode     rwx
 size     0x401
 humansz  1.0K
+mode     rwx
+format   any
+iorw     true
+blksz    0x0
+block    0x100
 baddr    0x0
 binsz    1025
 bits     64
 canary   false
-sanitiz  false
 crypto   false
 endian   little
 havecode false
@@ -138,6 +144,7 @@ nx       false
 pcalign  0
 pic      false
 relocs   false
+sanitiz  false
 static   true
 stripped false
 va       false
@@ -187,15 +194,15 @@ RUN
 NAME=i (all) (malloc) iI*
 FILE=malloc://1024
 EXPECT=<<EOF
-blksz    0x0
-block    0x100
 fd       3
 file     malloc://1024
-format   any
-iorw     true
-mode     rwx
 size     0x400
 humansz  1K
+mode     rwx
+format   any
+iorw     true
+blksz    0x0
+block    0x100
 e cfg.bigendian=false
 e asm.bits=64
 e asm.dwarf=false
@@ -204,7 +211,6 @@ baddr    0x0
 binsz    1024
 bits     64
 canary   false
-sanitiz  false
 crypto   false
 endian   little
 havecode false
@@ -217,6 +223,7 @@ nx       false
 pcalign  0
 pic      false
 relocs   false
+sanitiz  false
 static   true
 stripped false
 va       false
@@ -237,22 +244,22 @@ RUN
 NAME=i (file x86)
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 EXPECT=<<EOF
-blksz    0x0
-block    0x100
 fd       3
-format   elf
-iorw     false
-mode     r-x
 size     0x1323
 humansz  4.8K
+mode     r-x
+format   elf
+iorw     false
+blksz    0x0
+block    0x100
 arch     x86
 baddr    0x8048000
 binsz    4899
 bintype  elf
 bits     32
 canary   false
-sanitiz  false
 class    ELF32
+compiler GCC: (GNU) 4.8.2
 crypto   false
 endian   little
 havecode true
@@ -271,6 +278,7 @@ pic      false
 relocs   true
 relro    no
 rpath    NONE
+sanitiz  false
 static   false
 stripped false
 subsys   linux
@@ -294,15 +302,15 @@ RUN
 NAME=ib java class file
 FILE=malloc://1024
 EXPECT=<<EOF
-blksz    0x0
-block    0x100
 fd       3
 file     malloc://1024
-format   java
-iorw     true
-mode     rwx
 size     0x400
 humansz  1K
+mode     rwx
+format   java
+iorw     true
+blksz    0x0
+block    0x100
 type     JAVA CLASS
 arch     java
 baddr    0x0
@@ -311,7 +319,6 @@ bintype  class
 bits     32
 canary   false
 retguard false
-sanitiz  false
 class    0x3200 0x0000
 crypto   false
 endian   little
@@ -325,6 +332,7 @@ nx       false
 os       any
 pic      false
 relocs   false
+sanitiz  false
 static   false
 stripped false
 subsys   any
@@ -1442,8 +1450,8 @@ binsz    4899
 bintype  elf
 bits     32
 canary   false
-sanitiz  false
 class    ELF32
+compiler GCC: (GNU) 4.8.2
 crypto   false
 endian   little
 havecode true
@@ -1462,6 +1470,7 @@ pic      false
 relocs   true
 relro    no
 rpath    NONE
+sanitiz  false
 static   false
 stripped false
 subsys   linux
@@ -1482,9 +1491,9 @@ EXPECT='{
   "bintype": "elf",
   "bits": 32,
   "canary": false,
-  "sanitiz": false,
   "class": "ELF32",
   "compiled": "",
+  "compiler": "GCC: (GNU) 4.8.2",
   "crypto": false,
   "dbg_file": "",
   "endian": "little",
@@ -1505,6 +1514,7 @@ EXPECT='{
   "relocs": true,
   "relro": "no",
   "rpath": "NONE",
+  "sanitiz": false,
   "static": false,
   "stripped": false,
   "subsys": "linux",
@@ -2907,14 +2917,14 @@ RUN
 NAME=i (file x86_64)
 FILE=../bins/elf/analysis/hello-linux-x86_64
 EXPECT=<<EOF
-blksz    0x0
-block    0x100
 fd       3
-format   elf64
-iorw     false
-mode     r-x
 size     0x1a36
 humansz  6.6K
+mode     r-x
+format   elf64
+iorw     false
+blksz    0x0
+block    0x100
 type     EXEC (Executable file)
 arch     x86
 baddr    0x400000
@@ -2922,8 +2932,8 @@ binsz    6710
 bintype  elf
 bits     64
 canary   false
-sanitiz  false
 class    ELF64
+compiler GCC: (GNU) 4.7.2
 crypto   false
 endian   little
 havecode true
@@ -2942,6 +2952,7 @@ pic      false
 relocs   true
 relro    no
 rpath    NONE
+sanitiz  false
 static   false
 stripped false
 subsys   linux
@@ -3014,8 +3025,8 @@ binsz    6710
 bintype  elf
 bits     64
 canary   false
-sanitiz  false
 class    ELF64
+compiler GCC: (GNU) 4.7.2
 crypto   false
 endian   little
 havecode true
@@ -3034,6 +3045,7 @@ pic      false
 relocs   true
 relro    no
 rpath    NONE
+sanitiz  false
 static   false
 stripped false
 subsys   linux
@@ -3341,7 +3353,7 @@ RUN
 NAME=izzj (no rbin - file x86_64)
 FILE=../bins/elf/analysis/hello-linux-x86_64
 ARGS=-n
-CMDS='e bin.strpurge=all,!0x2fa,!0x1953
+CMDS='e bin.str.purge=all,!0x2fa,!0x1953
 izzj
 '
 EXPECT='[{"vaddr":762,"paddr":762,"ordinal":4,"size":5,"length":4,"section":"","type":"ascii","string":"cHV0cw=="},{"vaddr":6483,"paddr":6483,"ordinal":65,"size":18,"length":17,"section":"","type":"ascii","string":"cHV0c0BAR0xJQkNfMi4yLjU="}]'
@@ -3350,7 +3362,7 @@ RUN
 NAME=izzj 2 (no rbin - file x86_64)
 FILE=../bins/elf/analysis/hello-linux-x86_64
 ARGS=
-CMDS='e bin.strpurge=all,!0x4002fa,!0x15b
+CMDS='e bin.str.purge=all,!0x4002fa,!0x15b
 izzj
 '
 EXPECT='[{"vaddr":4195066,"paddr":762,"ordinal":4,"size":5,"length":4,"section":".dynstr","type":"ascii","string":"cHV0cw=="},{"vaddr":347,"paddr":6483,"ordinal":65,"size":18,"length":17,"section":".strtab","type":"ascii","string":"cHV0c0BAR0xJQkNfMi4yLjU="}]'
@@ -3359,13 +3371,13 @@ RUN
 NAME=i (no rbin - file x86_64)
 FILE=../bins/elf/analysis/hello-linux-x86_64
 EXPECT=<<EOF
-blksz    0x0
-block    0x100
 fd       3
-iorw     false
-mode     r-x
 size     0x1a36
 humansz  6.6K
+mode     r-x
+iorw     false
+blksz    0x0
+block    0x100
 EOF
 ARGS=-n
 CMDS=<<EOF
@@ -3525,7 +3537,7 @@ NAME=izj unicode blocks
 FILE=../bins/elf/strenc
 EXPECT='[{"vaddr":4202996,"paddr":8692,"ordinal":2,"size":11,"length":10,"section":".rodata","type":"ascii","string":"ZW5fVVMudXRmOA=="},{"vaddr":4203007,"paddr":8703,"ordinal":3,"size":61,"length":54,"section":".rodata","type":"utf8","string":"dXRmOD4gXFx1MDBhMlxcdTIwYWNcXFUwMDAxMDM0OCBpbiB5ZWxsb3c6XGVbMzNtIMKi4oKs8JCNiCBcZVswbVxu","blocks":["Basic Latin","Latin-1 Supplement","Currency Symbols","Gothic"]},{"vaddr":4203208,"paddr":8904,"ordinal":7,"size":68,"length":33,"section":".rodata","type":"utf16le","string":"aXMgYSB3YWxsIHdpdGggbm8gZW1iZWRkZWQgemVyb3Ncbg=="}]'
 CMDS=<<EOF
-e bin.strpurge=all,!4202996,!4203007,!4203208
+e bin.str.purge=all,!4202996,!4203007,!4203208
 izj
 EOF
 RUN
@@ -3534,12 +3546,12 @@ NAME=izzj unicode blocks
 FILE=../bins/elf/strenc-guess-utf32le
 EXPECT='[{"vaddr":4195920,"paddr":1616,"ordinal":13,"size":44,"length":10,"section":".rodata","type":"utf32le","string":"YWJjZGVm8JCNiCAgZw==","blocks":["Basic Latin","Gothic"]}]'
 CMDS=<<EOF
-e bin.strpurge=all,!4195920
+e bin.str.purge=all,!4195920
 izzj
 EOF
 RUN
 
-NAME=iz/izz bin.strpurge
+NAME=iz/izz bin.str.purge
 FILE=../bins/elf/analysis/ls2
 EXPECT=<<EOF
 --1--
@@ -3581,47 +3593,47 @@ EXPECT=<<EOF
 EOF
 CMDS=<<EOF
 ?e --1--
-e bin.strpurge=false
+e bin.str.purge=false
 izz~0x00412420
 ?e --2--
-e bin.strpurge=true
+e bin.str.purge=true
 izz~0x00412420  # Should print nothing
 ?e --3--
 (test_iz,iz~0x004131d8,iz~0x00413228,iz~0x00413233,iz~0x0041323a)
-e bin.strpurge=false
+e bin.str.purge=false
 .(test_iz)
 ?e --4--
-e bin.strpurge=true
+e bin.str.purge=true
 .(test_iz)
 ?e --5--
-e bin.strpurge=0x004131d8,0x00413228,0x0041323a
+e bin.str.purge=0x004131d8,0x00413228,0x0041323a
 .(test_iz)
 ?e --6--
-e bin.strpurge=true,0x00413228
+e bin.str.purge=true,0x00413228
 .(test_iz)
 ?e --7--
-e bin.strpurge=0x4131d8-0x413233
+e bin.str.purge=0x4131d8-0x413233
 .(test_iz)
 ?e --8--
-e bin.strpurge=0x413230-0x413240,0x4131d8
+e bin.str.purge=0x413230-0x413240,0x4131d8
 .(test_iz)
 ?e --9--
-e bin.strpurge=true,0x413228-0x413228
+e bin.str.purge=true,0x413228-0x413228
 .(test_iz)
 ?e --10--
-e bin.strpurge=0x413100-0x413300,!0x413233
+e bin.str.purge=0x413100-0x413300,!0x413233
 .(test_iz)
 ?e --11--
-e bin.strpurge=true,!0x41323a
+e bin.str.purge=true,!0x41323a
 .(test_iz)
 ?e --12--
-e bin.strpurge=true,!0x41323a,0x41323a
+e bin.str.purge=true,!0x41323a,0x41323a
 .(test_iz)
 ?e --13--
-e bin.strpurge=true,0x4131d8,!0x4131d8
+e bin.str.purge=true,0x4131d8,!0x4131d8
 .(test_iz)
 ?e --14--
-e bin.strpurge=all,!0x413220-0x413235
+e bin.str.purge=all,!0x413220-0x413235
 .(test_iz)
 EOF
 RUN
@@ -3629,11 +3641,11 @@ RUN
 NAME=iz-
 FILE=-
 CMDS='iz- @ 0x412420
-e bin.strpurge
+e bin.str.purge
 iz- @ 0x4028a0
-e bin.strpurge
+e bin.str.purge
 iz- 0x414fbf
-e bin.strpurge
+e bin.str.purge
 '
 EXPECT='0x412420
 0x412420,0x4028a0
@@ -4003,7 +4015,6 @@ RUN
 
 NAME=ii dupped imports
 FILE=../bins/elf/varsub
-BROKEN=1
 CMDS=ii
 EXPECT=<<RUN
 [Imports]
@@ -4023,17 +4034,20 @@ RUN
 # Should not be run on Windows
 NAME=utf8 (possibly malformed) filenames with non-printable chars
 FILE=-
-CMDS=<<EXPECT
+CMDS=<<EOF
+cd `e dir.tmp`
 e io.cache=true
 "(show_fname fname, wz $0, wtf `prz`, o `prz`, i~file, ij, rm `prz`)"
 .(show_fname A\x1b¢\302\200€𝄞\363\240\201\201\\.bin)
-.(show_fname B\x1b¢\302\200\200€𝄞\363\240\201\201\\.bin)
-  # TODO: fix i~file output
-EXPECT=<<RUN
+.(show_fname B\x1b¢\302\200€𝄞\363\240\201\201\\.bin)
+# INVALID FILENAME .(show_fname B\x1b¢\302\200\200€𝄞\363\240\201\201\\.bin)
+EOF
+EXPECT=<<EOF
 file     A�€𝄞󠁁\.bin
 {"core":{"type":"","file":"A\u001b¢\u0080€𝄞\udb40\udc41\\.bin","fd":4,"size":256,"humansz":"256","iorw":true,"mode":"r-x","obsz":0,"block":256,"format":"any"}}
-file     B��€𝄞󠁁\.bin
-{"core":{"type":"","file":"B\u001b¢\u0080\x80€𝄞\udb40\udc41\\.bin","fd":5,"size":256,"humansz":"256","iorw":true,"mode":"r-x","obsz":0,"block":256,"format":"any"}}
+file     B�€𝄞󠁁\.bin
+{"core":{"type":"","file":"B\u001b¢\u0080€𝄞\udb40\udc41\\.bin","fd":5,"size":256,"humansz":"256","iorw":true,"mode":"r-x","obsz":0,"block":256,"format":"any"}}
+EOF
 RUN
 
 NAME=ik
@@ -4123,17 +4137,18 @@ f str.http:__www.apple.com_appleca_codesigning.crl0 48 @ 0x100001f3c
 RUN
 
 NAME=it
-FILE=../bins/mach0/fatmach0-3true
+FILE=-
 ARGS=-w
 CMDS=it ; wx 0x90 ; it
-EXPECT_ERR=File has been modified.
-EXPECT=<<RUN
-md5 84144530144b53a704c84d9c65ab5f92
-sha1 9016e215a321184c42c28ab03847554851932713
-- md5 84144530144b53a704c84d9c65ab5f92
-- sha1 9016e215a321184c42c28ab03847554851932713
-+ md5 9a99cca7bf3e27ee1c8964141cfad053
-+ sha1 17c5b6331a420fc3b48defe782090295294fee2e
+EXPECT=<<EXPECT_ERR
+md5 bf619eac0cdf3f68d496ea9344137e8b
+sha1 5c3eb80066420002bc3dcc7ca4ab6efad7ed4ae5
+EXPECT_ERR=<<RUN
+File has been modified.
+- md5 bf619eac0cdf3f68d496ea9344137e8b
++ md5 afd010a5a5456c232dee59d59bd75cf6
+- sha1 5c3eb80066420002bc3dcc7ca4ab6efad7ed4ae5
++ sha1 3bfd02bb4fac6499c89278254f04a081887c38ea
 RUN
 
 NAME=it

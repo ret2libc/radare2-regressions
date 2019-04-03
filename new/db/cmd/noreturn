@@ -75,7 +75,7 @@ FILE=../bins/elf/analysis/noreturn
 EXPECT=<<EOF
 / (fcn) main 41
 |   int main (int argc, char **argv, char **envp);
-|           ; var int var_4h @ rbp-0x4
+|           ; var int32_t var_4h @ rbp-0x4
 |           ; DATA XREF from entry0 (0x40048d)
 |           0x00400566      55             push rbp
 |           0x00400567      4889e5         mov rbp, rsp

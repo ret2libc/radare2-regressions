@@ -389,8 +389,8 @@ EXPECT=<<EOF
 0x8060b4f8      00000000   nop
 0x8060b4fc      00000000   nop
 (fcn) fcn.8060b500 80
-; arg int arg1 @ a0
-; arg int arg2 @ a1
+; arg int32_t arg1 @ a0
+; arg int32_t arg2 @ a1
 0x8060b500      002e0500   sll a1, a1, 0x18
 0x8060b504      032e0500   sra a1, a1, 0x18
 0x8060b508      0f008010   beqz a0, 0x8060b548
@@ -412,7 +412,7 @@ EXPECT=<<EOF
 0x8060b548      0800e003   jr ra
 0x8060b54c      00000000   nop
 (fcn) fcn.8060b550 36
-; arg int arg2 @ a1
+; arg int32_t arg2 @ a1
 0x8060b550      0000a290   lbu v0, (a1)
 0x8060b554      05004010   beqz v0, 0x8060b56c
 0x8060b558      0100a524   addiu a1, a1, 1
@@ -522,8 +522,8 @@ EXPECT=<<EOF
 0x8060b4f8      00000000   nop
 0x8060b4fc      00000000   nop
 (fcn) fcn.8060b500 80
-; arg int arg1 @ a0
-; arg int arg2 @ a1
+; arg int32_t arg1 @ a0
+; arg int32_t arg2 @ a1
 0x8060b500      002e0500   sll a1, a1, 0x18
 0x8060b504      032e0500   sra a1, a1, 0x18
 0x8060b508      0f008010   beqz a0, 0x8060b548
@@ -545,7 +545,7 @@ EXPECT=<<EOF
 0x8060b548      0800e003   jr ra
 0x8060b54c      00000000   nop
 (fcn) fcn.8060b550 36
-; arg int arg2 @ a1
+; arg int32_t arg2 @ a1
 0x8060b550      0000a290   lbu v0, (a1)
 0x8060b554      05004010   beqz v0, 0x8060b56c
 0x8060b558      0100a524   addiu a1, a1, 1
@@ -591,8 +591,8 @@ EXPECT=<<EOF
   0x8060b4f8      00000000   nop
   0x8060b4fc      00000000   nop
 / (fcn) fcn.8060b500 80
-| ; arg int arg1 @ a0
-| ; arg int arg2 @ a1
+| ; arg int32_t arg1 @ a0
+| ; arg int32_t arg2 @ a1
 | 0x8060b500      002e0500   sll a1, a1, 0x18
 | 0x8060b504      032e0500   sra a1, a1, 0x18
 | 0x8060b508      0f008010   beqz a0, 0x8060b548
@@ -614,7 +614,7 @@ EXPECT=<<EOF
 | 0x8060b548      0800e003   jr ra
 \ 0x8060b54c      00000000   nop
 / (fcn) fcn.8060b550 36
-| ; arg int arg2 @ a1
+| ; arg int32_t arg2 @ a1
 | 0x8060b550      0000a290   lbu v0, (a1)
 | 0x8060b554      05004010   beqz v0, 0x8060b56c
 | 0x8060b558      0100a524   addiu a1, a1, 1

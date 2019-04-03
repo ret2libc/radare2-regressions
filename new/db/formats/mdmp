@@ -18,7 +18,6 @@ bintype  mdmp
 bits     64
 canary   false
 retguard false
-sanitiz  false
 crypto   false
 endian   little
 flags    0x00040000
@@ -36,6 +35,7 @@ pcalign  0
 pic      false
 relocs   false
 rpath    NONE
+sanitiz  false
 static   true
 streams  13
 stripped false

@@ -14,13 +14,13 @@ EXPECT=<<EOF
             0x00000000      4157           push r15
 (short)
 0x00000002 = 0x5641
+            0x00000004      4155           push r13
             0x00000006      4154           push r12
 (int)
 0x00000008 = 1442089289
-            0x0000000e      fd             std
+            0x0000000c      53             push rbx
+            0x0000000d      89fd           mov ebp, edi
             0x0000000f      4881eca80300.  sub rsp, 0x3a8
-            0x00000016      488b3e         mov rdi, qword [rsi]
-            0x00000019      64488b042528.  mov rax, qword fs:[0x28]
 EOF
 RUN
 
@@ -49,6 +49,36 @@ EXPECT=<<EOF
             0x00000022      90             nop
             0x00000023      90             nop
 EOF
+RUN
+
+NAME=List type links
+CMDS=<<EOF
+tl int = 0x4
+w test @ 0x10
+tl char * = 0x10
+tl
+EOF
+EXPECT=<<RUN
+0x00000004 = int
+0x00000010 = char *
+RUN
+
+NAME=List readable type links
+CMDS=<<EOF
+tl int
+wB -1
+tl int = 0x8
+w test @ 0x10
+tl char * = 0x10
+tll
+EOF
+EXPECT=<<RUN
+(int)
+0x00000000 = -1
+(int)
+0x00000008 = 0
+(char *)
+0x00000010 = "test"
 RUN
 
 NAME=jni and SoP
@@ -148,7 +178,7 @@ t-xoo
 EOF
 EXPECT=<<EOF
 union.xoo=x,y,z
-union.xoo.size=32
+union.xoo.!size=32
 union.xoo.x=int32_t,0,0
 union.xoo.x.meta=0
 union.xoo.y=int32_t,0,0
@@ -857,15 +887,15 @@ func.select.arg.4=struct timeval *,timeout
 func.sigaction.arg.1=const struct sigaction *,act
 func.sigaction.arg.2=struct sigaction *,oldact
 struct.0=num,num2
+struct.0.!size=96
 struct.0.num=int32_t,0,0
 struct.0.num.meta=0
 struct.0.num2=double,8,0
 struct.0.num2.meta=9
-struct.0.size=96
 struct.1=ch
+struct.1.!size=8
 struct.1.ch=char,0,0
 struct.1.ch.meta=2
-struct.1.size=8
 struct.A=num
 struct.A.num=float,0,0
 struct.A.num.meta=8
@@ -901,21 +931,21 @@ pf f num
 pf c ch
 
 struct.0=num
+struct.0.!size=32
 struct.0.num=float,0,0
 struct.0.num.meta=8
-struct.0.size=32
 struct.1=ch
+struct.1.!size=8
 struct.1.ch=char,0,0
 struct.1.ch.meta=2
-struct.1.size=8
 struct.2=num
+struct.2.!size=32
 struct.2.num=float,0,0
 struct.2.num.meta=8
-struct.2.size=32
 struct.3=ch
+struct.3.!size=8
 struct.3.ch=char,0,0
 struct.3.ch.meta=2
-struct.3.size=8
 
 0
 1
@@ -988,13 +1018,13 @@ s main
 aaft
 afv
 EXPECT=<<RUN
-arg int arg_4h @ esp+0x4
+arg int32_t arg_4h @ esp+0x4
 var char * src @ ebp-0x1c
 var char * s2 @ ebp-0x18
 var size_t var_14h @ ebp-0x14
 var size_t size @ ebp-0x10
 var char * dest @ ebp-0xc
-var int var_8h @ ebp-0x8
+var int32_t var_8h @ ebp-0x8
 RUN
 
 NAME=Register based var
@@ -1004,10 +1034,10 @@ aa
 s sym.funcarg
 afvr
 EXPECT=<<RUN
-arg int arg1 @ rdi
-arg int arg2 @ rsi
-arg int arg3 @ rdx
-arg int arg4 @ rcx
+arg int32_t arg1 @ rdi
+arg int32_t arg2 @ rsi
+arg int32_t arg3 @ rdx
+arg int32_t arg4 @ rcx
 RUN
 
 NAME=Type propgation for reg based arg
@@ -1020,7 +1050,7 @@ afvr
 EXPECT=<<RUN
 arg char * arg1 @ rdi
 arg char * arg2 @ rsi
-arg int arg3 @ rdx
+arg int32_t arg3 @ rdx
 arg size_t arg4 @ rcx
 RUN
 
@@ -1055,7 +1085,7 @@ pd 1
 EXPECT=<<RUN
 (fcn) sym.funcarg 147
   sym.funcarg (char *arg_8h, uint32_t arg_ch);
-; var int var_4h @ ebp-0x4
+; var int32_t var_4h @ ebp-0x4
 ; arg char *arg_8h @ ebp+0x8
 ; arg uint32_t arg_ch @ ebp+0xc
 0x0000054d      55             push ebp
@@ -1128,14 +1158,14 @@ aaft
 s main
 afv
 EXPECT=<<RUN
-var int var_34h @ rbp-0x34
+var int32_t var_34h @ rbp-0x34
 var signed int var_30h @ rbp-0x30
 var uint32_t var_2ch @ rbp-0x2c
 var FILE * stream @ rbp-0x28
 var char * s @ rbp-0x20
 var char * var_18h @ rbp-0x18
 var char * var_10h @ rbp-0x10
-var int canary @ rbp-0x8
+var int32_t canary @ rbp-0x8
 RUN
 
 NAME=bashbot test (x86_64)
@@ -1149,16 +1179,16 @@ s sym.processCmd
 afv
 EXPECT=<<RUN
 var char ** var_14e0h @ rbp-0x14e0
-var int var_14d4h @ rbp-0x14d4
-var int wstatus @ rbp-0x14cc
-var int options @ rbp-0x14c8
-var int var_14c4h @ rbp-0x14c4
+var int32_t var_14d4h @ rbp-0x14d4
+var int32_t wstatus @ rbp-0x14cc
+var int32_t options @ rbp-0x14c8
+var int32_t var_14c4h @ rbp-0x14c4
 var signed int var_14c0h @ rbp-0x14c0
-var int var_14bch @ rbp-0x14bc
+var int32_t var_14bch @ rbp-0x14bc
 var pid_t pid @ rbp-0x14b8
 var uint32_t var_14b4h @ rbp-0x14b4
 var uint32_t var_14b0h @ rbp-0x14b0
-var int var_14ach @ rbp-0x14ac
+var int32_t var_14ach @ rbp-0x14ac
 var char * var_14a8h @ rbp-0x14a8
 var char * s @ rbp-0x14a0
 var char * var_1498h @ rbp-0x1498
@@ -1169,8 +1199,8 @@ var void * var_1478h @ rbp-0x1478
 var char * var_1470h @ rbp-0x1470
 var void * var_1420h @ rbp-0x1420
 var char * s1 @ rbp-0x1020
-var int var_18h @ rbp-0x18
-arg int arg_1020h @ rbp+0x1020
+var int32_t var_18h @ rbp-0x18
+arg int32_t arg_1020h @ rbp+0x1020
 arg char * dest @ rbp+0x1470
 arg int argc @ rdi
 arg char ** argv @ rsi
@@ -1178,20 +1208,20 @@ var char ** str @ rbp-0xb0
 var signed int var_a4h @ rbp-0xa4
 var signed int var_a0h @ rbp-0xa0
 var uint32_t var_9ch @ rbp-0x9c
-var int var_98h @ rbp-0x98
-var int var_94h @ rbp-0x94
-var int var_90h @ rbp-0x90
-var int var_8ch @ rbp-0x8c
-var int var_88h @ rbp-0x88
-var int var_84h @ rbp-0x84
-var int var_80h @ rbp-0x80
-var int var_7ch @ rbp-0x7c
-var int var_78h @ rbp-0x78
-var int var_74h @ rbp-0x74
-var int var_70h @ rbp-0x70
-var int var_6ch @ rbp-0x6c
-var int var_68h @ rbp-0x68
-var int var_64h @ rbp-0x64
+var int32_t var_98h @ rbp-0x98
+var int32_t var_94h @ rbp-0x94
+var int32_t var_90h @ rbp-0x90
+var int32_t var_8ch @ rbp-0x8c
+var int32_t var_88h @ rbp-0x88
+var int32_t var_84h @ rbp-0x84
+var int32_t var_80h @ rbp-0x80
+var int32_t var_7ch @ rbp-0x7c
+var int32_t var_78h @ rbp-0x78
+var int32_t var_74h @ rbp-0x74
+var int32_t var_70h @ rbp-0x70
+var int32_t var_6ch @ rbp-0x6c
+var int32_t var_68h @ rbp-0x68
+var int32_t var_64h @ rbp-0x64
 var char * var_60h @ rbp-0x60
 var char * var_58h @ rbp-0x58
 var char * var_50h @ rbp-0x50
@@ -1201,8 +1231,8 @@ var char * s1 @ rbp-0x38
 var char * s @ rbp-0x30
 var char * var_28h @ rbp-0x28
 var char * var_20h @ rbp-0x20
-var int var_18h @ rbp-0x18
-var int var_8h @ rbp-0x8
+var int32_t var_18h @ rbp-0x18
+var int32_t var_8h @ rbp-0x8
 arg signed int arg1 @ rdi
 arg char ** arg2 @ rsi
 RUN
@@ -1215,22 +1245,22 @@ af
 aaft
 afv
 EXPECT=<<RUN
-var int var_0h @ sp+0x0
-var int var_48h @ fp-0x48
+var int32_t var_0h @ sp+0x0
+var int32_t var_48h @ fp-0x48
 var char * s1 @ fp-0x44
-var int var_40h @ fp-0x40
-var int var_3ch @ fp-0x3c
-var int var_38h @ fp-0x38
+var int32_t var_40h @ fp-0x40
+var int32_t var_3ch @ fp-0x3c
+var int32_t var_38h @ fp-0x38
 var pid_t pid @ fp-0x34
 var char * v4 @ fp-0x30
-var int var_2ch @ fp-0x2c
+var int32_t var_2ch @ fp-0x2c
 var char * src @ fp-0x28
-var int var_24h @ fp-0x24
+var int32_t var_24h @ fp-0x24
 var char * var_20h @ fp-0x20
 var char * s @ fp-0x1c
 var char * var_18h @ fp-0x18
-var int var_14h @ fp-0x14
-var int var_10h @ fp-0x10
+var int32_t var_14h @ fp-0x14
+var int32_t var_10h @ fp-0x10
 arg char ** argv @ r1
 RUN
 
@@ -1242,10 +1272,10 @@ aaft
 s main
 afv
 EXPECT=<<RUN
-var int var_25h @ rbp-0x25
+var int32_t var_25h @ rbp-0x25
 var signed int var_24h @ rbp-0x24
 var uint32_t var_20h @ rbp-0x20
-var int var_1ch @ rbp-0x1c
+var int32_t var_1ch @ rbp-0x1c
 var char * var_18h @ rbp-0x18
 var long int var_10h @ rbp-0x10
 var char * var_8h @ rbp-0x8
@@ -1261,9 +1291,9 @@ afv
 EXPECT=<<RUN
 var char ** var_28h @ rbp-0x28
 var char ** var_20h @ rbp-0x20
-var int var_14h @ rbp-0x14
+var int32_t var_14h @ rbp-0x14
 var void * var_10h @ rbp-0x10
-var int var_4h @ rbp-0x4
+var int32_t var_4h @ rbp-0x4
 arg int argc @ rdi
 arg char ** argv @ rsi
 arg char ** envp @ rdx
@@ -1307,4 +1337,63 @@ s sym.foo
 afv~var_20h
 EXPECT=<<RUN
 var size_t * var_20h @ rbp-0x20
+RUN
+
+NAME=types size
+CMDS=<<EOF
+"td struct s1 { int a; int size; int b; };"
+tk~struct.s1
+EOF
+EXPECT=<<EOF
+struct.s1=a,size,b
+struct.s1.!size=96
+struct.s1.a=int32_t,0,0
+struct.s1.a.meta=0
+struct.s1.b=int32_t,8,0
+struct.s1.b.meta=0
+struct.s1.size=int32_t,4,0
+struct.s1.size.meta=0
+EOF
+RUN
+
+NAME=types afs [before]
+FILE=../bins/elf/hello_world
+CMDS=<<EOF
+s main
+af
+tk~func.main
+EOF
+EXPECT=<<EOF
+func.main.arg.0=int,argc
+func.main.arg.1=char **,argv
+func.main.arg.2=char **,envp
+func.main.args=3
+func.main.ret=int
+EOF
+RUN
+
+NAME=types afs [after]
+FILE=../bins/elf/hello_world
+CMDS=<<EOF
+s main
+af
+"afs int main(int argc);"
+tk~func.main
+EOF
+EXPECT=<<EOF
+func.main.arg.0=int32_t,argc
+func.main.args=1
+func.main.cc=cdecl
+func.main.ret=int32_t
+EOF
+RUN
+
+NAME=td crash
+FILE=-
+CMDS=<<EOF
+"td struct;"
+"td struct crash __attribute__((packed)) { };"
+EOF
+EXPECT=<<EOF
+EOF
 RUN

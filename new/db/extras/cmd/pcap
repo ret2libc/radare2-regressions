@@ -3,15 +3,15 @@ FILE=../../bins/pcap/sample0.pcap
 CMDS=<<EXPECT
 i
 EXPECT=<<RUN
-blksz    0x0
-block    0x100
 fd       6
 file     ../../../bins/pcap/sample0.pcap
-format   pcap
-iorw     false
-mode     -r--
 size     0xd4b64
 humansz  850.8K
+mode     -r--
+format   pcap
+iorw     false
+blksz    0x0
+block    0x100
 type     tcpdump capture file - version 2.4 (Ethernet, capture length 262144)
 RUN
 

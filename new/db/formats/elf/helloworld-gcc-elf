@@ -178,8 +178,8 @@ RUN
 NAME=p-
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 EXPECT=<<EOF
-0x8048000 [^._______ss_s__s_sss_ssssss_ss_ss__sz_s____] 0x804859c
-0x8048000 [^_sssssszss_____________________________sss] 0x80496b8
+0x08048000 [^._______ss_s__s_sss_ssssss_ss_ss__sz_s____] 0x0804859c
+0x08048000 [^_sssssszss_____________________________sss] 0x080496b8
 EOF
 CMDS=<<EOF
 0x8048000
