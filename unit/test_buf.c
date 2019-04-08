@@ -26,6 +26,14 @@ bool test_buf(RBuffer *b) {
 	mu_assert_eq (r, sl, "r_buf_read_at failed");
 	mu_assert_memeq (buffer, s, sl, "r_buf_read_at has corrupted content");
 
+	r_buf_seek (b, 0, R_BUF_SET);
+	r = r_buf_read (b, buffer, 3);
+	mu_assert_eq (r, 3, "r_buf_read_at failed");
+	mu_assert_memeq (buffer, "Thi", 3, "r_buf_read_at has corrupted content");
+	r = r_buf_read (b, buffer, 5);
+	mu_assert_eq (r, 5, "r_buf_read_at failed");
+	mu_assert_memeq (buffer, "s is ", 5, "r_buf_read_at has corrupted content");
+
 	const char *s2 = ", hello world";
 	const size_t s2l = strlen (s2);
 	res = r_buf_append_string (b, s2);
@@ -160,7 +168,6 @@ bool test_r_buf_mmap() {
 }
 
 bool test_r_buf_io() {
-	mu_ignore;
 	RBuffer *b;
 	const char *content = "Something To\nSay Here..";
 	const int length = 23;
@@ -224,10 +231,67 @@ bool test_r_buf_format() {
 	mu_end;
 }
 
+bool test_r_buf_with_buf() {
+	char filename[] = "r2-XXXXXX";
+	const char *content = "Something To\nSay Here..";
+	const int length = 23;
+	RBuffer *buf = r_buf_new_with_bytes (content, length);
+
+	RBuffer *b = r_buf_new_with_buf (buf);
+	mu_assert_notnull (b, "r_buf_new_with_buf failed");
+	r_buf_free (buf);
+
+	if (test_buf (b) != MU_PASSED) {
+		mu_fail ("r_buf_with_buf failed");
+	}
+
+	// Cleanup
+	r_buf_free (b);
+	mu_end;
+}
+
+bool test_r_buf_slice() {
+	char filename[] = "r2-XXXXXX";
+	const char *content = "AAAAAAAAAASomething To\nSay Here..BBBBBBBBBB";
+	const int length = strlen (content);
+	RBuffer *buf = r_buf_new_with_bytes (content, length);
+	char buffer[1024];
+
+	RBuffer *b = r_buf_new_slice (buf, 10, 23);
+	mu_assert_notnull (b, "r_buf_new_slice failed");
+
+	ut64 buf_sz = r_buf_size (b);
+	mu_assert_eq (buf_sz, 23, "file size should be computed");
+
+	int r = r_buf_read_at (b, 0, buffer, 23);
+	mu_assert_eq (r, 23, "r_buf_read_at failed");
+	mu_assert_memeq (buffer, "Something To\nSay Here..", 23, "r_buf_read_at has corrupted content");
+
+	r_buf_seek (b, 3, R_BUF_SET);
+	r = r_buf_read (b, buffer, 3);
+	mu_assert_eq (r, 3, "only 3 read");
+	mu_assert_memeq (buffer, (ut8 *)"eth", 3, "base should be considered");
+
+	r = r_buf_read (b, buffer, 40);
+	mu_assert_eq (r, 23 - 6, "consider limit");
+
+	bool res = r_buf_resize (b, 30);
+	mu_assert ("file should be resized", res);
+	buf_sz = r_buf_size (b);
+	mu_assert_eq (buf_sz, 30, "file size should be 30");
+
+	// Cleanup
+	r_buf_free (b);
+	r_buf_free (buf);
+	mu_end;
+}
+
 int all_tests() {
 	mu_run_test (test_r_buf_file);
 	mu_run_test (test_r_buf_bytes);
 	mu_run_test (test_r_buf_mmap);
+	mu_run_test (test_r_buf_with_buf);
+	mu_run_test (test_r_buf_slice);
 	mu_run_test (test_r_buf_io);
 	mu_run_test (test_r_buf_bytes_steal);
 	mu_run_test (test_r_buf_format);
