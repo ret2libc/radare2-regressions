@@ -13,6 +13,7 @@ e asm.bb.middle=false
 pD 0x560eb3-$$
 EXPECT=<<RUN
 / (fcn) fcn.00560e67 6412
+|   fcn.00560e67 ();
 |           0x00560e67      push esi
 |       ,=< 0x00560e68      jmp 0x560e7d
         |   0x00560e6d      push ecx
@@ -49,6 +50,7 @@ EXPECT=<<RUN
 |      ||   0x00560eb2      pop eax
 
 / (fcn) fcn.00560e67 6412
+|   fcn.00560e67 ();
 |           0x00560e67      push esi
 |       ,=< 0x00560e68      jmp 0x560e7d
         |   0x00560e6d      push ecx
@@ -205,7 +207,13 @@ EXPECT=<<RUN
     "type": "mov",
     "reloc": false,
     "type_num": 9,
-    "type2_num": 0
+    "type2_num": 0,
+    "refs": [
+      {
+        "addr": 44,
+        "type": "DATA"
+      }
+    ]
   },
   {
     "offset": 17,
@@ -222,7 +230,13 @@ EXPECT=<<RUN
     "reloc": false,
     "type_num": 1,
     "type2_num": 0,
-    "jump": 3
+    "jump": 3,
+    "refs": [
+      {
+        "addr": 3,
+        "type": "CODE"
+      }
+    ]
   }
 ]
 
@@ -281,7 +295,13 @@ EXPECT=<<RUN
     "reloc": false,
     "type_num": 1,
     "type2_num": 0,
-    "jump": 9
+    "jump": 9,
+    "refs": [
+      {
+        "addr": 9,
+        "type": "CODE"
+      }
+    ]
   },
   {
     "offset": 12,
@@ -299,7 +319,13 @@ EXPECT=<<RUN
     "type": "mov",
     "reloc": false,
     "type_num": 9,
-    "type2_num": 0
+    "type2_num": 0,
+    "refs": [
+      {
+        "addr": 44,
+        "type": "DATA"
+      }
+    ]
   },
   {
     "offset": 17,
@@ -316,7 +342,13 @@ EXPECT=<<RUN
     "reloc": false,
     "type_num": 1,
     "type2_num": 0,
-    "jump": 3
+    "jump": 3,
+    "refs": [
+      {
+        "addr": 3,
+        "type": "CODE"
+      }
+    ]
   }
 ]
 
@@ -401,7 +433,13 @@ EXPECT=<<RUN
       "reloc": false,
       "type_num": 1,
       "type2_num": 0,
-      "jump": 9
+      "jump": 9,
+      "refs": [
+        {
+          "addr": 9,
+          "type": "CODE"
+        }
+      ]
     },
     {
       "offset": 9,
@@ -442,7 +480,13 @@ EXPECT=<<RUN
       "type": "mov",
       "reloc": false,
       "type_num": 9,
-      "type2_num": 0
+      "type2_num": 0,
+      "refs": [
+        {
+          "addr": 44,
+          "type": "DATA"
+        }
+      ]
     },
     {
       "offset": 17,
@@ -459,7 +503,13 @@ EXPECT=<<RUN
       "reloc": false,
       "type_num": 1,
       "type2_num": 0,
-      "jump": 3
+      "jump": 3,
+      "refs": [
+        {
+          "addr": 3,
+          "type": "CODE"
+        }
+      ]
     }
   ]
 }

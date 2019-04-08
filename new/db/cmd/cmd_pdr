@@ -156,7 +156,13 @@ EXPECT=%
     "reloc": false,
     "type_num": 1,
     "type2_num": 0,
-    "jump": 9
+    "jump": 9,
+    "refs": [
+      {
+        "addr": 9,
+        "type": "CODE"
+      }
+    ]
   },
   {
     "offset": 9,
@@ -197,7 +203,13 @@ EXPECT=%
     "type": "mov",
     "reloc": false,
     "type_num": 9,
-    "type2_num": 0
+    "type2_num": 0,
+    "refs": [
+      {
+        "addr": 44,
+        "type": "DATA"
+      }
+    ]
   },
   {
     "offset": 17,
@@ -214,7 +226,13 @@ EXPECT=%
     "reloc": false,
     "type_num": 1,
     "type2_num": 0,
-    "jump": 3
+    "jump": 3,
+    "refs": [
+      {
+        "addr": 3,
+        "type": "CODE"
+      }
+    ]
   }
 ]
 
@@ -301,7 +319,13 @@ jmp 3
     "reloc": false,
     "type_num": 1,
     "type2_num": 0,
-    "jump": 9
+    "jump": 9,
+    "refs": [
+      {
+        "addr": 9,
+        "type": "CODE"
+      }
+    ]
   },
   {
     "offset": 9,
@@ -342,7 +366,13 @@ jmp 3
     "type": "mov",
     "reloc": false,
     "type_num": 9,
-    "type2_num": 0
+    "type2_num": 0,
+    "refs": [
+      {
+        "addr": 44,
+        "type": "DATA"
+      }
+    ]
   },
   {
     "offset": 17,
@@ -359,7 +389,13 @@ jmp 3
     "reloc": false,
     "type_num": 1,
     "type2_num": 0,
-    "jump": 3
+    "jump": 3,
+    "refs": [
+      {
+        "addr": 3,
+        "type": "CODE"
+      }
+    ]
   }
 ]%
 RUN

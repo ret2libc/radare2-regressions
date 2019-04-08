@@ -40,6 +40,7 @@ EXPECT=<<EOF
   ;-- entry0:
   ;-- func.100001058:
 / (fcn) main 2259
+|   int main (int argc, char **argv, char **envp);
 | 0x100001058      pushq %rbp
 | 0x100001059      movq %rsp, %rbp
 | 0x10000105c      pushq %r15
@@ -76,6 +77,7 @@ NAME=att varsub 2
 FILE=../bins/elf/varsub
 EXPECT=<<EOF
 / (fcn) main 42
+|   int main (int argc, char **argv, char **envp);
 | 0x004004a6      pushq %rbp
 | 0x004004a7      movq %rsp, %rbp
 | 0x004004aa      movq arg_8h, %rax
@@ -104,6 +106,7 @@ NAME=att varsub 2 with asm.var.subonly disabled
 FILE=../bins/elf/varsub
 EXPECT=<<EOF
 / (fcn) main 42
+|   int main (int argc, char **argv, char **envp);
 | 0x004004a6      pushq %rbp
 | 0x004004a7      movq %rsp, %rbp
 | 0x004004aa      movq arg_8h(%rsp), %rax

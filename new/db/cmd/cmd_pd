@@ -1141,6 +1141,7 @@ NAME=varsub for rip variable
 FILE=../bins/elf/varsub_2
 EXPECT=<<EOF
 / (fcn) main 21
+|   int main (int argc, char **argv, char **envp);
 | 0x0000061a      pushq %rbp
 | 0x0000061b      movq %rsp, %rbp
 | 0x0000061e      movl $1, obj.sa

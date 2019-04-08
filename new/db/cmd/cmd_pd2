@@ -178,6 +178,7 @@ pdf
 pdr.
 EXPECT=<<RUN
 / (fcn) fcn.00560e67 30
+|   fcn.00560e67 ();
 |       :   0x00560e67      56             push esi
 |      ,==< 0x00560e68      e904000000     jmp 0x560e71
 ..
@@ -200,6 +201,7 @@ EXPECT=<<RUN
 \     ||`=< 0x00560eb2      e940c5edff     jmp 0x43d3f7
 
 / (fcn) fcn.00560e67 30
+|   fcn.00560e67 ();
 | 0x00560e67      56             push esi
 | 0x00560e68      e904000000     jmp 0x560e71
 | ----------- true: 0x00560e71
