@@ -353,7 +353,7 @@ FILE=malloc://1024
 EXPECT=<<EOF
   0x00000000  ~   66b8eb05       mov ax, 0x5eb                         ; 1515
   ;-- mid.flag:
-  0x00000002      eb05           jmp 9
+  0x00000002      eb05           jmp mid.flag2
   0x00000004      31c0           xor eax, eax
   0x00000006      74f9           je 1
   0x00000008  ~   e890909090     call 0x9090909d

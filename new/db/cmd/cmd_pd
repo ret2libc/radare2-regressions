@@ -1055,7 +1055,7 @@ RUN
 NAME=fcn name cmt alignment
 FILE=../bins/pe/ConsoleApplication1.exe
 EXPECT=<<EOF
-|           0x00401157      e8b4feffff     call 0x401010               ; fcn.00401010
+|           0x00401157      e8b4feffff     call fcn.00401010
 EOF
 CMDS=<<EOF
 e asm.filter=false

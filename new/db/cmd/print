@@ -77,7 +77,6 @@ FILE=../bins/mach0/mac-ls
 EXPECT=<<EOF
 ;-- entry0:
 ;-- func.100001058:
-;-- rip:
 0x10000106c argv
 0x10000106f argc
 0x100001085 call sym.func.100004401

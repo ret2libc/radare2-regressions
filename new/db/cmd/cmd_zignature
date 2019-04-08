@@ -404,12 +404,14 @@ RUN
 NAME=zaf
 FILE=../bins/elf/analysis/zigs
 EXPECT=<<EOF
-zigs.main:
+zigs:main:
   bytes: 554889e54883ec1089....48......bf........e8........b800000000c9c3
   graph: cc=1 nbbs=1 edges=0 ebbs=1 bbsum=32
   addr: 0x0040055b
+  realname: main
   refs: sym.print
   vars: b-4, b-16, r110, r114
+  bbhash: 9890426532f35eb3a80fe773d887714fe27d13ea125ad7e90beab16a51b74496
 EOF
 CMDS=<<EOF
 aaa
@@ -423,12 +425,14 @@ RUN
 NAME=zaf at offset
 FILE=../bins/elf/analysis/zigs
 EXPECT=<<EOF
-zigs.main:
+zigs:main:
   bytes: 554889e54883ec1089....48......bf........e8........b800000000c9c3
   graph: cc=1 nbbs=1 edges=0 ebbs=1 bbsum=32
   addr: 0x0040055b
+  realname: main
   refs: sym.print
   vars: b-4, b-16, r110, r114
+  bbhash: 9890426532f35eb3a80fe773d887714fe27d13ea125ad7e90beab16a51b74496
 EOF
 CMDS=<<EOF
 aaa
@@ -465,8 +469,10 @@ foobar:
   bytes: 554889e54883ec1089....48......bf........e8........b800000000c9c3
   graph: cc=1 nbbs=1 edges=0 ebbs=1 bbsum=32
   addr: 0x0040055b
+  realname: main
   refs: sym.print
   vars: b-4, b-16, r110, r114
+  bbhash: 9890426532f35eb3a80fe773d887714fe27d13ea125ad7e90beab16a51b74496
 EOF
 CMDS=<<EOF
 aaa
@@ -484,6 +490,7 @@ foobar:
   bytes: 554889e54883ec1089....48......bf........e8........b800000000c9c3
   graph: cc=1 nbbs=1 edges=0 ebbs=1 bbsum=32
   addr: 0x0040055b
+  realname: main
   refs: sym.print
   vars: b-4, b-16, r110, r114
   bbhash: 9890426532f35eb3a80fe773d887714fe27d13ea125ad7e90beab16a51b74496
@@ -506,20 +513,7 @@ aaa
 zs zigs
 zaf main
 z/
-?v sign.bytes.zigs.main_0
-EOF
-RUN
-
-NAME=zs + zaf + z/
-FILE=../bins/elf/analysis/zigs
-EXPECT=<<EOF
-0x40055b
-EOF
-CMDS=<<EOF
-aaa
-zaf main
-z/
-?v sign.bytes.main_0
+?v sign.bytes.zigs:main_0
 EOF
 RUN
 
@@ -544,7 +538,7 @@ EOF
 CMDS=<<EOF
 aa
 za sym.print b 5548....48......48......48......48....bf........b8........e8........90c9c3
-zc @@ fcn*
+z. @@ fcn*
 ?v sign.bytes.sym.print_0
 EOF
 RUN
@@ -558,7 +552,7 @@ CMDS=<<EOF
 aa
 za sym.print g cc=1 nbbs=1 edges=0 ebbs=1
 e zign.mincc = 0
-zc @@ fcn*
+z. @@ fcn*
 ?v sign.graph.sym.print_0
 EOF
 RUN
@@ -573,11 +567,11 @@ CMDS=<<EOF
 aa
 za sym.print g cc=1 nbbs=1 edges=0 ebbs=1
 e zign.mincc = 0
-zc @@ fcn*
+z. @@ fcn*
 ?v sign.graph.sym.print_0
 f-*
 e zign.mincc = 10
-zc @@ fcn*
+z. @@ fcn*
 ?v sign.graph.sym.print_0
 EOF
 RUN
@@ -660,13 +654,13 @@ e zign.mincc = 0
 fs sign
 e zign.bytes = true
 e zign.graph = false
-zc @ 0x400536
+z. @ 0x400536
 f~sign.bytes.sym.print?
 f~sign.graph.sym.print?
 f-*
 e zign.bytes = false
 e zign.graph = true
-zc @ 0x400536
+z. @ 0x400536
 f~sign.bytes.sym.print?
 f~sign.graph.sym.print?
 EOF

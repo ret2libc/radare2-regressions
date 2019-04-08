@@ -60,5 +60,5 @@ e asm.comments=false
 e asm.lines=false
 pd 1 @ 0x0800005e
 EXPECT=<<RUN
-0x0800005e      e878840300     call reloc.r_spaces_set
+0x0800005e      e878840300     call r_spaces_set
 RUN
