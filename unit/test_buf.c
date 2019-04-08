@@ -73,6 +73,23 @@ bool test_buf(RBuffer *b) {
 	mu_assert_memeq (buffer, "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00", 16, "first bytes should be 0");
 	mu_assert_memeq (buffer + 0x10, "mydata", 6, "then there is mydata");
 
+	r_buf_set_bytes (b, "Hello", 5);
+	RBuffer *sec_buf = r_buf_new_with_bytes (" second", 7);
+	res = r_buf_append_buf (b, sec_buf);
+	mu_assert ("append buf should succeed", res);
+	char *st3 = r_buf_to_string (b);
+	mu_assert_streq (st3, "Hello second", "append buf correctly");
+	free (st3);
+	r_buf_free (sec_buf);
+
+	sec_buf = r_buf_new_with_bytes ("123456789", 9);
+	res = r_buf_append_buf_slice (b, sec_buf, 5, 3);
+	mu_assert ("append buf slice should succeed", res);
+	char *st4 = r_buf_to_string (b);
+	mu_assert_streq (st4, "Hello second678", "append buf slice correctly");
+	free (st4);
+	r_buf_free (sec_buf);
+
 	return MU_PASSED;
 }
 
