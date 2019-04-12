@@ -68,7 +68,7 @@ void sprint_mem(char *out, ut8 *buf, size_t len) {
 
 #define mu_assert_eq(actual, expected, message) do { \
 		char _meqstr[2048]; \
-		sprintf(_meqstr, "%s: expected %d, got %d.", (message), (expected), (actual)); \
+		sprintf(_meqstr, "%s: expected %lld, got %lld.", (message), (ut64)(expected), (ut64)(actual)); \
 		mu_assert(_meqstr, (expected) == (actual)); \
 } while(0)
 
