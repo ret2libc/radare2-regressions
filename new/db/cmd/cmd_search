@@ -801,3 +801,31 @@ EXPECT=<<RUN
 0x0804833d
 0x0804841d
 RUN
+
+NAME=search range /c in arm
+FILE=../bin/arm/elf/hello_world
+EXPECT=<<EOF
+0x0000050e   # 2: add r7, sp, 0
+EOF
+CMDS=<<EOF
+af @ sym.main
+e search.in = raw 
+e search.from = 0x0000050c 
+e search.to = 0x00000510
+/c add
+EOF
+RUN
+
+NAME=search range /ce in arm
+FILE=../bin/arm/elf/hello_world
+EXPECT=<<EOF
+0x00000514   # 0: r3,r0,=
+EOF
+CMDS=<<EOF
+af @ sym.main
+e search.in = raw 
+e search.from = 0x00000512 
+e search.to = 0x00000516
+/ce r3,r0,=
+EOF
+RUN
