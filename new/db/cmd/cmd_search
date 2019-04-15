@@ -803,7 +803,8 @@ EXPECT=<<RUN
 RUN
 
 NAME=search range /c in arm
-FILE=../bin/arm/elf/hello_world
+BROKEN=1
+FILE=../bins/arm/elf/hello_world
 EXPECT=<<EOF
 0x0000050e   # 2: add r7, sp, 0
 EOF
@@ -817,7 +818,7 @@ EOF
 RUN
 
 NAME=search range /ce in arm
-FILE=../bin/arm/elf/hello_world
+FILE=../bins/arm/elf/hello_world
 EXPECT=<<EOF
 0x00000514   # 0: r3,r0,=
 EOF
