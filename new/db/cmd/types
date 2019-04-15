@@ -565,7 +565,7 @@ NAME=tpx test
 FILE=-
 CMDS=<<EOF
 "td struct foo {char* a; int b;}"
-tpx foo 4141414144141414141442001000000
+tpx foo 41414141441414141414420010000000
 EOF
 EXPECT=<<EOF
  a : 0x00000000 = "AAAAD\x14\x14\x14\x14\x14B"
@@ -803,7 +803,11 @@ CMDS=<<EOF
 tsc
 EOF
 EXPECT=<<EOF
-struct three_elements {int32_t x; char y; float z;};
+struct three_elements {
+	int32_t x;
+	char y;
+	float z;
+};
 EOF
 RUN
 
@@ -814,7 +818,10 @@ CMDS=<<EOF
 tec
 EOF
 EXPECT=<<EOF
-enum Foo {COW = 1, BAR = 2};
+enum Foo {
+	COW = 1,
+	BAR = 2
+};
 EOF
 RUN
 
@@ -825,7 +832,11 @@ CMDS=<<EOF
 tuc
 EOF
 EXPECT=<<EOF
-union x {int32_t x; int32_t y; int32_t z;};
+union x {
+	int32_t x;
+	int32_t y;
+	int32_t z;
+};
 EOF
 RUN
 
@@ -840,14 +851,14 @@ typedef char FILE_NAME;
 EOF
 RUN
 
-NAME=tc test
+NAME=tcd test
 FILE=-
 CMDS=<<EOF
 "td typedef char FILE_NAME;"
 "td union x{int x; int y; int z;}"
 "td enum Foo {COW=1,BAR=2};"
 "td struct three_elements{int x; char y; float z;}"
-tc
+tcd
 EOF
 EXPECT=<<EOF
 union x {int32_t x; int32_t y; int32_t z;};

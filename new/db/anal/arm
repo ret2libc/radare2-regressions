@@ -101,17 +101,31 @@ RUN
 NAME=pd bits override for arm
 FILE=malloc://32
 EXPECT=<<EOF
+mov r0, r0
             0x00000000      0000a0e1       mov r0, r0
             0x00000000      0000a0e1       mov r0, r0
+            0x00000000      0000a0e1       mov r0, r0
+            0x00000000      0000           movs r0, r0
+            0x00000000      0000a0e1       mov r0, r0
+            0x00000000      0000           movs r0, r0
+            0x00000002                    unaligned
+        ,=< 0x00000002      a0e1           b 0x346
 EOF
 CMDS=<<EOF
 e asm.arch=arm
 e asm.bits=32
 wa mov r0, r0
-e asm.bits=16
+pi 1
+pd 1
+ahb 32
+pd 1
+pd 1 @a:arm @b:32
+pd 1 @a:arm @b:16
 ahb 16
 pd 1 @a:arm @b:32
-pd 1 @a:arm @b:32
+pd 1 @a:arm @b:16
+pd 1 @a:arm @b:32@2
+pd 1 @a:arm @b:16@2
 EOF
 RUN
 

@@ -1519,20 +1519,10 @@ EXPECT=<<EOF
 |     `---> 0x0040296a      bf01000000     mov edi, 1
 |      ||   0x0040296f      e80cf9ffff     call sym.imp.isatty
 EOF
+
+
 NAME=pd @a overwrites anal hints
 FILE=../bins/elf/analysis/ls-linux64
-EXPECT=<<EOF
-0x00005c20      31ed4989       ldc p9, c8, [r1, -0x124]!
-0x00005c20      31ed4989       stmdbhi sb, {r0, r4, r5, r8, sl, fp, sp, lr, pc} ^
-aha arm @ 0x5c20
-ahb 16 @ 0x5c20
-0000:5c20     31ed           xor bp, bp
-aha arm @ 0x5c20
-ahb 16 @ 0x5c20
-0x00005c20      31ed           xor ebp, ebp
-aha arm @ 0x5c20
-ahb 16 @ 0x5c20
-EOF
 CMDS=<<EOF
 e asm.comments=false
 e asm.functions=false
@@ -1541,12 +1531,30 @@ e asm.flags=false
 ahb 16
 aha arm
 pd 1
+e anal.ignbithints=1
+pd 1 @b:32
+e anal.ignbithints=0
+pd 1 @b:16
 pd 1 @b:32
 ah*
 pd 1 @a:x86
 ah*
 pd 1 @a:x86:64
 ah*
+EOF
+EXPECT=<<EOF
+0x00005c20      31ed4989       ldc p9, c8, [r1, -0x124]!
+0x00005c20      31ed4989       stmdbhi sb, {r0, r4, r5, r8, sl, fp, sp, lr, pc} ^
+0x00005c20      31ed4989       ldc p9, c8, [r1, -0x124]!
+0x00005c20      31ed4989       stmdbhi sb, {r0, r4, r5, r8, sl, fp, sp, lr, pc} ^
+aha arm @ 0x5c20
+ahb 16 @ 0x5c20
+0000:5c20     31ed           xor bp, bp
+aha arm @ 0x5c20
+ahb 16 @ 0x5c20
+0x00005c20      31ed           xor bp, bp
+aha arm @ 0x5c20
+ahb 16 @ 0x5c20
 EOF
 RUN
 

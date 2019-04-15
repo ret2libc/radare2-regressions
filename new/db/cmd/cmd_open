@@ -117,7 +117,7 @@ NAME=oob consider baddr
 FILE=../bins/mach0/mac-ls
 CMDS=<<EXPECT
 e bin.baddr = 0xf00000
-k old_v = `ieq`
+k old_v=`ieq`
 oob
 iI~baddr[1]
 ie~vaddr[1]

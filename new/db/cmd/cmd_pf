@@ -882,3 +882,162 @@ EXPECT=<<RUN
 0x00000000 = ".abc\123\n"
 0x00000000 = ".abc\\123\n"
 RUN
+
+NAME=pfj and triply-nested struct
+FILE=-
+CMDS=<<EXPECT
+wv2 0x1234
+wv4 0x56789abc @ 0x2
+wv8 0xdef0123456789abc @ 0x6
+pf.third w t1
+pf.second ?x (third)t s1
+pf.first ?q (second)s f1
+pf.first
+?e
+pfj.first~{}
+EXPECT=<<RUN
+  s : 
+                struct<second>
+     t : 
+                      struct<third>
+       t1 : 0x00000000 = 0x1234
+    s1 : 0x00000002 = 0x56789abc
+ f1 : 0x00000006 = (qword)0xdef0123456789abc
+
+[
+  {
+    "name": "s",
+    "type": "second",
+    "offset": 0,
+    "value": [
+      {
+        "name": "t",
+        "type": "third",
+        "offset": 0,
+        "value": [
+          {
+            "name": "t1",
+            "type": "w",
+            "offset": 0,
+            "value": 4660
+          }
+        ]
+      },
+      {
+        "name": "s1",
+        "type": "x",
+        "offset": 2,
+        "value": 1450744508
+      }
+    ]
+  },
+  {
+    "name": "f1",
+    "type": "q",
+    "offset": 6,
+    "value": -2382384186880648516
+  }
+]
+RUN
+
+NAME=pfj and Matryoshka dolls
+FILE=-
+CMDS=<<EXPECT
+wx 7f
+wv8 0xdef0123456789abc @ 0x1
+pf.fourth b fo1
+pf.third ? (fourth)fo
+pf.second ? (third)t
+pf.start ?q (second)s f1
+pf.start
+?e
+pfj.start~{}
+?e
+pf.full ? (second)s
+pf.full
+?e
+pfj.full~{}
+EXPECT=<<RUN
+  s : 
+                struct<second>
+   t : 
+                      struct<third>
+       fo : 
+                            struct<fourth>
+             fo1 : 0x00000000 = 0x7f
+ f1 : 0x00000001 = (qword)0xdef0123456789abc
+
+[
+  {
+    "name": "s",
+    "type": "second",
+    "offset": 0,
+    "value": [
+      {
+        "name": "t",
+        "type": "third",
+        "offset": 0,
+        "value": [
+          {
+            "name": "fo",
+            "type": "fourth",
+            "offset": 0,
+            "value": [
+              {
+                "name": "fo1",
+                "type": "b",
+                "offset": 0,
+                "value": 127
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "f1",
+    "type": "q",
+    "offset": 1,
+    "value": -2382384186880648516
+  }
+]
+
+ s : 
+                struct<second>
+   t : 
+                      struct<third>
+       fo : 
+                            struct<fourth>
+             fo1 : 0x00000000 = 0x7f
+
+[
+  {
+    "name": "s",
+    "type": "second",
+    "offset": 0,
+    "value": [
+      {
+        "name": "t",
+        "type": "third",
+        "offset": 0,
+        "value": [
+          {
+            "name": "fo",
+            "type": "fourth",
+            "offset": 0,
+            "value": [
+              {
+                "name": "fo1",
+                "type": "b",
+                "offset": 0,
+                "value": 127
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
+RUN

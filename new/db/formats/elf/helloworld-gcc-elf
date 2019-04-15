@@ -1,3 +1,40 @@
+NAME=arm - elf - main detection
+FILE=../bins/arm/elf/hello_world
+CMDS=<<EOF
+?v main
+?v sym.main
+EOF
+EXPECT=<<EOF
+0x50c
+0x50c
+EOF
+RUN
+
+NAME=armr - functions bits
+FILE=../bins/arm/elf/hello_world
+CMDS=<<EOF
+aaa
+pi 1@@f
+EOF
+EXPECT=<<EOF
+mov.w fp, 0
+ldr r3, [pc, 0x14]
+ldr r0, [pc, 0x18]
+ldr r0, [pc, 0x20]
+push {r3, lr}
+add ip, pc, 0, 12
+b sym.register_tm_clones
+bx lr
+push {r3, lr}
+push.w {r3, r4, r5, r6, r7, r8, sb, lr}
+push {r7, lr}
+add ip, pc, 0, 12
+push {r3, lr}
+add ip, pc, 0, 12
+add ip, pc, 0, 12
+EOF
+RUN
+
 NAME=x86 - init_array detection
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 EXPECT=<<EOF
@@ -406,7 +443,7 @@ FILE=../bins/elf/analysis/x86-helloworld-gcc
 EXPECT='[
   {
     "offset": 134513408,
-    "esil": "ebp,ebp,^=,$z,zf,=,$p,pf,=,$s,sf,=,$0,cf,=,$0,of,=",
+    "esil": "ebp,ebp,^=,$z,zf,:=,$p,pf,:=,$s,sf,:=,0,cf,:=,0,of,:=",
     "refptr": false,
     "fcn_addr": 0,
     "fcn_last": 0,
@@ -461,7 +498,7 @@ EXPECT='[
   },
   {
     "offset": 134513413,
-    "esil": "4294967280,esp,&=,$z,zf,=,$p,pf,=,$s,sf,=,$0,cf,=,$0,of,=",
+    "esil": "4294967280,esp,&=,$z,zf,:=,$p,pf,:=,$s,sf,:=,0,cf,:=,0,of,:=",
     "refptr": false,
     "fcn_addr": 0,
     "fcn_last": 0,
