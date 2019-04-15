@@ -1546,7 +1546,7 @@ EXPECT=<<EOF
 0x00005c20      31ed4989       ldc p9, c8, [r1, -0x124]!
 0x00005c20      31ed4989       stmdbhi sb, {r0, r4, r5, r8, sl, fp, sp, lr, pc} ^
 0x00005c20      31ed4989       ldc p9, c8, [r1, -0x124]!
-0x00005c20      31ed4989       ldc p9, c8, [r1, -0x124]!
+0x00005c20      31ed4989       stmdbhi sb, {r0, r4, r5, r8, sl, fp, sp, lr, pc} ^
 aha arm @ 0x5c20
 ahb 16 @ 0x5c20
 0000:5c20     31ed           xor bp, bp
@@ -1661,7 +1661,7 @@ pd 1 @b:32 @0xc
 ah*
 '
 EXPECT='ahb 16 @ 0xc
-            0x0000000c      0120           movs r0, 1
+            0x0000000c      01207047       ldrbmi r2, [r0, -r1]!
 ahb 16 @ 0xc
 '
 RUN
@@ -1675,8 +1675,8 @@ pd 5 @b:32
 EXPECT='            0x00000000      0000a0e1       mov r0, r0
             0x00000004      010000eb       bl 0x10
         @-> 0x00000008      feffffea       b 8
-            0x0000000c      0120           movs r0, 1
-            0x0000000e      7047           bx lr
+            0x0000000c      01207047       ldrbmi r2, [r0, -r1]!
+            0x00000010      00c09fe5       ldr ip, [pc]                ; [0x18:4]=13 ; 24
 '
 RUN
 
