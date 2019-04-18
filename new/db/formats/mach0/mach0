@@ -1,5 +1,4 @@
 NAME=mach0 headers
-BROKEN=1
 FILE=../bins/mach0/hello-osx-i386
 EXPECT=<<EOF
 0x00000000  Magic       0xfeedface
@@ -40,8 +39,7 @@ pf.mach0_segment @ 0x00000328
 0x00000434  cmdsize     80
 0x00000480  cmd      10 0xc LC_LOAD_DYLIB
 0x00000484  cmdsize     52
-0x00000494  load_dylib  
-}
+0x00000494  load_dylib  /usr/lib/libSystem.B.dylib
 EOF
 CMDS=<<EOF
 iH
@@ -49,7 +47,6 @@ EOF
 RUN
 
 NAME=mach0 headers big-endian
-BROKEN=1
 FILE=../bins/mach0/ppc-ls
 EXPECT=<<EOF
 0x00000000  Magic       0xfeedface
@@ -70,7 +67,6 @@ EOF
 RUN
 
 NAME=mach0 headers2
-BROKEN=1
 FILE=../bins/mach0/ired
 EXPECT=<<EOF
 0x00000000  Magic       0xfeedface
@@ -119,7 +115,7 @@ pf.mach0_segment @ 0x000002e4
 0x00000428  cmdsize     20
 0x00000438  cmd      13 0xc LC_LOAD_DYLIB
 0x0000043c  cmdsize     52
-0x0000044c  load_dylib  �
+0x0000044c  load_dylib  /usr/lib/libSystem.B.dylib
 0x0000046c  cmd      14 0x26 LC_FUNCTION_STARTS
 0x00000470  cmdsize     16
 0x0000047c  cmd      15 0x29 LC_DATA_IN_CODE
