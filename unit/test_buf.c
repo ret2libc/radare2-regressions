@@ -30,8 +30,41 @@ bool test_r_buf_file_new() {
 	mu_end;
 }
 
+bool test_r_buf_get_string(void) {
+	ut8 *ch = malloc (128);
+	memset(ch, 'A', 127);
+	ch[127] = '\0';
+	RBuffer *b = r_buf_new_with_bytes (ch, 128);
+	char *s = r_buf_get_string (b, 100);
+	mu_assert_streq (s, ch + 100, "the string is the same");
+	free (s);
+	s = r_buf_get_string (b, 0);
+	mu_assert_streq (s, ch, "the string is the same");
+	free (s);
+	s = r_buf_get_string (b, 127);
+	mu_assert_streq (s, "\x00", "the string is empty");
+	free (s);
+	r_buf_free (b);
+	free (ch);
+	mu_end;
+}
+
+bool test_r_buf_get_string_nothing(void) {
+	RBuffer *b = r_buf_new_with_bytes ((ut8 *)"\x33\x22", 2);
+	char *s = r_buf_get_string (b, 0);
+	mu_assert_null (s, "there is no string in the buffer (no null terminator)");
+	r_buf_append_bytes (b, (ut8 *)"\x00", 1);
+	s = r_buf_get_string (b, 0);
+	mu_assert_streq (s, "\x33\x22", "now there is a string because of the null terminator");
+	free (s);
+	r_buf_free (b);
+	mu_end;
+}
+
 int all_tests() {
 	mu_run_test (test_r_buf_file_new);
+	mu_run_test (test_r_buf_get_string);
+	mu_run_test (test_r_buf_get_string_nothing);
 	return tests_passed != tests_run;
 }
 
