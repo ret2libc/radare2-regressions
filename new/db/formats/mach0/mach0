@@ -1,3 +1,133 @@
+NAME=mach0 headers
+FILE=../bins/mach0/hello-osx-i386
+EXPECT=<<EOF
+0x00000000  Magic       0xfeedface
+0x00000004  CpuType     0x7
+0x00000008  CpuSubType  0x3
+0x0000000c  FileType    0x2
+0x00000010  nCmds       11
+0x00000014  sizeOfCmds  1172
+0x00000018  Flags       0x85
+0x00000020  cmd       0 0x1 LC_SEGMENT
+0x00000024  cmdsize     56
+pf.mach0_segment @ 0x0000001c
+0x00000024  name        __PAGEZERO
+0x00000058  cmd       1 0x1 LC_SEGMENT
+0x0000005c  cmdsize     396
+pf.mach0_segment @ 0x00000054
+0x0000005c  name        __TEXT
+0x000001e4  cmd       2 0x1 LC_SEGMENT
+0x000001e8  cmdsize     328
+pf.mach0_segment @ 0x000001e0
+0x000001e8  name        __DATA
+0x0000032c  cmd       3 0x1 LC_SEGMENT
+0x00000330  cmdsize     56
+pf.mach0_segment @ 0x00000328
+0x00000330  name        __LINKEDIT
+0x00000364  cmd       4 0x80000022 LC_DYLD_INFO_ONLY
+0x00000368  cmdsize     48
+0x00000394  cmd       5 0x2 LC_SYMTAB
+0x00000398  cmdsize     24
+0x000003ac  cmd       6 0xb LC_DYSYMTAB
+0x000003b0  cmdsize     80
+0x000003fc  cmd       7 0xe LC_LOAD_DYLINKER
+0x00000400  cmdsize     28
+0x00000418  cmd       8 0x1b LC_UUID
+0x0000041c  cmdsize     24
+0x0000041c  uuid        2310026f6db717b4a9d7d991a5a686ff
+0x00000430  cmd       9 0x5 LC_UNIXTHREAD
+0x00000434  cmdsize     80
+0x00000480  cmd      10 0xc LC_LOAD_DYLIB
+0x00000484  cmdsize     52
+0x00000494  load_dylib  /usr/lib/libSystem.B.dylib
+EOF
+CMDS=<<EOF
+iH
+EOF
+RUN
+
+NAME=mach0 headers big-endian
+FILE=../bins/mach0/ppc-ls
+EXPECT=<<EOF
+0x00000000  Magic       0xfeedface
+0x00000004  CpuType     0x12
+0x00000008  CpuSubType  0x0
+0x0000000c  FileType    0x2
+0x00000010  nCmds       11
+0x00000014  sizeOfCmds  1608
+0x00000018  Flags       0x85
+0x00000020  cmd       0 0x1000000 
+0x00000024  cmdsize     0
+0x100000020  cmd       1 0xffffffff 
+0x100000024  cmdsize     16777215
+EOF
+CMDS=<<EOF
+iH
+EOF
+RUN
+
+NAME=mach0 headers2
+FILE=../bins/mach0/ired
+EXPECT=<<EOF
+0x00000000  Magic       0xfeedface
+0x00000004  CpuType     0xc
+0x00000008  CpuSubType  0x9
+0x0000000c  FileType    0x2
+0x00000010  nCmds       17
+0x00000014  sizeOfCmds  1148
+0x00000018  Flags       0x200085
+0x00000020  cmd       0 0x1 LC_SEGMENT
+0x00000024  cmdsize     56
+pf.mach0_segment @ 0x0000001c
+0x00000024  name        __PAGEZERO
+0x00000058  cmd       1 0x1 LC_SEGMENT
+0x0000005c  cmdsize     328
+pf.mach0_segment @ 0x00000054
+0x0000005c  name        __TEXT
+0x000001a0  cmd       2 0x1 LC_SEGMENT
+0x000001a4  cmdsize     328
+pf.mach0_segment @ 0x0000019c
+0x000001a4  name        __DATA
+0x000002e8  cmd       3 0x1 LC_SEGMENT
+0x000002ec  cmdsize     56
+pf.mach0_segment @ 0x000002e4
+0x000002ec  name        __LINKEDIT
+0x00000320  cmd       4 0x80000022 LC_DYLD_INFO_ONLY
+0x00000324  cmdsize     48
+0x00000350  cmd       5 0x2 LC_SYMTAB
+0x00000354  cmdsize     24
+0x00000368  cmd       6 0xb LC_DYSYMTAB
+0x0000036c  cmdsize     80
+0x000003b8  cmd       7 0xe LC_LOAD_DYLINKER
+0x000003bc  cmdsize     28
+0x000003d4  cmd       8 0x1b LC_UUID
+0x000003d8  cmdsize     24
+0x000003d8  uuid        ef8520a2ad483e1aa0e38b60d92c1dc8
+0x000003ec  cmd       9 0x25 LC_VERSION_MIN_IPHONEOS
+0x000003f0  cmdsize     16
+0x000003fc  cmd      10 0x2a LC_SOURCE_VERSION
+0x00000400  cmdsize     16
+0x0000040c  cmd      11 0x80000028 LC_MAIN
+0x00000410  cmdsize     24
+0x00000410  entry0      0x4da9
+0x00000414  stacksize   0x0
+0x00000424  cmd      12 0x21 LC_ENCRYPTION_INFO
+0x00000428  cmdsize     20
+0x00000438  cmd      13 0xc LC_LOAD_DYLIB
+0x0000043c  cmdsize     52
+0x0000044c  load_dylib  /usr/lib/libSystem.B.dylib
+0x0000046c  cmd      14 0x26 LC_FUNCTION_STARTS
+0x00000470  cmdsize     16
+0x0000047c  cmd      15 0x29 LC_DATA_IN_CODE
+0x00000480  cmdsize     16
+0x0000048c  cmd      16 0x2b LC_DYLIB_CODE_SIGN_DRS
+0x00000490  cmdsize     16
+EOF
+CMDS=<<EOF
+iH
+EOF
+RUN
+
 NAME=mach0 entrypoint
 FILE=../bins/mach0/hello-osx-i386
 EXPECT=<<EOF
