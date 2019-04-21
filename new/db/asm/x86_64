@@ -1,4 +1,5 @@
-d "lea rax, [0x803]" 488d042503080000
+a "lea rax, [0x1000]" 488d05f90f0000
+d "lea rax, [rip + 0xff9]" 488d05f90f0000
 ad "nop" 90
 ad "ret" c3
 a "add r13, r15" 4d01fd

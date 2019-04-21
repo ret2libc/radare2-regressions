@@ -618,10 +618,12 @@ EXPECT=<<EOF
 |    ||||   0x00011411      cmp sil, cl
 |   ,=====< 0x00011414      jne 0x11424
 |   |||||   0x00011416      lea rbx, [rax + 4]
-|   |||||   0x0001141a      mov rax, qword [rip + 0xdeaf]              ; reloc.program_invocation_short_name ; [0x1f2d0:8]=0
+|   |||||   0x0001141a      mov rax, qword [rip + 0xdeaf]; MOV rax = [0x1f2d0] = 0x0 rflags
+ ; reloc.program_invocation_short_name ; [0x1f2d0:8]=0
 |   |||||   0x00011421      mov qword [rax], rbx
 |   |||||   ; CODE XREFS from fcn.00011390 (0x113d0, 0x113e0, 0x113f4, 0x11414)
-|   ````--> 0x00011424      mov rax, qword [rip + 0xde3d]              ; [0x1f268:8]=0x21680
+|   ````--> 0x00011424      mov rax, qword [rip + 0xde3d]; MOV rax = [0x1f268] = 0x21680 
+ ; [0x1f268:8]=0x21680
 EOF
 CMDS=<<EOF
 e asm.relsub=false
@@ -761,8 +763,9 @@ NAME=reflines in noreturn
 FILE=../bins/elf/analysis/ls-alxchk
 EXPECT=<<EOF
 / (fcn) fcn.00012740 76
-|   fcn.00012740 (int32_t arg2);
+|   fcn.00012740 (int32_t arg1, int32_t arg2);
 |           ; var int32_t var_8h @ rbp-0x8
+|           ; arg int32_t arg1 @ rdi
 |           ; arg int32_t arg2 @ rsi
 |           0x00012740      push rbp
 |           0x00012741      mov rbp, rsp
@@ -851,6 +854,7 @@ RUN
 NAME=auto string memory reference (iopa)
 FILE=malloc://8096
 EXPECT=<<EOF
+; MOV rsi = [0x1048] = 0x500 
   ; [0x1048:8]=0x500 "Hello"
   0x00000000      mov rsi, qword [rip + 0x1041]
 EOF
@@ -873,6 +877,7 @@ RUN
 NAME=auto string memory reference (io.va)
 FILE=malloc://8096
 EXPECT=<<EOF
+; MOV rsi = [0x1048] = 0x500 
   ; [0x1048:8]=0x500 "Hello"
   0x00000000      mov rsi, qword [rip + 0x1041]
 EOF

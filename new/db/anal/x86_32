@@ -1,3 +1,31 @@
+NAME=aap
+FILE=../bins/pe/NoREpls.exe
+CMDS=<<EOF
+aaa
+s 0x00401e80
+afi.
+aap
+afi.
+EOF
+EXPECT=<<EOF
+fcn.00401e80
+EOF
+RUN
+
+NAME=anal.pushret
+FILE=-
+CMDS=<<EOF
+"wa push 10;ret;nop;nop;nop;nop;nop;nop;nop;ret"
+e anal.pushret=true
+af
+afi~size
+EOF
+EXPECT=<<EOF
+size: 11
+EOF
+RUN
+
+
 NAME=aac pe trampoline fcn name 32bit
 FILE=../bins/pe/testx32.exe
 CMDS=<<EXPECT

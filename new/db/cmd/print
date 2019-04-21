@@ -129,6 +129,7 @@ EXPECT=<<EOF
 0x100001663 call sym.imp.tgetstr
 0x100001679 call sym.imp.tgetstr
 0x100001698 call sym.imp.tgetstr
+0x1000055d0 [12] -rw- section size 140 named 12.__DATA.__common
 0x1000016e1 sym.func.100003b48
 0x1000016ed sym.func.100003b48
 0x1000016f0 call sym.imp.signal

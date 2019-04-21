@@ -25,6 +25,7 @@ freebsd
 openbsd
 netbsd
 windows
+s110
 EOF
 CMDS=<<EOF
 e asm.os=?

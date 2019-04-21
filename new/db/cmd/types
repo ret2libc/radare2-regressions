@@ -1272,7 +1272,10 @@ var char * s @ fp-0x1c
 var char * var_18h @ fp-0x18
 var int32_t var_14h @ fp-0x14
 var int32_t var_10h @ fp-0x10
+arg int argc @ r0
 arg char ** argv @ r1
+arg char ** envp @ r2
+arg char * options @ r3
 RUN
 
 NAME=format string parse

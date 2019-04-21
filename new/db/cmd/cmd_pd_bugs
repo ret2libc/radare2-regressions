@@ -67,7 +67,7 @@ RUN
 NAME=call fcn eip 32bit
 FILE=../bins/elf/analysis/ls-alxchk
 EXPECT=<<EOF
-            0x00005f16      e835ffffff     call fcn.eip
+            0x00005f16      e835ffffff     call fcn.00005e50
 EOF
 CMDS=<<EOF
 s 0x5e50
@@ -100,7 +100,7 @@ RUN
 NAME=call fcn rip 64bit
 FILE=../bins/elf/analysis/ls-alxchk
 EXPECT=<<EOF
-            0x00005f16      e835ffffff     call fcn.rip
+            0x00005f16      e835ffffff     call fcn.00005e50
 EOF
 CMDS=<<EOF
 s 0x5e50

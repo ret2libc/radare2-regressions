@@ -1,11 +1,25 @@
-NAME=labels replacements (common prefix)
+NAME=quoted comments bug
 FILE=malloc://1024
 ARGS=
 CMDS=<<EOF
+"w hello # world"
+ps
+EOF
+EXPECT=<<EOF
+hello # world
+EOF
+RUN
+
+NAME=labels replacements (common prefix)
+FILE=malloc://1024
+ARGS=
+BROKEN=1
+CMDS=<<EOF
 e asm.arch=x86
 e asm.bits=32
-waf ../bins/other/asm/multiline_prefix.asm
-p8 7@0'
+.waf ../bins/other/asm/multiline_prefix.asm
+p8 7@0
+EOF
 EXPECT=<<EOF
 9090e8fbffffff
 EOF
