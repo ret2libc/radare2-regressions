@@ -598,7 +598,7 @@ EXPECT=<<EOF
 |       |   0x000113c8      call sym.imp.strrchr                       ; char *strrchr(const char *s, int c)
 |       |   0x000113cd      test rax, rax
 |      ,==< 0x000113d0      je 0x11424
-|      ||   0x000113d2      lea rdx, [rax + 1]
+|      ||   0x000113d2      lea rdx, [rax + 1]                         ; r10 ; "ELF\x02\x01\x01"
 |      ||   0x000113d6      mov rcx, rdx
 |      ||   0x000113d9      sub rcx, rbx
 |      ||   0x000113dc      cmp rcx, 6
@@ -618,7 +618,7 @@ EXPECT=<<EOF
 |    ||||   0x00011411      cmp sil, cl
 |   ,=====< 0x00011414      jne 0x11424
 |   |||||   0x00011416      lea rbx, [rax + 4]
-|   |||||   0x0001141a      mov rax, qword [rip + 0xdeaf]; MOV rax = [0x1f2d0] = 0x0 rflags
+|   |||||   0x0001141a      mov rax, qword [rip + 0xdeaf]; MOV rax = [0x1f2d0] = 0x0 r9
  ; reloc.program_invocation_short_name ; [0x1f2d0:8]=0
 |   |||||   0x00011421      mov qword [rax], rbx
 |   |||||   ; CODE XREFS from fcn.00011390 (0x113d0, 0x113e0, 0x113f4, 0x11414)

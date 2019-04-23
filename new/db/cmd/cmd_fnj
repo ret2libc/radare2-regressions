@@ -5,6 +5,6 @@ EXPECT=<<CMDS
 {"name":"__init_array_start","size":0,"offset":15800}
 CMDS=<<RUN
 aaa
-fj~{245}
-fnj~{245}
+fj~{244}
+fnj~{244}
 RUN

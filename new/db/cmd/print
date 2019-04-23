@@ -168,12 +168,30 @@ NAME=mac ls pfc
 FILE=../bins/mach0/mac-ls
 EXPECT=<<EOF
 struct {
-    char* foo;
-    unsigned int bar;
-    long long cow;
+    char* foo; // "UH..AWAVAUATSH..H."
+    int32_t bar; // 4085860352
+    uint64_t cow; // -450213120875525823
 }
 EOF
 CMDS=<<EOF
 pfc zdq foo bar cow
+EOF
+RUN
+
+NAME=mac ls pfc.fmt
+FILE=../bins/mach0/mac-ls
+EXPECT=<<EOF
+struct fmt {
+    uint8_t foo; // 85
+    int8_t bar; // "H"
+    double baz; // 4.8537884927073429e+102
+    int32_t cow; // 0x48535441
+    uleb128_t one; // "1193473"
+    float two; // 131072.094
+}
+EOF
+CMDS=<<EOF
+pf.fmt bcFiuf foo bar baz cow one two
+pfc.fmt
 EOF
 RUN
