@@ -248,6 +248,15 @@ bool test_r_buf_sparse2(void) {
 	mu_assert_eq (r, 10, "read the initial/final 0xff bytes");
 	mu_assert_memeq (tmp, (ut8 *)"\xff\xff\xff\x61\x61\x61\x61\xff\xff\xff", 10, "right 10 bytes");
 
+	r = r_buf_write_at (b, 0x100, (ut8 *)"ABCDEF", 6);
+	mu_assert_eq (r, 6, "write 6 bytes at 0x100");
+	r = r_buf_read_at (b, 0xfe, tmp, sizeof (tmp));
+	mu_assert_eq (r, 8, "read 8 bytes");
+	mu_assert_memeq (tmp, (ut8 *)"\xff\xff\x41\x42\x43\x44\x45\x46", 8, "right bytes");
+
+	sz = r_buf_size (b);
+	mu_assert_eq (sz, 0x106, "size is 0x106");
+
 	r_buf_free (b);
 	mu_end;
 }
