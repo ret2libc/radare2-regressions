@@ -52,6 +52,10 @@ bool test_buf(RBuffer *b) {
 	mu_assert_memeq (buffer, (ut8 *)"his is a ", 9, "read right bytes from offset 1");
 
 	r_buf_set_bytes (b, (ut8 *)"World", strlen ("World"));
+	char *base = r_buf_to_string (b);
+	mu_assert_notnull (base, "string should be there");
+	mu_assert_streq (base, "World", "World there");
+	free (base);
 
 	const char *s3 = "Hello ";
 	res = r_buf_prepend_bytes (b, (const ut8 *)s3, strlen (s3));
@@ -96,7 +100,7 @@ bool test_buf(RBuffer *b) {
 	return MU_PASSED;
 }
 
-bool test_r_buf_file() {
+bool test_r_buf_file(void) {
 	RBuffer *b;
 	char filename[] = "r2-XXXXXX";
 	const char *content = "Something To\nSay Here..";
@@ -121,7 +125,7 @@ bool test_r_buf_file() {
 	mu_end;
 }
 
-bool test_r_buf_bytes() {
+bool test_r_buf_bytes(void) {
 	RBuffer *b;
 	const char *content = "Something To\nSay Here..";
 	const int length = 23;
@@ -138,7 +142,7 @@ bool test_r_buf_bytes() {
 	mu_end;
 }
 
-bool test_r_buf_mmap() {
+bool test_r_buf_mmap(void) {
 	RBuffer *b;
 	char filename[] = "r2-XXXXXX";
 	const char *content = "Something To\nSay Here..";
@@ -162,7 +166,7 @@ bool test_r_buf_mmap() {
 	mu_end;
 }
 
-bool test_r_buf_io() {
+bool test_r_buf_io(void) {
 	RBuffer *b;
 	const char *content = "Something To\nSay Here..";
 	const int length = 23;
@@ -191,7 +195,64 @@ bool test_r_buf_io() {
 	mu_end;
 }
 
-bool test_r_buf_bytes_steal() {
+bool test_r_buf_sparse(void) {
+	RBuffer *b;
+	const char *content = "Something To\nSay Here..";
+	const int length = 23;
+
+	b = r_buf_new_sparse (0);
+	mu_assert_notnull (b, "r_buf_new_file failed");
+
+	r_buf_write (b, (ut8 *)content, length);
+	r_buf_seek (b, 0, R_BUF_SET);
+
+	if (test_buf (b) != MU_PASSED) {
+		mu_fail ("test failed");
+	}
+
+	// Cleanup
+	r_buf_free (b);
+	mu_end;
+}
+
+bool test_r_buf_sparse2(void) {
+	RBuffer *b = r_buf_new_sparse (0xff);
+	r_buf_write (b, (ut8 *)"aaaa", 4);
+	r_buf_write (b, (ut8 *)"bbbbb", 5);
+	r_buf_write (b, (ut8 *)"cccccc", 6);
+	r_buf_write_at (b, 2, (ut8 *)"D", 1);
+	r_buf_write_at (b, 7, (ut8 *)"EEE", 3);
+
+	ut8 tmp[20];
+	int r = r_buf_read_at (b, 0, tmp, sizeof (tmp));
+	mu_assert_eq (r, 15, "read only 15 bytes");
+	mu_assert_memeq (tmp, (ut8 *)"aaDabbbEEEccccc", 15, "read the right bytes");
+
+	bool res = r_buf_resize (b, 0);
+	mu_assert ("resized to 0", res);
+
+	r = r_buf_read_at (b, 0, tmp, sizeof (tmp));
+	mu_assert_eq (r, 0, "nothing to read");
+
+	r_buf_write_at (b, 3, (ut8 *)"aaaa", 4);
+	r = r_buf_read_at (b, 0, tmp, sizeof (tmp));
+	mu_assert_eq (r, 7, "read the initial 0xff bytes");
+	mu_assert_memeq (tmp, (ut8 *)"\xff\xff\xff\x61\x61\x61\x61", 7, "right 7 bytes");
+
+	res = r_buf_resize (b, 10);
+	mu_assert ("resized to 10", res);
+
+	ut64 sz = r_buf_size (b);
+	mu_assert_eq (sz, 10, "size is 10");
+	r = r_buf_read_at (b, 0, tmp, sizeof (tmp));
+	mu_assert_eq (r, 10, "read the initial/final 0xff bytes");
+	mu_assert_memeq (tmp, (ut8 *)"\xff\xff\xff\x61\x61\x61\x61\xff\xff\xff", 10, "right 10 bytes");
+
+	r_buf_free (b);
+	mu_end;
+}
+
+bool test_r_buf_bytes_steal(void) {
 	RBuffer *b;
 	const char *content = "Something To\nSay Here..";
 	const int length = 23;
@@ -207,7 +268,7 @@ bool test_r_buf_bytes_steal() {
 	mu_end;
 }
 
-bool test_r_buf_format() {
+bool test_r_buf_format(void) {
 	RBuffer *b = r_buf_new ();
 	uint16_t a[] = {0xdead, 0xbeef, 0xcafe, 0xbabe};
 	ut8 buf[4 * sizeof (uint16_t)];
@@ -226,7 +287,7 @@ bool test_r_buf_format() {
 	mu_end;
 }
 
-bool test_r_buf_with_buf() {
+bool test_r_buf_with_buf(void) {
 	char filename[] = "r2-XXXXXX";
 	const char *content = "Something To\nSay Here..";
 	const int length = 23;
@@ -245,7 +306,7 @@ bool test_r_buf_with_buf() {
 	mu_end;
 }
 
-bool test_r_buf_slice() {
+bool test_r_buf_slice(void) {
 	char filename[] = "r2-XXXXXX";
 	const char *content = "AAAAAAAAAASomething To\nSay Here..BBBBBBBBBB";
 	const int length = strlen (content);
@@ -319,6 +380,8 @@ int all_tests() {
 	mu_run_test (test_r_buf_with_buf);
 	mu_run_test (test_r_buf_slice);
 	mu_run_test (test_r_buf_io);
+	mu_run_test (test_r_buf_sparse);
+	mu_run_test (test_r_buf_sparse2);
 	mu_run_test (test_r_buf_bytes_steal);
 	mu_run_test (test_r_buf_format);
 	mu_run_test (test_r_buf_get_string);
