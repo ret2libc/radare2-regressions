@@ -23,8 +23,8 @@ RUN
 NAME=3: io.baddr
 FILE=../bins/elf/analysis/pie
 EXPECT=<<EOF
-f entry0 1 @ 0x00f00450
-f entry0_haddr 1 @ 0x00000018
+"f entry0 1 0x00f00450"
+"f entry0_haddr 1 0x00000018"
 EOF
 CMDS=<<EOF
 !rabin2 -B 0xf00000 -re ${R2_FILE} | grep 0x
@@ -77,8 +77,8 @@ NAME=4: io.baddr
 FILE=../bins/elf/analysis/pie
 ARGS=-B 0xf00000
 EXPECT=<<EOF
-f entry0 1 @ 0x00f00450
-f entry0_haddr 1 @ 0x00000018
+"f entry0 1 0x00f00450"
+"f entry0_haddr 1 0x00000018"
 31ed5e89e183e4f05054
 EOF
 CMDS=<<EOF
