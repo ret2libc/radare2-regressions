@@ -36,6 +36,20 @@ afi~size
 EOF
 RUN
 
+NAME=tn- symbol1 symbol2
+FILE=../bins/elf/analysis/hello-objc-linux
+EXPECT=<<EOF
+size: 34
+EOF
+CMDS=<<EOF
+tn-*
+tn __libc_start_main
+tn- abc __libc_start_main
+af
+afi~size
+EOF
+RUN
+
 NAME=without noreturn
 FILE=../bins/elf/analysis/hello-objc-linux
 EXPECT=<<EOF

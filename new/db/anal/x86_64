@@ -1,4 +1,4 @@
-NAME=x86_64 socket syscall
+NAME=x86_64 getenv this maybe
 FILE=../bins/mach0/ls-osx-x86_64
 CMDS=<<EOF
 af
@@ -23,9 +23,6 @@ as
 EOF
 EXPECT=<<EOF
 |           ;-- syscall.socket:
-|           ;-- syscall.socket.0:
-|           ;-- syscall.socket.1:
-|           ;-- syscall.socket.2:
 |           0x00001140      0f05           syscall
 41 = socket (0x00000001, 0x00000002, 0x00000003)
 EOF
@@ -526,7 +523,7 @@ RUN
 NAME=ahe
 FILE=malloc://512
 EXPECT=<<EOF
-15
+16
 esil: test
 EOF
 CMDS=<<EOF
@@ -2401,6 +2398,7 @@ FILE=-
 EXPECT=<<EOF
 address: 0x0
 opcode: push rbp
+disasm: push rbp
 mnemonic: push
 prefix: 0
 id: 588
