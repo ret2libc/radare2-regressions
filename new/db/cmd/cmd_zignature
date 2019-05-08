@@ -288,8 +288,8 @@ NAME=z/ with search.in
 FILE=../bins/elf/analysis/go_stripped
 EXPECT=<<EOF
 0
-0x81a5898
-0x805b030
+0x15d898
+0x13030
 0
 0x0
 0x805b030
@@ -299,13 +299,15 @@ za date_string b 323030362d30312d30322031353a30343a30352e393939393939393939202d3
 za sym.fmt.Println b 653b2530000000724b53b834e7150883ec188b15401c22088d4c24048b5c242083ec08ff742434ff742434ff742434525051e829ffffff8b44242089038b4424248943048b44242889430889d883c4345bc204006a106a1ce85e350700c20400
 fs sign
 f~?
+e io.va=0
 e search.in=file
 z/
+e io.va=1
 ?v sign.bytes.date_string_0
 ?v sign.bytes.sym.fmt.Println_0
 f-*
 f~?
-e search.in=io.sections.exec
+e search.in=bin.sections.x
 z/
 ?v sign.bytes.elf_header_0
 ?v sign.bytes.sym.fmt.Println_0

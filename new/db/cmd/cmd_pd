@@ -207,8 +207,8 @@ RUN
 NAME=pd pseudo test for issue #7268
 FILE=malloc://8
 EXPECT=<<EOF
-  [36m          [0m[7m[32m0x00000000[0m      [33m48[37m89[37me5[0m         [37mrbp =[36m rsp[0m[0m[0m
-[0m  [36m          [0m[7m[32m0x00000000[0m      [33m48[37m89[37me5[0m         [37mrbp =[36m rsp[0m[0m
+  [36m          [0m[7m[32m0x00000000[0m      [33m48[37m89[37me5[0m         [37mrbp = rsp[0m[0m
+[0m  [36m          [0m[7m[32m0x00000000[0m      [33m48[37m89[37me5[0m         [37mrbp = rsp[0m
 EOF
 CMDS=<<EOF
 e asm.arch=x86

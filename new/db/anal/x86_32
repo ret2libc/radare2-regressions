@@ -2896,9 +2896,9 @@ mov ebp, esp
 dec eax
 and esp, 0xfffffff0
 dec eax
-mov edi, dword [ebp + 8]
+mov edi, dword [arg_8h]
 dec eax
-lea esi, [ebp + 0x10]
+lea esi, [arg_10h]
 mov edx, edi
 add edx, 1
 shl edx, 3
@@ -2943,9 +2943,9 @@ mov ebp, esp
 dec eax
 and esp, 0xfffffff0
 dec eax
-mov edi, dword [ebp + 8]
+mov edi, dword [arg_8h]
 dec eax
-lea esi, [ebp + 0x10]
+lea esi, [arg_10h]
 mov edx, edi
 add edx, 1
 shl edx, 3

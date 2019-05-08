@@ -257,6 +257,7 @@ NAME=$e (malloc) 3
 FILE=malloc://1024
 EXPECT=<<EOF
 int32   8
+uint32  8
 hex     0x8
 octal   010
 unit    8
@@ -269,6 +270,7 @@ binary  0b00001000
 trits   0t22
 0x8
 int32   0
+uint32  0
 hex     0x0
 octal   00
 unit    0
@@ -326,6 +328,7 @@ FILE=../bins/elf/analysis/x86-simple
 EXPECT=<<EOF
 0x7b
 int32   123
+uint32  123
 hex     0x7b
 octal   0173
 unit    123

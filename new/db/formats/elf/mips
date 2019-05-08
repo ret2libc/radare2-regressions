@@ -1,11 +1,11 @@
 NAME=ELF: mips.elf
 FILE=../bins/elf/analysis/mips.elf
 ARGS=-A
-EXPECT=<<EOF
-0x400ab0
-EOF
 CMDS=<<EOF
 ?v entry0
+EOF
+EXPECT=<<EOF
+0x400ab0
 EOF
 RUN
 
@@ -33,6 +33,7 @@ sw sp, 0x18(sp)
 EOF
 CMDS=<<EOF
 af
+e asm.var.sub=false
 pif
 EOF
 RUN
@@ -61,6 +62,7 @@ sw sp, 0x18(sp)
 EOF
 CMDS=<<EOF
 af
+e asm.var.sub=false
 pif
 EOF
 RUN

@@ -6,7 +6,7 @@ const walk = require('walk').walk;
 const path = require('path');
 const spawn = require('child_process').spawn;
 const util = require('util');
-const common = require('../common');
+const common = require('./common');
 const r2bin = 'radare2';
 const fs = require('fs');
 

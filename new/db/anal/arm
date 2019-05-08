@@ -226,7 +226,7 @@ RUN
 NAME=ldr code analysis
 FILE=malloc://32
 EXPECT=<<EOF
-ldr ip, [pc, 0x20]
+ldr ip, [0x00000028]
 ldr ip, [sl, ip]
 load
 load
@@ -340,7 +340,7 @@ RUN
 NAME=arm: ldr code analysis
 FILE=malloc://32
 EXPECT=<<EOF
-ldr ip, [pc, 0x20]
+ldr ip, [0x00000028]
 ldr ip, [sl, ip]
 load
 load

@@ -31,6 +31,7 @@ NAME=ljmp follow
 FILE=../bins/firmware/bios_64k.bin
 EXPECT=<<EOF
 int32   1048490
+uint32  1048490
 hex     0xfffaa
 octal   03777652
 unit    1023.9K

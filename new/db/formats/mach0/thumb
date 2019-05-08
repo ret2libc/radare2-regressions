@@ -21,7 +21,7 @@ RUN
 NAME=mach0 non-thumb symbol on thumb bin
 FILE=../bins/mach0/thumb-test
 EXPECT=<<EOF
-ldr pc, [pc, -4]
+ldr pc, [reloc.strcmp]
 EOF
 CMDS=<<EOF
 pi 1@ sym.imp.strcmp

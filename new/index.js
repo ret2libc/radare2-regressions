@@ -13,7 +13,7 @@ const path = require('path');
 const spawn = require('child_process').spawn;
 const spawnSync = require('child_process').spawnSync;
 const r2promise = require('r2pipe-promise');
-const common = require('./common');
+const common = require('./lib/common');
 const promiseLimit = require('promise-limit');
 
 const limit = promiseLimit(promiseConcurrency);

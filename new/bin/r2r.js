@@ -9,7 +9,7 @@ const minimist = require('minimist');
 const walk = require('walk').walk;
 const path = require('path');
 const readline = require('readline');
-const common = require('../common');
+const common = require('../lib/common');
 const os = require('os');
 
 const rl = readline.createInterface({

@@ -2548,14 +2548,14 @@ RUN
 NAME=x86-64 after unknown jmp
 FILE=../bins/elf/analysis/ls-linux64
 EXPECT=<<EOF
-lea rdi, [rip + 0x217631]
-lea rax, [rip + 0x217631]
+lea rdi, [0x0021d281]
+lea rax, [loc._edata]
 push rbp
 sub rax, rdi
 mov rbp, rsp
 cmp rax, 0xe
 jbe 0x5c80
-mov rax, qword [rip + 0x217316]
+mov rax, qword [0x0021cf81]
 test rax, rax
 je 0x5c80
 pop rbp

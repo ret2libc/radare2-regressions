@@ -16,7 +16,7 @@ EXPECT=<<EOF
 EOF
 CMDS=<<EOF
 s 0
-e search.in=io.sections
+e search.in=bin.sections
 /x ac686b6d
 EOF
 RUN

@@ -132,6 +132,7 @@ CMDS=<<EXPECT
 ? 1;?v
 EXPECT=<<RUN
 int32   1
+uint32  1
 hex     0x1
 octal   01
 unit    1
@@ -151,6 +152,7 @@ CMDS=<<EXPECT
 ? 0;?v
 EXPECT=<<RUN
 int32   0
+uint32  0
 hex     0x0
 octal   00
 unit    0
@@ -170,6 +172,7 @@ CMDS=<<EXPECT
 ? -1
 EXPECT=<<RUN
 int64   -1
+uint64  18446744073709551615
 hex     0xffffffffffffffff
 octal   01777777777777777777777
 unit    16.0E
@@ -188,6 +191,7 @@ CMDS=<<EXPECT
 ? 2*1.5
 EXPECT=<<RUN
 int32   2
+uint32  2
 hex     0x2
 octal   02
 unit    2

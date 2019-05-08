@@ -107,7 +107,7 @@ wao nop
 pi 3
 EOF
 EXPECT=<<EOF
-ldr ip, [pc, 0x24]
+ldr ip, [0x0000002c]
 mov fp, 0
 pop {r1}
 mov r2, sp
@@ -128,7 +128,7 @@ wao trap
 pi 3
 EOF
 EXPECT=<<EOF
-ldr ip, [pc, 0x24]
+ldr ip, [0x0000002c]
 mov fp, 0
 pop {r1}
 mov r2, sp

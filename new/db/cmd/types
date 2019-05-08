@@ -1275,7 +1275,7 @@ var int32_t var_10h @ fp-0x10
 arg int argc @ r0
 arg char ** argv @ r1
 arg char ** envp @ r2
-arg char * options @ r3
+arg char * arg4 @ r3
 RUN
 
 NAME=format string parse

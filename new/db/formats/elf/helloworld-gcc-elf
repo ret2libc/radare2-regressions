@@ -18,9 +18,9 @@ pi 1@@f
 EOF
 EXPECT=<<EOF
 mov.w fp, 0
-ldr r3, [pc, 0x14]
-ldr r0, [pc, 0x18]
-ldr r0, [pc, 0x20]
+ldr r3, [0x00000460]
+ldr r0, [0x00000488]
+ldr r0, [0x000004bc]
 push {r3, lr}
 add ip, pc, 0, 12
 b sym.register_tm_clones

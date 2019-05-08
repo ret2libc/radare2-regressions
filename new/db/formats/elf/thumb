@@ -108,9 +108,9 @@ push {r3, r4, r5, r6, r7, r8, sl, lr}
 mov r5, r0
 mov r6, r1
 mov r7, r2
-ldr r8, [pc, 0x48]
+ldr r8, [0x00008494]
 bl sym._init
-ldr r3, [pc, 0x44]
+ldr r3, [0x00008498]
 EOF
 CMDS=<<EOF
 pi 14@ sym.main
@@ -147,7 +147,7 @@ FILE=../bins/elf/analysis/libsimplejni.so
 EXPECT=<<EOF
 push {fp, lr}
 add fp, sp, 4
-ldr r3, [pc, 0xc]
+ldr r3, [0x00000f64]
 add r3, pc, r3
 mov r0, r3
 bl sym.imp.__cxa_finalize
@@ -164,8 +164,8 @@ EXPECT=<<EOF
 push {r4, lr}
 sub sp, 8
 mov r4, r0
-ldr r0, [pc, 0xb0]
-ldr r1, [pc, 0xb0]
+ldr r0, [0x000010e4]
+ldr r1, [0x000010e8]
 add r0, pc
 EOF
 CMDS=<<EOF

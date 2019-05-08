@@ -228,7 +228,7 @@ RUN
 NAME=esil func cmts
 FILE=../bins/elf/arm1.bin
 CMDS=<<EXPECT
-tk func.__libc_start_main.noreturn=false
+tn- __libc_start_main
 e asm.emu=true
 e emu.write=true
 s 0x8174
