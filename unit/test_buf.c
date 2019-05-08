@@ -108,7 +108,7 @@ bool test_r_buf_file(void) {
 
 	// Prepare file
 	int fd = mkstemp (filename);
-	mu_assert_neq ((long long)fd, -1LL, "mkstemp failed...");
+	mu_assert_neq ((ut64)fd, (ut64)-1, "mkstemp failed...");
 	write (fd, content, length);
 	close (fd);
 
@@ -356,8 +356,8 @@ bool test_r_buf_get_string(void) {
 	memset (ch, 'A', 127);
 	ch[127] = '\0';
 	RBuffer *b = r_buf_new_with_bytes (ch, 128);
-	ut8 *s = r_buf_get_string (b, 100);
-	mu_assert_streq (s, ch + 100, "the string is the same");
+	char *s = r_buf_get_string (b, 100);
+	mu_assert_streq (s, (char *)ch + 100, "the string is the same");
 	free (s);
 	s = r_buf_get_string (b, 0);
 	mu_assert_streq (s, (char *)ch, "the string is the same");
