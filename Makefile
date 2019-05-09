@@ -23,37 +23,39 @@ apply-overlay overlay-apply:
 
 alltargets: js-tests unit_tests
 
+R2R=$(shell cd new ; npm bin)/r2r
+
 js-tests:
 	cd new && npm install
-	cd new && node bin/r2r.js
+	cd new && $(R2R)
 
 keystone:
 	cd new && npm install
-	cd new && node bin/r2r.js db/extras/asm/x86.ks_
+	cd new && $(R2R) db/extras/asm/x86.ks_
 
 swf:
 	cd new && npm install
-	cd new && node bin/r2r.js db/extras/asm/swf
+	cd new && $(R2R) db/extras/asm/swf
 
 m68k-extras:
 	cd new && npm install
-	cd new && node bin/r2r.js db/extras/asm/m68k
+	cd new && $(R2R) db/extras/asm/m68k
 
 mc6809:
 	cd new && npm install
-	cd new && node bin/r2r.js db/extras/asm/x86.udis
+	cd new && $(R2R) db/extras/asm/x86.udis
 
 udis86:
 	cd new && npm install
-	cd new && node bin/r2r.js db/extras/asm/mc6809
+	cd new && $(R2R) db/extras/asm/mc6809
 
 olly-extras:
 	cd new && npm install
-	cd new && node bin/r2r.js db/extras/asm/x86.olly
+	cd new && $(R2R) db/extras/asm/x86.olly
 
 dwarf:
 	cd new && npm install
-	cd new && node bin/r2r.js db/extras/asm/dwarf
+	cd new && $(R2R) db/extras/asm/dwarf
 broken:
 	grep BROKEN=1 t -r -l
 
