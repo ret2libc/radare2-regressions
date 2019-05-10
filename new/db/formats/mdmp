@@ -268,6 +268,16 @@ pd 12 @[0x004061cc]
 EOF
 RUN
 
+NAME=: 32bit - strings count
+FILE=../bins/mdmp/hello.dmp
+EXPECT=<<EOF
+10300
+EOF
+CMDS=<<EOF
+iz~?
+EOF
+RUN
+
 NAME=: 64bit - libraries count
 FILE=../bins/mdmp/hello64.dmp
 EXPECT=<<EOF
@@ -415,6 +425,16 @@ EXPECT=<<EOF
 EOF
 CMDS=<<EOF
 pd 9 @[0x004083ac]
+EOF
+RUN
+
+NAME=: 64bit - strings count
+FILE=../bins/mdmp/hello64.dmp
+EXPECT=<<EOF
+22945
+EOF
+CMDS=<<EOF
+iz~?
 EOF
 RUN
 

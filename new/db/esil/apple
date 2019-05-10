@@ -19,18 +19,16 @@ RUN
 NAME=iphone-arm-esil pdsf
 FILE=../bins/mach0/FileDP
 EXPECT=<<EOF
+0x00002900 argc
+0x00002904 argv
 0x00002918 "alloc"
-0x00002920 argv
 0x00002920 str.alloc
 0x00002928 bl sym.imp.objc_msgSend
 0x00002934 "init"
-0x0000293c argv
 0x0000293c str.init
 0x00002940 bl sym.imp.objc_msgSend
 0x0000294c "X\x10\x9d\xe5"
-0x00002958 argv
 0x0000295c bl sym.imp.objc_msgSend
-0x00002968 argc
 0x00002970 bl sym.imp.objc_msgSend
 0x00002998 "Usage: FileDP [-f/-d] [Full path to file/directory] "
 0x0000299c bl sym.imp.puts

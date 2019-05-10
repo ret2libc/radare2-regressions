@@ -646,11 +646,12 @@ FILE=../bins/elf/analysis/armcall
 EXPECT=<<EOF
 / (fcn) sym.call 44
 |           ; var int32_t var_8h @ fp-0x8
+|           ; arg int32_t arg1 @ r0
 |           ; CALL XREF from main (0x10468)
 |           0x00010420      00482de9       push {fp, lr}
 |           0x00010424      04b08de2       add fp, sp, 4
 |           0x00010428      08d04de2       sub sp, sp, 8
-|           0x0001042c      08000be5       str r0, [var_8h]            ; 8
+|           0x0001042c      08000be5       str r0, [var_8h]            ; 8 ; arg1
 |           0x00010430      14009fe5       ldr r0, [0x0001044c]        ; [0x1044c:4]=0x104f0
 |           0x00010434      08101be5       ldr r1, [var_8h]            ; 8
 |           0x00010438      a2ffffeb       bl sym.imp.printf
@@ -673,11 +674,13 @@ EXPECT=<<EOF
 / (fcn) main 44
 |           ; var int32_t var_ch @ fp-0xc
 |           ; var int32_t var_8h @ fp-0x8
+|           ; arg int argc @ r0
+|           ; arg char **argv @ r1
 |           0x00010450      00482de9       push {fp, lr}
 |           0x00010454      04b08de2       add fp, sp, 4
 |           0x00010458      08d04de2       sub sp, sp, 8
-|           0x0001045c      08000be5       str r0, [var_8h]            ; 8
-|           0x00010460      0c100be5       str r1, [var_ch]            ; 0xc ; 12
+|           0x0001045c      08000be5       str r0, [var_8h]            ; 8 ; argc
+|           0x00010460      0c100be5       str r1, [var_ch]            ; 0xc ; 12 ; argv
 |           0x00010464      08001be5       ldr r0, [var_8h]            ; 8
 |           0x00010468      ecffffeb       bl sym.call
 |           0x0001046c      0030a0e1       mov r3, r0
