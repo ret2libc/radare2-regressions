@@ -58,8 +58,6 @@ EXPECT=<<EOF
 0x00000018  Flags       0x85
 0x00000020  cmd       0 0x1000000 
 0x00000024  cmdsize     0
-0x100000020  cmd       1 0xffffffff 
-0x100000024  cmdsize     16777215
 EOF
 CMDS=<<EOF
 iH
