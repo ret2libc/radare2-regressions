@@ -416,7 +416,7 @@ RUN
 
 NAME=pdj 3 @ main
 FILE=../bins/elf/analysis/main
-EXPECT='[{"offset":4195590,"esil":"rbp,8,rsp,-,=[8],8,rsp,-=","refptr":false,"fcn_addr":0,"fcn_last":0,"size":1,"opcode":"push rbp","disasm":"push rbp","bytes":"55","family":"cpu","type":"upush","reloc":false,"type_num":12,"type2_num":0,"flags":["main","sym.main"]},{"offset":4195591,"esil":"rsp,rbp,=","refptr":false,"fcn_addr":0,"fcn_last":0,"size":3,"opcode":"mov rbp, rsp","disasm":"mov rbp, rsp","bytes":"4889e5","family":"cpu","type":"mov","reloc":false,"type_num":9,"type2_num":0},{"offset":4195594,"ptr":4195780,"val":4195780,"esil":"4195780,rdi,=","refptr":false,"fcn_addr":0,"fcn_last":0,"size":5,"opcode":"mov edi, 0x4005c4","disasm":"mov edi, str.Hello_World","bytes":"bfc4054000","family":"cpu","type":"mov","reloc":false,"type_num":9,"type2_num":0}]
+EXPECT='[{"offset":4195590,"esil":"rbp,8,rsp,-,=[8],8,rsp,-=","refptr":false,"fcn_addr":0,"fcn_last":0,"size":1,"opcode":"push rbp","disasm":"push rbp","bytes":"55","family":"cpu","type":"rpush","reloc":false,"type_num":268435468,"type2_num":0,"flags":["main","sym.main"]},{"offset":4195591,"esil":"rsp,rbp,=","refptr":false,"fcn_addr":0,"fcn_last":0,"size":3,"opcode":"mov rbp, rsp","disasm":"mov rbp, rsp","bytes":"4889e5","family":"cpu","type":"mov","reloc":false,"type_num":9,"type2_num":0},{"offset":4195594,"ptr":4195780,"val":4195780,"esil":"4195780,rdi,=","refptr":false,"fcn_addr":0,"fcn_last":0,"size":5,"opcode":"mov edi, 0x4005c4","disasm":"mov edi, str.Hello_World","bytes":"bfc4054000","family":"cpu","type":"mov","reloc":false,"type_num":9,"type2_num":0}]
 
 '
 CMDS=<<EOF
@@ -428,7 +428,7 @@ RUN
 
 NAME=pdj -3 @ 0x0040050f
 FILE=../bins/elf/analysis/main
-EXPECT='[{"offset":4195590,"esil":"rbp,8,rsp,-,=[8],8,rsp,-=","refptr":false,"fcn_addr":0,"fcn_last":0,"size":1,"opcode":"push rbp","disasm":"push rbp","bytes":"55","family":"cpu","type":"upush","reloc":false,"type_num":12,"type2_num":0,"flags":["main","sym.main"]},{"offset":4195591,"esil":"rsp,rbp,=","refptr":false,"fcn_addr":0,"fcn_last":0,"size":3,"opcode":"mov rbp, rsp","disasm":"mov rbp, rsp","bytes":"4889e5","family":"cpu","type":"mov","reloc":false,"type_num":9,"type2_num":0},{"offset":4195594,"ptr":4195780,"val":4195780,"esil":"4195780,rdi,=","refptr":false,"fcn_addr":0,"fcn_last":0,"size":5,"opcode":"mov edi, 0x4005c4","disasm":"mov edi, str.Hello_World","bytes":"bfc4054000","family":"cpu","type":"mov","reloc":false,"type_num":9,"type2_num":0}]
+EXPECT='[{"offset":4195590,"esil":"rbp,8,rsp,-,=[8],8,rsp,-=","refptr":false,"fcn_addr":0,"fcn_last":0,"size":1,"opcode":"push rbp","disasm":"push rbp","bytes":"55","family":"cpu","type":"rpush","reloc":false,"type_num":268435468,"type2_num":0,"flags":["main","sym.main"]},{"offset":4195591,"esil":"rsp,rbp,=","refptr":false,"fcn_addr":0,"fcn_last":0,"size":3,"opcode":"mov rbp, rsp","disasm":"mov rbp, rsp","bytes":"4889e5","family":"cpu","type":"mov","reloc":false,"type_num":9,"type2_num":0},{"offset":4195594,"ptr":4195780,"val":4195780,"esil":"4195780,rdi,=","refptr":false,"fcn_addr":0,"fcn_last":0,"size":5,"opcode":"mov edi, 0x4005c4","disasm":"mov edi, str.Hello_World","bytes":"bfc4054000","family":"cpu","type":"mov","reloc":false,"type_num":9,"type2_num":0}]
 
 '
 CMDS=<<EOF

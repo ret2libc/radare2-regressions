@@ -44,26 +44,26 @@ bool test_insert(void) {
 	}
 
 	n = r_skiplist_find (list, (void *)(intptr_t)33);
-	mu_assert_neq ((int)(intptr_t)n, (int)(intptr_t)NULL, "33 should be in the list");
+	mu_assert_notnull (n, "33 should be in the list");
 	mu_assert_eq ((int)(intptr_t)n->data, 33, "33 should be the data");
 	n = r_skiplist_find (list, (void *)(intptr_t)50);
-	mu_assert_neq ((int)(intptr_t)n, (int)(intptr_t)NULL, "50 should be in the list");
+	mu_assert_notnull (n, "50 should be in the list");
 	mu_assert_eq ((int)(intptr_t)n->data, 50, "50 should be the data");
 	// check first element
 	n = r_skiplist_find (list, (void *)(intptr_t)0);
-	mu_assert_neq ((int)(intptr_t)n, (int)(intptr_t)NULL, "0 should be in the list");
+	mu_assert_notnull (n, "0 should be in the list");
 	mu_assert_eq ((int)(intptr_t)n->data, 0, "0 should be the data");
 	// check last element
 	n = r_skiplist_find (list, (void *)(intptr_t)99);
-	mu_assert_neq ((int)(intptr_t)n, (int)(intptr_t)NULL, "99 should be in the list");
+	mu_assert_notnull (n, "99 should be in the list");
 	mu_assert_eq ((int)(intptr_t)n->data, 99, "99 should be the data");
 	mu_assert_eq (r_skiplist_length (list), 100, "Four elements in the list");
 
 	// check non existing items
 	n = r_skiplist_find (list, (void *)(intptr_t)150);
-	mu_assert_eq ((int)(intptr_t)n, (int)(intptr_t)NULL, "150 shouldn't be in the list");
+	mu_assert_null (n, "150 shouldn't be in the list");
 	n = r_skiplist_find (list, (void *)(intptr_t)(-10));
-	mu_assert_eq ((int)(intptr_t)n, (int)(intptr_t)NULL, "-10 shouldn't be in the list");
+	mu_assert_null (n, "-10 shouldn't be in the list");
 
 	r_skiplist_free (list);
 	mu_end;

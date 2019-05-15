@@ -46,8 +46,8 @@ ec mov rgb:d0b070
 ec func_var rgb:f0d090
 ec func_var_type rgb:805000
 ec func_var_addr rgb:906000
-ec widget_bg rgb:303030
-ec widget_sel rgb:ff0000
+ec widget_bg rgb:d0b070 rgb:000000
+ec widget_sel rgb:000000 rgb:f0e0c0
 ec ai.read rgb:c0b070
 ec ai.write rgb:c0a060
 ec ai.exec rgb:d0b070

@@ -3765,7 +3765,7 @@ Nm Paddr       Size Vaddr      Memsz Perms Checksum          Name
 05 0x00000168    32 0x08048168    32 -r-- entropy=1.74868984 NOTE
 06 0x00000000     0 0x00000000     0 -rw- entropy=0.00000000 GNU_STACK
 07 0x00000f0c   244 0x08049f0c   244 -r-- entropy=2.71815661 GNU_RELRO
-08 0x00000000     0 0x00000000     0 ---- entropy=0.00000000 UNKNOWN
+08 0x00000000     0 0x00000000     0 ---- entropy=0.00000000 NONE
 09 0x00000000    52 0x08048000    52 -rw- entropy=2.79887339 ehdr
 RUN
 

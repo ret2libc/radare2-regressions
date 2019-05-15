@@ -132,7 +132,7 @@ bool test_r_io_priority(void) {
 
 bool test_r_io_priority2(void) {
 	RIO *io = r_io_new();
-	ut32 map0, map1;
+	ut32 map0;
 	ut8 buf[2];
 	bool ret;
 
@@ -149,7 +149,6 @@ bool test_r_io_priority2(void) {
 
 	RIODesc *desc1 = r_io_open_at (io, "malloc://1024", R_PERM_R, 0644, 0x0);
 	mu_assert_notnull (desc1, "second malloc should be opened");
-	map1 = r_io_map_get (io, 0)->id;
 	r_io_read_at (io, 0, buf, 2);
 	mu_assert_memeq (buf, (ut8 *)"\x00\x00", 2, "0x00 from map1 should be on top");
 

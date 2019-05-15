@@ -195,3 +195,35 @@ pf.fmt bcFiuf foo bar baz cow one two
 pfc.fmt
 EOF
 RUN
+
+NAME=elf 64bit ls pfc.elf_header
+FILE=../bins/elf/ls
+EXPECT=<<EOF
+struct elf_header {
+    struct ident {
+        char* magic; // ".ELF"
+        enum class; // ELFCLASS64
+        enum data; // ELFDATA2LSB
+        enum version; // EV_CURRENT
+    }
+    enum type; // ET_DYN
+    enum machine; // EM_X86_64
+    enum version; // EV_CURRENT
+    uint64_t entry; // 23264
+    uint64_t phoff; // 64
+    uint64_t shoff; // 136040
+    int32_t flags; // 0x00000000
+    uint16_t ehsize; // 0x0040
+    uint16_t phentsize; // 0x0038
+    uint16_t phnum; // 0x000b
+    uint16_t shentsize; // 0x0040
+    uint16_t shnum; // 0x0019
+    uint16_t shstrndx; // 0x0018
+}
+EOF
+CMDS=<<EOF
+s 0
+pfo elf64
+pfc elf_header
+EOF
+RUN
