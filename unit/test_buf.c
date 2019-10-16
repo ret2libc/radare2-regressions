@@ -382,6 +382,22 @@ bool test_r_buf_get_string_nothing(void) {
 	mu_end;
 }
 
+bool test_r_buf_slice_too_big(void) {
+	RBuffer *buf = r_buf_new_with_bytes ((ut8 *)"AAAA", 4);
+	RBuffer *sl = r_buf_new_slice (buf, 1, 5);
+	ut64 sz = r_buf_size (sl);
+	mu_assert_eq (sz, 3, "the size cannot be more than the original buffer");
+	r_buf_resize (sl, 1);
+	sz = r_buf_size (sl);
+	mu_assert_eq (sz, 1, "it should be shrinked to 1 byte");
+	bool res = r_buf_resize (sl, 7);
+	mu_assert (res, "the resize should be successful");
+	sz = r_buf_size (sl);
+	mu_assert_eq (sz, 3, "but it should just use the biggest value");
+	r_buf_free (buf);
+	mu_end;
+}
+
 int all_tests() {
 	mu_run_test (test_r_buf_file);
 	mu_run_test (test_r_buf_bytes);
@@ -395,6 +411,7 @@ int all_tests() {
 	mu_run_test (test_r_buf_format);
 	mu_run_test (test_r_buf_get_string);
 	mu_run_test (test_r_buf_get_string_nothing);
+	mu_run_test (test_r_buf_slice_too_big);
 	return tests_passed != tests_run;
 }
 
