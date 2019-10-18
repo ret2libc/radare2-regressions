@@ -176,5 +176,5 @@ e scr.null=false
 p8 4
 EXPECT=<<RUN
 Hello world!
-31ed5e89
+ffffffff
 RUN
